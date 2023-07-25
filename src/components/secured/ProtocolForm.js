@@ -151,7 +151,7 @@ export default function ProtocolForm() {
               }}
               onClick={handleSubmit}
             >
-              Publicar
+              Publicar Datos
             </Button>
           </Box>
         </Box>
