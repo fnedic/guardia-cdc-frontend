@@ -8,6 +8,10 @@ export const useUserForm = (initialState = {}) => {
 
         const { name, value} = target;
 
+        console.log("name", name);
+        console.log("value", value);
+        console.log("target", target);
+
         setForm(
             {
                 ...form,
