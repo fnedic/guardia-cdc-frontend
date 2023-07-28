@@ -9,7 +9,7 @@ import { useRef } from "react";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker, pickersLayoutClasses } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers";
 
 import "../../../node_modules/draft-js/dist/Draft.css";
 import RichTextEditor from "./RichTextEditor";
@@ -37,7 +37,22 @@ export default function ProtocolForm() {
     e.preventDefault();
 
     // const titleContentWithFormat = titleRef.current.getContentWithFormat();
-    // console.log("Título:", titleContentWithFormat);
+    // console.log(titleContentWithFormat);
+    // const autor1ContentWithFormat = autor1Ref.current.getContentWithFormat();
+    // console.log(autor1ContentWithFormat);
+    // const autor2ContentWithFormat = autor2Ref.current.getContentWithFormat();
+    // console.log(autor2ContentWithFormat);
+    // const generalInfoContentWithFormat = generalInfoRef.current.getContentWithFormat();
+    // console.log(generalInfoContentWithFormat);
+    // const proceduresContentWithFormat = proceduresRef.current.getContentWithFormat();
+    // console.log(proceduresContentWithFormat);
+    // const anexxedContentWithFormat = anexxedRef.current.getContentWithFormat();
+    // console.log(anexxedContentWithFormat);
+    // const videoLinkContentWithFormat = videoLinkRef.current.getContentWithFormat();
+    // console.log(videoLinkContentWithFormat);
+    // const driveLinkContentWithFormat = driveLinkRef.current.getContentWithFormat();
+    // console.log(driveLinkContentWithFormat);
+
   };
 
   const handleRichTextChange = (id, editorState) => {
