@@ -17,7 +17,7 @@ export const Header = () => {
   return (
     <header style={headerStyle}>
       <img style={imgStyle}
-        src="https://www.clinicadecuyosa.org/wp-content/uploads/2022/10/logo-cdc-header.svg"
+        src="logo-cdc-header.svg"
         alt="Imagen centrada"
       />
     </header>

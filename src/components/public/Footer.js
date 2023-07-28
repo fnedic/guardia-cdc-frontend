@@ -41,7 +41,7 @@ export default function Footer() {
         <Box>
           <img
             style={imgStyle}
-            src="https://clinicadecuyosa.org/wp-content/uploads/2022/10/logo-cdc-footer.svg"
+            src="logo-cdc-footer.svg"
             alt="Logo"
           />
         </Box>
