@@ -8,8 +8,8 @@ import Box from "@mui/material/Box";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
-import { useForm } from "../../hooks/useForm.js";
+import { CssBaseline, createTheme, ThemeProvider, Snackbar, Alert } from "@mui/material";
+import { useForm } from "./../../hooks/useForm";
 
 const customTheme = createTheme({
   palette: {
@@ -31,19 +31,16 @@ const initialForm = {
 };
 
 export default function Register() {
-  const { form, handleChange, handleSubmit } = useForm(initialForm);
-
-  const [areEquals, setAreEqual] = React.useState(true);
-  const [passwordConfrimation, setPasswordConfirmation] = React.useState('');
-
-  const handlePasswordConfirmation = (e) => {
-    setPasswordConfirmation(e.target.value);
-  };
-
-  React.useEffect(() => {
-    const { password } = form;
-    setAreEqual(password === passwordConfrimation);
-  }, [passwordConfrimation, form]);
+  const {
+    form,
+    handleChange,
+    handleSubmit,
+    areEquals,
+    handlePasswordConfirmation,
+    showSnackbar,
+    snackbarMessage,
+    handleCloseSnackbar,
+  } = useForm(initialForm);
 
   return (
     <ThemeProvider theme={customTheme}>
@@ -61,12 +58,7 @@ export default function Register() {
           <Avatar sx={{ bgcolor: "#283583", width: 50, height: 50 }}>
             <AppRegistrationIcon sx={{ fontSize: 35 }} />
           </Avatar>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" sx={{ mt: 3 }}>
             <Grid container spacing={1}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -150,11 +142,10 @@ export default function Register() {
                 {!areEquals && (
                   <Typography
                     align="center"
-                    boxShadow={3}
                     fontSize={"small"}
-                    backgroundColor="#d32f2f"
+                    backgroundColor="#fc6a6a"
                     color={"white"}
-                    marginTop={0.5}
+                    marginTop={0.3}
                     borderRadius={0.8}
                   >
                     Las contraseñas no coinciden!
@@ -163,7 +154,7 @@ export default function Register() {
               </Grid>
             </Grid>
             <Button
-              type="submit"
+              type="button"
               fullWidth
               variant="contained"
               sx={{
@@ -194,6 +185,21 @@ export default function Register() {
           </Box>
         </Box>
       </Container>
+      <Snackbar
+        open={showSnackbar}
+        autoHideDuration={2000} 
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </ThemeProvider>
   );
 }
