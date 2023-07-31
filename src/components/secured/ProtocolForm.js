@@ -56,6 +56,7 @@ export default function ProtocolForm() {
   };
 
   const handleRichTextChange = (id, editorState) => {
+    // eslint-disable-next-line
     switch (id) {
       case "title":
         titleRef.current = editorState;
