@@ -12,6 +12,10 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Key } from "@mui/icons-material";
 import { CssBaseline } from "@mui/material";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+
 
 const customTheme = createTheme({
   palette: {
@@ -22,15 +26,41 @@ const customTheme = createTheme({
 });
 
 export default function LogIn() {
-  
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const formData = {
+      email: data.get("email"),
+      password: data.get("password"),
+    };
     console.log({
       email: data.get("email"),
       password: data.get("password"),
     });
+
+
+    try {
+      const response = await axios.post("http://localhost:8080/cdc/login", formData);
+
+      if (response.data === "Login exitoso!") {
+        console.log("Inicio de sesión exitoso");
+        navigate("/dashboard");
+        // Realizar redirección u otras acciones después del inicio de sesión exitoso
+      } else if (response.data === "Inicio de sesión fallido") {
+        console.log("Inicio de sesión fallido ");
+        // Manejar el inicio de sesión fallido
+      }
+    } catch (error) {
+      console.error("Error al procesar la solicitud:", error);
+
+    }
   };
+
+
+
+
+
 
   return (
     <ThemeProvider theme={customTheme}>
