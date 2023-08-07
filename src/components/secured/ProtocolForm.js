@@ -4,7 +4,14 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { CssBaseline, Typography } from "@mui/material";
+import {
+  CssBaseline,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
 import { useRef } from "react";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -13,6 +20,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 
 import "../../../node_modules/draft-js/dist/Draft.css";
 import RichTextEditor from "./RichTextEditor";
+import ProtocolService from "../secured/services/ProtocolService.js";
 
 const customTheme = createTheme({
   palette: {
@@ -23,7 +31,7 @@ const customTheme = createTheme({
 });
 
 export default function ProtocolForm() {
-  const titleRef = React.useRef(null);
+  const titleRef = useRef(null);
   const autor1Ref = useRef(null);
   const autor2Ref = useRef(null);
   const introRef = useRef(null);
@@ -32,28 +40,6 @@ export default function ProtocolForm() {
   const anexxedRef = useRef(null);
   const videoLinkRef = useRef(null);
   const driveLinkRef = useRef(null);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // const titleContentWithFormat = titleRef.current.getContentWithFormat();
-    // console.log(titleContentWithFormat);
-    // const autor1ContentWithFormat = autor1Ref.current.getContentWithFormat();
-    // console.log(autor1ContentWithFormat);
-    // const autor2ContentWithFormat = autor2Ref.current.getContentWithFormat();
-    // console.log(autor2ContentWithFormat);
-    // const generalInfoContentWithFormat = generalInfoRef.current.getContentWithFormat();
-    // console.log(generalInfoContentWithFormat);
-    // const proceduresContentWithFormat = proceduresRef.current.getContentWithFormat();
-    // console.log(proceduresContentWithFormat);
-    // const anexxedContentWithFormat = anexxedRef.current.getContentWithFormat();
-    // console.log(anexxedContentWithFormat);
-    // const videoLinkContentWithFormat = videoLinkRef.current.getContentWithFormat();
-    // console.log(videoLinkContentWithFormat);
-    // const driveLinkContentWithFormat = driveLinkRef.current.getContentWithFormat();
-    // console.log(driveLinkContentWithFormat);
-
-  };
 
   const handleRichTextChange = (id, editorState) => {
     // eslint-disable-next-line
@@ -88,6 +74,43 @@ export default function ProtocolForm() {
     }
   };
 
+  const handleSubmit = (e) => {
+    
+    e.preventDefault();
+
+    const protocol = {
+      title: titleRef.current.getContentWithFormat(),
+      autor1: autor1Ref.current.getContentWithFormat(),
+      autor2: autor2Ref.current.getContentWithFormat(),
+      intro: introRef.current.getContentWithFormat(),
+      generalInfo: generalInfoRef.current.getContentWithFormat(),
+      procedures: proceduresRef.current.getContentWithFormat(),
+      annexed: anexxedRef.current.getContentWithFormat(),
+      videoLink: videoLinkRef.current.getContentWithFormat(),
+      driveLink: driveLinkRef.current.getContentWithFormat(),
+      publicationDate: selectedDate,
+      protocolGroup: group,
+    };
+
+    ProtocolService.createUser(protocol).then((user) => {});
+
+    handleRedirect();
+  };
+
+  const [selectedDate, setDate] = React.useState();
+  const handleDateChange = (date) => {
+    setDate(date);
+  };
+
+  const [group, setGroup] = React.useState("");
+  const handleInputChange = (e) => {
+    setGroup(e.target.value);
+  };
+
+  const handleRedirect = () => {
+    window.location.href = "/dashboard";
+  };
+
   const customBoxStyle = {
     backgroundColor: "#283683e5",
     maxWidth: "100%",
@@ -110,12 +133,7 @@ export default function ProtocolForm() {
             alignItems: "center",
           }}
         >
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 0, textAlign: "center" }}
-          >
+          <Box component="form" noValidate sx={{ mt: 0, textAlign: "center" }}>
             <Grid container spacing={1}>
               <Grid item xs={12} marginBottom={"2rem"}>
                 <Box sx={customBoxStyle}>
@@ -236,10 +254,34 @@ export default function ProtocolForm() {
             </Grid>
 
             <Grid item xs={12} sm={2}>
+              <FormControl sx={{ minWidth: 200, mr: 5 }} size="small">
+                <InputLabel>Grupo</InputLabel>
+                <Select
+                  id="protocolGroup"
+                  value={group}
+                  label="Group"
+                  onChange={handleInputChange}
+                >
+                  <MenuItem value={"CARDIOVASCULAR"}>Cardiología</MenuItem>
+                  <MenuItem value={"CIRUGIA"}>Cirugía</MenuItem>
+                  <MenuItem value={"GENERALES"}>Generales</MenuItem>
+                  <MenuItem value={"INFECTOLOGIA"}>Infectología</MenuItem>
+                  <MenuItem value={"OTORRINOLARINGOLOGIA"}>ORL</MenuItem>
+                  <MenuItem value={"RESPIRATORIO"}>Respiratorio</MenuItem>
+                  <MenuItem value={"TRAUMATOLOGIA"}>Traumatología</MenuItem>
+                  <MenuItem value={"TOXICOLOGIA"}>Toxicología</MenuItem>
+                  <MenuItem value={"URGENCIAS"}>Urgencias</MenuItem>
+                  <MenuItem value={"UROLOGIA"}>Urología</MenuItem>
+                </Select>
+              </FormControl>
+
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   label="Publicación"
                   slotProps={{ textField: { size: "small" } }}
+                  id="createdDate"
+                  value={selectedDate}
+                  onChange={handleDateChange}
                 />
               </LocalizationProvider>
 

@@ -4,6 +4,7 @@ import "./RichTextEditor.css";
 import "../../../node_modules/draft-js/dist/Draft.css";
 
 class RichTextEditor extends React.Component {
+  
   getContentWithFormat() {
     const contentState = this.state.editorState.getCurrentContent();
     const contentWithFormat = JSON.stringify(convertToRaw(contentState));
