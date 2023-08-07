@@ -10,6 +10,7 @@ import { CssBaseline } from "@mui/material";
 import DashAppBar from "./components/secured/DashAppBar";
 import ProtocolForm from "./components/secured/ProtocolForm";
 import ProtocolView from "./components/secured/ProtocolView";
+import Profile from "./components/secured/Profile";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/home" element={<LoggedAppBar />} />
+        <Route path="/profile" element={<LoggedAppBar />} />
         <Route path="/dashboard" element={<DashAppBar />} />
         <Route path="/protocolUpload" element={<DashAppBar />} />
         <Route path="/protocolview" element={<LoggedAppBar />} />
@@ -26,6 +28,7 @@ function App() {
         <Route path="/login" element={<SignBar />} />
       </Routes>
       <Routes>
+        <Route path="/profile" element={<Profile />} />
         <Route path="/protocolview" element={<ProtocolView />} />
         <Route path="/protocolUpload" element={<ProtocolForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
