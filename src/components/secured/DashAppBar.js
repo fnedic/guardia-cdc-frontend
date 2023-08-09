@@ -12,8 +12,9 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { CssBaseline } from "@mui/material";
+import { Link } from "react-router-dom";
 
-const pages = ["Subir Contenido", "Personal", "Calendario"];
+const pages = ["Subir Contenido", "Personal"];
 const settings = ["Perfil", "Cerrar Sesión"];
 
 function DashAppBar() {
@@ -33,6 +34,11 @@ function DashAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const pageUrls = {
+    "Subir Contenido": "http://localhost:3000/protocolupload",
+    "Personal": "http://localhost:3000/dashboard",
   };
 
   const appBarStyle = {
@@ -103,12 +109,25 @@ function DashAppBar() {
             Panel Administrativo
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: 'center', alignItems: 'center' }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ mx: 1, color: "white", display: "block", letterSpacing: 1}}
+                href={pageUrls[page]}
+                sx={{
+                  mx: 1,
+                  color: "white",
+                  display: "block",
+                  letterSpacing: 1,
+                }}
               >
                 {page}
               </Button>

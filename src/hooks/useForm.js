@@ -49,7 +49,7 @@ export const useForm = (initialForm) => {
   };
 
   // handle password confirmation ////////////////////////////////////////////////
-  const [passwordConfrimation, setPasswordConfirmation] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [areEquals, setAreEqual] = useState(true);
 
   const handlePasswordConfirmation = (e) => {
@@ -58,8 +58,8 @@ export const useForm = (initialForm) => {
 
   useEffect(() => {
     const { password } = form;
-    setAreEqual(password === passwordConfrimation);
-  }, [passwordConfrimation, form]);
+    setAreEqual(password === passwordConfirmation);
+  }, [passwordConfirmation, form]);
   ///////////////////////////////////////////////////////////////////////////////
 
   return {
