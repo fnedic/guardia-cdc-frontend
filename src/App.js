@@ -10,7 +10,11 @@ import { CssBaseline } from "@mui/material";
 import DashAppBar from "./components/secured/DashAppBar";
 import ProtocolForm from "./components/secured/ProtocolForm";
 import ProtocolView from "./components/secured/ProtocolView";
+<<<<<<< Updated upstream
 import Profile from "./components/secured/Profile";
+=======
+import UpdateUser from "./components/secured/UpdateUser";
+>>>>>>> Stashed changes
 
 function App() {
   return (
@@ -26,6 +30,8 @@ function App() {
         <Route path="/protocolview" element={<LoggedAppBar />} />
         <Route path="/register" element={<SignBar />} />
         <Route path="/login" element={<SignBar />} />
+        <Route path="/update-user/:id" element={<DashAppBar/>} />
+        
       </Routes>
       <Routes>
         <Route path="/profile" element={<Profile />} />
@@ -34,6 +40,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LogIn />} />
+        <Route path="/update-user/:id" element={<UpdateUser/>} />
       </Routes>
       <Footer />
     </BrowserRouter>
