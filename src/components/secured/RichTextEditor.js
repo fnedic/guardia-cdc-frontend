@@ -11,6 +11,10 @@ class RichTextEditor extends React.Component {
     return contentWithFormat;
   }
 
+  renderContentWithFormat(contentFromBackend) {
+    
+  }
+
   constructor(props) {
     super(props);
     this.state = { editorState: EditorState.createEmpty() };

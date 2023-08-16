@@ -2,6 +2,7 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import { Container, Link, Typography } from "@mui/material";
+import logo from "../public/images/logo-cdc-footer.svg"
 
 const StyledFooter = styled('footer')(({ theme }) => ({
   display: 'flex',
@@ -41,8 +42,7 @@ export default function Footer() {
         <Box>
           <img
             style={imgStyle}
-            src="logo-cdc-footer.svg"
-            alt="Logo"
+            src={logo}
           />
         </Box>
         <Container>

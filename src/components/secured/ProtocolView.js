@@ -6,25 +6,11 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { Container, Divider } from "@mui/material";
+import { useState, useEffect } from "react";
+import ProtocolService from "../secured/services/ProtocolService.js";
+import { Editor, EditorState, convertFromRaw } from "draft-js";
 
 function ProtocolView() {
-  const post = {
-    title: "Infecciones del tracto urinario",
-    date: "23/12/2022",
-    autor1: "Facundo Nedic",
-    autor2: "Vanina Solavallone",
-    intro:
-      "La infección del tracto urinario (ITU) consiste en la colonización y multiplicación microbiana en la vía urinaria asociado a signo-sintomatología. Estos procesos son motivo frecuente de consulta en el servicio de Guarda con la consecuente prescripción de antimicrobianos. ",
-    generalInfo:
-      "Es más frecuente en mujeres (relación 3:1), asociado a la actividad sexual, embarazo y edad. En el varón, predomina luego de los 50 años, en relación a la presencia de alteraciones prostáticas o manipulaciones urológicas. Existe creciente resistencia antimicrobiana en Argentina, siendo mayor al 20% para Trimetoprima/Sulfametoxazol y Ampicilina Sulbactam, y en aumento para Fluoroquinolonas.",
-    procedures: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    anexxed: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    videoLink: "",
-    drivelLink: "",
-    imageLink: "https://source.unsplash.com/random?wallpapers",
-    group: "Infectología",
-  };
-
   const cardImgStyle = {
     position: "absolute",
     width: "100%",
@@ -36,6 +22,72 @@ function ProtocolView() {
     opacity: "5px",
   };
 
+  const initialState = {
+    annexed: "",
+    autor1: "",
+    autor2: "",
+    title: "",
+    intro: "",
+    procedures: "",
+    generalInfo: "",
+    videoLink: "",
+    driveLink: "",
+    protocolGroup: "",
+    publicationDate: "",
+  };
+
+  const [protocol, setProtocol] = useState(initialState);
+  const [editorStates, setEditorStates] = useState({}); // Store editor states dynamically
+
+  useEffect(() => {
+    ProtocolService.getProtocol()
+      .then((data) => {
+        setProtocol(data);
+      })
+      .catch((error) => {
+        console.error("Error seteando protocolo! ", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    const updatedEditorStates = {};
+
+    // Iterate through protocol properties and create editor states for each section
+    for (const key in protocol) {
+      if (key !== "protocolGroup" || key !== "publicationDate") {
+        const contentState = renderFormatedContent({ section: protocol[key] });
+        if (contentState) {
+          updatedEditorStates[key] =
+            EditorState.createWithContent(contentState);
+        }
+      }
+    }
+
+    setEditorStates(updatedEditorStates);
+  }, [protocol]);
+
+  function renderFormatedContent({ section }) {
+    try {
+      if (!section) {
+        return null;
+      }
+      const parsedSection = JSON.parse(section);
+      const contentState = convertFromRaw(parsedSection);
+      return contentState;
+    } catch (error) {
+      console.error("Error parsing JSON: ", error);
+      return null;
+    }
+  }
+
+  const post = { imageLink: "https://source.unsplash.com/random?wallpapers" };
+
+  const myDate = new Date(protocol.publicationDate);
+  const day = myDate.getDate();
+  const month = myDate.getMonth() + 1;
+  const year = myDate.getFullYear();
+  const formattedDate = `${day}/${month}/${year}`;
+
   return (
     <Container sx={{ mt: 5, mb: 5 }}>
       <main>
@@ -45,12 +97,16 @@ function ProtocolView() {
               <CardContent
                 sx={{ flex: 1, zIndex: 1, backdropFilter: "blur(0.5px)" }}
               >
-                <Typography component="h3" variant="h3" paragraph>
-                  {post.title}
-                </Typography>
-                <Typography variant="subtitle1" paragraph>
-                  {post.intro}
-                </Typography>
+                <Grid>
+                  {editorStates.title && (
+                    <Editor editorState={editorStates.title} readOnly />
+                  )}
+                </Grid>
+                <Grid>
+                  {editorStates.intro && (
+                    <Editor editorState={editorStates.intro} readOnly />
+                  )}
+                </Grid>
                 <Typography variant="subtitle1" color="primary">
                   Continuar leyendo...
                 </Typography>
@@ -63,23 +119,54 @@ function ProtocolView() {
             />
           </CardActionArea>
         </Grid>
-        <Grid item xs={12} md={8} mt={7}>
-          <Typography variant="h6" color={"text.secondary"} gutterBottom>
-            {post.group}
-          </Typography>
-          <Divider />
-          <Grid mt={3}>
-            <Typography variant="h4">{post.title}</Typography>
-            <Typography fontStyle={"italic"} color={"text.secondary"}>
-              {post.date}, por {post.autor1}, {post.autor2}
-            </Typography>
-            <Typography></Typography>
-            <Typography mt={3}>{post.intro}</Typography>
-            <Typography mt={2}>{post.generalInfo}</Typography>
-            <Typography mt={2}>{post.procedures}</Typography>
-            <Typography mt={2}>{post.anexxed}</Typography>
-            <Typography mt={2}>{post.videoLink}</Typography>
-            <Typography mt={2}>{post.drivelLink}</Typography>
+
+        <Grid mt={7}>
+          <Grid>
+            {protocol.protocolGroup}
+            <Divider />
+          </Grid>
+          <Grid item xs={12} md={8} mt={4}>
+            {editorStates.title && (
+              <Editor editorState={editorStates.title} readOnly />
+            )}
+            <Grid fontStyle="italic" color="text.secondary" display="flex">
+              {formattedDate}
+              <Typography>, &nbsp; por &nbsp;</Typography>
+              {editorStates.autor1 && (
+                <Editor editorState={editorStates.autor1} readOnly />
+              )}
+              <Typography
+                fontStyle="italic"
+                color="text.secondary"
+                component="div" // Cambio aquí
+                display="flex"
+              >
+                , &nbsp;
+              </Typography>
+              {editorStates.autor2 && (
+                <Editor editorState={editorStates.autor2} readOnly />
+              )}
+            </Grid>
+            <Grid mt={3}>
+              {editorStates.intro && (
+                <Editor editorState={editorStates.intro} readOnly />
+              )}
+              {editorStates.generalInfo && (
+                <Editor editorState={editorStates.generalInfo} readOnly />
+              )}
+              {editorStates.procedures && (
+                <Editor editorState={editorStates.procedures} readOnly />
+              )}
+              {editorStates.annexed && (
+                <Editor editorState={editorStates.annexed} readOnly />
+              )}
+              {editorStates.driveLink && (
+                <Editor editorState={editorStates.driveLink} readOnly />
+              )}
+              {editorStates.videoLink && (
+                <Editor editorState={editorStates.videoLink} readOnly />
+              )}
+            </Grid>
           </Grid>
         </Grid>
       </main>

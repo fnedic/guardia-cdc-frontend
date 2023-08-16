@@ -88,7 +88,7 @@ function DashAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Button href={pageUrls[page]} textAlign="center">{page}</Button>
                 </MenuItem>
               ))}
             </Menu>
