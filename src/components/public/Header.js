@@ -1,8 +1,7 @@
 import React from "react";
-import logo from "../public/images/logo-cdc-header.svg"
+import logo from "../public/images/logo-cdc-header.svg";
 
 export const Header = () => {
-
   const headerStyle = {
     display: "flex",
     justifyContent: "center",
@@ -17,9 +16,7 @@ export const Header = () => {
 
   return (
     <header style={headerStyle}>
-      <img style={imgStyle}
-        src={logo}
-      />
+      <img alt="" style={imgStyle} src={logo} />
     </header>
   );
 };
