@@ -6,21 +6,24 @@ class ProtocolService {
   createUser(protocol) {
     return axios.post(USER_API_BASE_URL, protocol)
       .then(response => {
-        // Procesar la respuesta exitosa aquí si lo deseas
-        console.log('Respuesta exitosa:', response.data);
-        return response.data; // Puedes retornar la respuesta si es necesario
+        return response.data;
       })
       .catch(error => {
-        // Manejar el error aquí
         console.error('Error en la solicitud:', error);
-
-        // Puedes obtener más información sobre el error
-        // Accediendo a las propiedades del objeto error
         console.log('Código de estado:', error.response?.status);
         console.log('Mensaje de error:', error.message);
-
-        // Lanza el error nuevamente para que pueda ser manejado en el componente que llama a esta función
         throw error;
+      });
+  }
+
+  getProtocol() {
+    return axios.get("http://localhost:8080/protocol/view")
+      .then((response) => {
+        // console.log("Exito!", response.data);
+        return Promise.resolve(response.data);
+      })
+      .catch((err) => {
+        console.error("Error obteniendo protocolo!", err);
       });
   }
 }

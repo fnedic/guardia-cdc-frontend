@@ -27,7 +27,7 @@ function App() {
         <Route path="/profile" element={<LoggedAppBar />} />
         <Route path="/dashboard" element={<DashAppBar />} />
         <Route path="/protocolUpload" element={<DashAppBar />} />
-        <Route path="/protocolview" element={<LoggedAppBar />} />
+        <Route path="/protocol/view" element={<LoggedAppBar />} />
         <Route path="/register" element={<SignBar />} />
         <Route path="/login" element={<SignBar />} />
         <Route path="/update-user/:id" element={<DashAppBar/>} />
@@ -35,7 +35,7 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/profile" element={<Profile />} />
-        <Route path="/protocolview" element={<ProtocolView />} />
+        <Route path="/protocol/view" element={<ProtocolView />} />
         <Route path="/protocolUpload" element={<ProtocolForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/register" element={<Register />} />

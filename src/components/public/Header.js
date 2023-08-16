@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../public/images/logo-cdc-header.svg"
 
 export const Header = () => {
 
@@ -17,8 +18,7 @@ export const Header = () => {
   return (
     <header style={headerStyle}>
       <img style={imgStyle}
-        src="logo-cdc-header.svg"
-        alt="Imagen centrada"
+        src={logo}
       />
     </header>
   );
