@@ -11,6 +11,7 @@ import DashAppBar from "./components/secured/DashAppBar";
 import ProtocolForm from "./components/secured/ProtocolForm";
 import ProtocolView from "./components/secured/ProtocolView";
 import UpdateUser from "./components/secured/UpdateUser";
+import ProtocolList from './components/secured/ProtocolList';
 
 function App() {
   return (
@@ -22,20 +23,22 @@ function App() {
         <Route path="/home" element={<LoggedAppBar />} />
         <Route path="/profile" element={<LoggedAppBar />} />
         <Route path="/dashboard" element={<DashAppBar />} />
-        <Route path="/protocolUpload" element={<DashAppBar />} />
-        <Route path="/protocol/view" element={<LoggedAppBar />} />
+        <Route path="/protocol/upload" element={<DashAppBar />} />
+        <Route path="/protocol/view/:id" element={<LoggedAppBar />} />
+        <Route path="/protocol/list" element={<LoggedAppBar />} />
         <Route path="/register" element={<SignBar />} />
         <Route path="/login" element={<SignBar />} />
-        <Route path="/update-user/:id" element={<DashAppBar/>} />
+        <Route path="/user/update/:id" element={<DashAppBar/>} />
         
       </Routes>
       <Routes>
-        <Route path="/protocol/view" element={<ProtocolView />} />
-        <Route path="/protocolUpload" element={<ProtocolForm />} />
+        <Route path="/protocol/view/:id" element={<ProtocolView />} />
+        <Route path="/protocol/list" element={<ProtocolList />} />
+        <Route path="/protocol/upload" element={<ProtocolForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LogIn />} />
-        <Route path="/update-user/:id" element={<UpdateUser/>} />
+        <Route path="/user/update/:id" element={<UpdateUser/>} />
       </Routes>
       <Footer />
     </BrowserRouter>

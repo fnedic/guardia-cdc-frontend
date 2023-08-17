@@ -6,9 +6,8 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { Container, Divider } from "@mui/material";
-import { useState, useEffect } from "react";
-import ProtocolService from "../secured/services/ProtocolService.js";
-import { Editor, EditorState, convertFromRaw } from "draft-js";
+import { useProtocolView } from "../../hooks/useProtocolView.js";
+import { Editor } from "draft-js";
 
 function ProtocolView() {
   const cardImgStyle = {
@@ -22,63 +21,7 @@ function ProtocolView() {
     opacity: "5px",
   };
 
-  const initialState = {
-    annexed: "",
-    autor1: "",
-    autor2: "",
-    title: "",
-    intro: "",
-    procedures: "",
-    generalInfo: "",
-    videoLink: "",
-    driveLink: "",
-    protocolGroup: "",
-    publicationDate: "",
-  };
-
-  const [protocol, setProtocol] = useState(initialState);
-  const [editorStates, setEditorStates] = useState({}); // Store editor states dynamically
-
-  useEffect(() => {
-    ProtocolService.getProtocol()
-      .then((data) => {
-        setProtocol(data);
-      })
-      .catch((error) => {
-        console.error("Error seteando protocolo! ", error);
-      });
-  }, []);
-
-  useEffect(() => {
-    const updatedEditorStates = {};
-
-    // Iterate through protocol properties and create editor states for each section
-    for (const key in protocol) {
-      if (key !== "protocolGroup" || key !== "publicationDate") {
-        const contentState = renderFormatedContent({ section: protocol[key] });
-        if (contentState) {
-          updatedEditorStates[key] =
-            EditorState.createWithContent(contentState);
-        }
-      }
-    }
-
-    setEditorStates(updatedEditorStates);
-  }, [protocol]);
-
-  function renderFormatedContent({ section }) {
-    try {
-      if (!section) {
-        return null;
-      }
-      const parsedSection = JSON.parse(section);
-      const contentState = convertFromRaw(parsedSection);
-      return contentState;
-    } catch (error) {
-      console.error("Error parsing JSON: ", error);
-      return null;
-    }
-  }
+  const { editorStates, protocol } = useProtocolView();
 
   const post = { imageLink: "https://source.unsplash.com/random?wallpapers" };
 
@@ -138,7 +81,7 @@ function ProtocolView() {
               <Typography
                 fontStyle="italic"
                 color="text.secondary"
-                component="div" // Cambio aquí
+                component="div"
                 display="flex"
               >
                 , &nbsp;

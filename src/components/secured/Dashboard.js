@@ -4,8 +4,8 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Container, CssBaseline } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
-import UserService from "./services/UserService"
-import { Button } from '@mui/material';
+import UserService from "./services/UserService";
+import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const columns = [
@@ -68,12 +68,9 @@ const columns = [
     align: "center",
     headerAlign: "center",
   },
-
-
 ];
 
 export default function Dashboard() {
-
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -83,29 +80,28 @@ export default function Dashboard() {
   }, []);
   const navigate = useNavigate();
   const editUser = (id) => {
-    navigate(`/update-user/${id}`);
-};
+    navigate(`/user/update/${id}`);
+  };
 
   return (
     <Container component="main" sx={{ marginTop: 5, marginBottom: 5 }}>
       <CssBaseline />
-
       <Box sx={{ height: 400, width: "100%" }}>
         <DataGrid
           sx={{
             boxShadow: 3,
             border: 2,
-            borderColor: '#799A3D',
-            '& .MuiDataGrid-cell:hover': {
-              color: '#283583',
+            borderColor: "#799A3D",
+            "& .MuiDataGrid-cell:hover": {
+              color: "#283583",
             },
           }}
           rows={users}
           columns={[
             ...columns,
             {
-              field: 'actions',
-              headerName: 'Acciones',
+              field: "actions",
+              headerName: "Acciones",
               width: 120,
               renderCell: (params) => (
                 <Button
@@ -113,17 +109,12 @@ export default function Dashboard() {
                   color="primary"
                   size="small"
                   onClick={() => editUser(params.id)}
-                  
-
                 >
                   Editar
                 </Button>
               ),
             },
           ]}
-        
-
-
           initialState={{
             pagination: { paginationModel: { pageSize: 10 } },
             filter: {

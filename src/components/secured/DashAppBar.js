@@ -36,7 +36,7 @@ function DashAppBar() {
   };
 
   const pageUrls = {
-    "Subir Contenido": "http://localhost:3000/protocolupload",
+    "Subir Contenido": "http://localhost:3000/protocol/upload",
     "Personal": "http://localhost:3000/dashboard",
   };
 
