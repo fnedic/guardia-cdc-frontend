@@ -92,7 +92,7 @@ export default function ProtocolForm() {
       protocolGroup: group,
     };
 
-    ProtocolService.createUser(protocol).then((user) => {});
+    ProtocolService.createProtocol(protocol).then((user) => {});
 
     handleRedirect();
   };

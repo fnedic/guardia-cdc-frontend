@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { CssBaseline } from "@mui/material";
 
-const pages = ["Protocolos", "Videos", "Calendario", "Interconsultores"];
+const pages = ["Protocolos", "Videos"];
 const settings = ["Perfil", "Cerrar Sesión"];
 
 function LoggedAppBar() {
@@ -44,6 +44,11 @@ function LoggedAppBar() {
     backgroundColor: "#283583",
     boxShadow:
       "0px 4px 4px -3px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)",
+  };
+
+  const pageUrls = {
+    Protocolos: "http://localhost:3000/protocol/list",
+    Videos: "http://localhost:3000/",
   };
 
   return (
@@ -82,7 +87,9 @@ function LoggedAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Button href={pageUrls[page]} textAlign="center">
+                    {page}
+                  </Button>
                 </MenuItem>
               ))}
             </Menu>
@@ -103,12 +110,25 @@ function LoggedAppBar() {
             Servicio de Guardia
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: 'center', alignItems: 'center' }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             {pages.map((page) => (
               <Button
+                href={pageUrls[page]}
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ mx: 1, color: "white", display: "block", letterSpacing: 1}}
+                sx={{
+                  mx: 1,
+                  color: "white",
+                  display: "block",
+                  letterSpacing: 1,
+                }}
               >
                 {page}
               </Button>

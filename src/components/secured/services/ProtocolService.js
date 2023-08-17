@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const USER_API_BASE_URL = "http://localhost:8080/protocol/upload";
+const USER_API_BASE_URL = "http://localhost:8080/protocol/";
 
 class ProtocolService {
-  createUser(protocol) {
-    return axios.post(USER_API_BASE_URL, protocol)
+  createProtocol(protocol) {
+    return axios.post(USER_API_BASE_URL+"upload", protocol)
       .then(response => {
         return response.data;
       })
@@ -16,8 +16,8 @@ class ProtocolService {
       });
   }
 
-  getProtocol() {
-    return axios.get("http://localhost:8080/protocol/view")
+  getProtocol(id) {
+    return axios.get(USER_API_BASE_URL+"view/"+id)
       .then((response) => {
         // console.log("Exito!", response.data);
         return Promise.resolve(response.data);
@@ -25,6 +25,10 @@ class ProtocolService {
       .catch((err) => {
         console.error("Error obteniendo protocolo!", err);
       });
+  }
+
+  protocolList() {
+    return axios.get(USER_API_BASE_URL+"list");
   }
 }
 
