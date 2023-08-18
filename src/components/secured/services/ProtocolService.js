@@ -30,6 +30,14 @@ class ProtocolService {
   protocolList() {
     return axios.get(USER_API_BASE_URL+"list");
   }
+
+  mostViewedProtocol () {
+    return axios.get(USER_API_BASE_URL+"mostviewed");
+  }
+
+  improveViews (id) {
+    return axios.post(USER_API_BASE_URL+"mostviewed/"+id);
+  }
 }
 
 const instance = new ProtocolService();

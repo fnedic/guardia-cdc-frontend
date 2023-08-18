@@ -13,16 +13,8 @@ import {
 import { Book, KeyboardArrowRight } from "@mui/icons-material";
 import { useProtocolList } from "../../hooks/useProtocolList";
 export default function ProtocolList() {
-  const { protocolArray } = useProtocolList();
-
-  function myDate(date) {
-    const myDate = new Date(date);
-    const day = myDate.getDate();
-    const month = myDate.getMonth() + 1;
-    const year = myDate.getFullYear();
-    const formattedDate = `${day}/${month}/${year}`;
-    return formattedDate;
-  }
+  
+  const { protocolArray, myDate } = useProtocolList();
 
   function generate() {
     return protocolArray.map((protocol) => (

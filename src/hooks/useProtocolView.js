@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 export const useProtocolView = () => {
   // LOGIC FOR PROTOCOL RENDERING ////////////////////////////////////////////////
+
   const initialState = {
     annexed: "",
     autor1: "",
@@ -63,9 +64,19 @@ export const useProtocolView = () => {
       return null;
     }
   }
-  ///////////////////////////////////////////////////////////////////////////////
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // LOGIC FOR IMPROVE NUMBER OF PROTOCOL VIEWS //////////////////////////////////
+  function ImproveViews() {
+    useEffect(() => {
+      ProtocolService.improveViews(id);
+    }, [])
+  }
+  ////////////////////////////////////////////////////////////////////////////////
   return {
     editorStates,
     protocol,
+    renderFormatedContent,
+    ImproveViews
   };
 };
