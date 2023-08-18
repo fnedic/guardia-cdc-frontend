@@ -1,13 +1,15 @@
-import * as React from "react";
+import {React} from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import { Container, Divider } from "@mui/material";
+import { Badge, Button, Container, Divider } from "@mui/material";
 import { useProtocolView } from "../../hooks/useProtocolView.js";
 import { Editor } from "draft-js";
+import { useMostViewedProtocol } from "../../hooks/useMostViewedProtocol.js";
+import { useProtocolList } from "../../hooks/useProtocolList.js";
 
 function ProtocolView() {
   const cardImgStyle = {
@@ -20,48 +22,65 @@ function ProtocolView() {
     borderRadius: "0.5rem",
     opacity: "5px",
   };
-
-  const { editorStates, protocol } = useProtocolView();
+  const { mostViewedProtocol } = useMostViewedProtocol();
+  const { editorStates, protocol, ImproveViews } = useProtocolView();
+  const { myDate } = useProtocolList();
 
   const post = { imageLink: "https://source.unsplash.com/random?wallpapers" };
 
-  const myDate = new Date(protocol.publicationDate);
-  const day = myDate.getDate();
-  const month = myDate.getMonth() + 1;
-  const year = myDate.getFullYear();
-  const formattedDate = `${day}/${month}/${year}`;
+  // useEffect(() => {
+  //   if (protocol) {
+  //     console.log(protocol.id);
+  //     ProtocolService.improveViews(protocol.id);
+  //   }
+  // })
+
+  if (protocol) {
+    ImproveViews();
+  }
 
   return (
     <Container sx={{ mt: 5, mb: 5 }}>
       <main>
-        <Grid item xs={12} md={6}>
-          <CardActionArea component="" href="">
-            <Card sx={{ display: "flex", color: "white", padding: "2rem" }}>
-              <CardContent
-                sx={{ flex: 1, zIndex: 1, backdropFilter: "blur(0.5px)" }}
-              >
-                <Grid>
-                  {editorStates.title && (
-                    <Editor editorState={editorStates.title} readOnly />
-                  )}
-                </Grid>
-                <Grid>
-                  {editorStates.intro && (
-                    <Editor editorState={editorStates.intro} readOnly />
-                  )}
-                </Grid>
-                <Typography variant="subtitle1" color="primary">
-                  Continuar leyendo...
-                </Typography>
-              </CardContent>
-            </Card>
-            <CardMedia
-              component="img"
-              style={cardImgStyle}
-              image={post.imageLink}
-            />
-          </CardActionArea>
-        </Grid>
+        {mostViewedProtocol && (
+          <Grid item xs={12} md={6}>
+            <Badge
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              badgeContent={"Top!"}
+              color="primary"
+            >
+              <CardActionArea>
+                <Card sx={{ display: "flex", color: "white", padding: "2rem" }}>
+                  <CardContent
+                    sx={{ flex: 1, zIndex: 1, backdropFilter: "blur(0.5px)" }}
+                  >
+                    <Typography fontSize={15}>{mostViewedProtocol.protocolGroup}</Typography>
+                    <Divider />
+                    <Grid mt={2}>
+                      <Typography component="h3" variant="h3" paragraph>
+                        {mostViewedProtocol.title}
+                      </Typography>
+                    </Grid>
+                    <Typography variant="subtitle1" paragraph>
+                      {mostViewedProtocol.intro}
+                    </Typography>
+                    <Button href={`${mostViewedProtocol.id}`}>
+                      Continuar leyendo...
+                    </Button>
+                  </CardContent>
+                </Card>
+                <CardMedia
+                  component="img"
+                  style={cardImgStyle}
+                  image={post.imageLink}
+                />
+              </CardActionArea>
+            </Badge>
+          </Grid>
+        )}
 
         <Grid mt={7}>
           <Grid>
@@ -73,7 +92,7 @@ function ProtocolView() {
               <Editor editorState={editorStates.title} readOnly />
             )}
             <Grid fontStyle="italic" color="text.secondary" display="flex">
-              {formattedDate}
+              {myDate(protocol.publicationDate)}
               <Typography>, &nbsp; por &nbsp;</Typography>
               {editorStates.autor1 && (
                 <Editor editorState={editorStates.autor1} readOnly />
