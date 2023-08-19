@@ -14,7 +14,7 @@ import { Book, KeyboardArrowRight } from "@mui/icons-material";
 import { useProtocolList } from "../../hooks/useProtocolList";
 export default function ProtocolList() {
   
-  const { protocolArray, myDate } = useProtocolList();
+  const { protocolArray } = useProtocolList();
 
   function generate() {
     return protocolArray.map((protocol) => (
@@ -61,7 +61,7 @@ export default function ProtocolList() {
               justifyContent: "left",
             }}
           >
-            <Typography>{myDate(protocol.publicationDate)}</Typography>
+            <Typography>{protocol.publicationDate}</Typography>
           </Grid>
         </Grid>
         <IconButton href={`view/${protocol.id}`}>

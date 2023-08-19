@@ -12,6 +12,7 @@ import ProtocolForm from "./components/secured/ProtocolForm";
 import ProtocolView from "./components/secured/ProtocolView";
 import UpdateUser from "./components/secured/UpdateUser";
 import ProtocolList from './components/secured/ProtocolList';
+import ProtocolDashboard from "./components/secured/ProtocolDashboard.js"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/home" element={<LoggedAppBar />} />
         <Route path="/profile" element={<LoggedAppBar />} />
         <Route path="/dashboard" element={<DashAppBar />} />
+        <Route path="/dashboard/protocol" element={<DashAppBar />} />
         <Route path="/protocol/upload" element={<DashAppBar />} />
         <Route path="/protocol/view/:id" element={<LoggedAppBar />} />
         <Route path="/protocol/list" element={<LoggedAppBar />} />
@@ -34,6 +36,7 @@ function App() {
       <Routes>
         <Route path="/protocol/view/:id" element={<ProtocolView />} />
         <Route path="/protocol/list" element={<ProtocolList />} />
+        <Route path="/dashboard/protocol" element={<ProtocolDashboard />} />
         <Route path="/protocol/upload" element={<ProtocolForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/register" element={<Register />} />

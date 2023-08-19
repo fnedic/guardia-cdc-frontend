@@ -157,6 +157,7 @@ export default function Register() {
               type="button"
               fullWidth
               variant="contained"
+              disableElevation
               sx={{
                 mt: 3,
                 mb: 1,

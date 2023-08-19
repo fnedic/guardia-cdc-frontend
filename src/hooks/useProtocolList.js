@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import ProtocolService from "../components/secured/services/ProtocolService.js";
-import { useProtocolView } from './useProtocolView';
+import { convertFromRaw } from "draft-js";
 
 export const useProtocolList = () => {
   // LOGIC FOR PROTOCOL RENDERING ////////////////////////////////////////////////
-  const { renderFormatedContent } = useProtocolView();
   const [protocolList, setProtocolList] = useState();
   const [protocolArray, setProtocolArray] = useState([]);
 
@@ -28,7 +27,8 @@ export const useProtocolList = () => {
             section: element.intro,
           }).getPlainText(),
           protocolGroup: element.protocolGroup,
-          publicationDate: element.publicationDate,
+          publicationDate: myDate(element.publicationDate),
+          views: element.views
         };
         setProtocolArray(updatedProtocolArray);
       }
@@ -36,6 +36,20 @@ export const useProtocolList = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [protocolList]);
+
+  function renderFormatedContent({ section }) {
+    try {
+      if (!section) {
+        return null;
+      }
+      const parsedSection = JSON.parse(section);
+      const contentState = convertFromRaw(parsedSection);
+      return contentState;
+    } catch (error) {
+      console.error("Error parsing JSON: ", error);
+      return null;
+    }
+  }
 
   function myDate(date) {
     const myDate = new Date(date);

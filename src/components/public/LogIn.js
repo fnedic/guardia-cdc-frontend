@@ -15,8 +15,6 @@ import { CssBaseline } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-
 const customTheme = createTheme({
   palette: {
     primary: {
@@ -39,9 +37,11 @@ export default function LogIn() {
       password: data.get("password"),
     });
 
-
     try {
-      const response = await axios.post("http://localhost:8080/cdc/login", formData);
+      const response = await axios.post(
+        "http://localhost:8080/cdc/login",
+        formData
+      );
 
       if (response.data === "Login exitoso!") {
         console.log("Inicio de sesión exitoso");
@@ -53,14 +53,8 @@ export default function LogIn() {
       }
     } catch (error) {
       console.error("Error al procesar la solicitud:", error);
-
     }
   };
-
-
-
-
-
 
   return (
     <ThemeProvider theme={customTheme}>
@@ -113,12 +107,14 @@ export default function LogIn() {
               type="submit"
               fullWidth
               variant="contained"
+              disableElevation
               sx={{
-                mt: 3,
+                mt: 1,
                 mb: 1,
                 backgroundColor: "#799A3D",
                 boxShadow: "0",
                 borderRadius: 1,
+                width: "100%",
               }}
             >
               <Typography>Iniciar Sesión</Typography>
