@@ -21,6 +21,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import "../../../node_modules/draft-js/dist/Draft.css";
 import RichTextEditor from "./RichTextEditor";
 import ProtocolService from "../secured/services/ProtocolService.js";
+import { Send } from "@mui/icons-material";
 
 const customTheme = createTheme({
   palette: {
@@ -288,17 +289,19 @@ export default function ProtocolForm() {
               <Button
                 type="submit"
                 variant="contained"
+                endIcon={<Send/>}
+                disableElevation
                 sx={{
                   mt: 0.2,
                   ml: 6,
                   backgroundColor: "#799A3D",
                   boxShadow: "0",
                   borderRadius: 1,
-                  width: "50%",
+                  width: "15%",
                 }}
                 onClick={handleSubmit}
               >
-                Publicar Protocolo
+                Publicar
               </Button>
             </Grid>
           </Box>

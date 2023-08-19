@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { CssBaseline } from "@mui/material";
+import { Settings } from "@mui/icons-material";
 
 const pages = ["Protocolos", "Videos"];
 const settings = ["Perfil", "Cerrar Sesión"];
@@ -138,7 +139,9 @@ function LoggedAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Opciones">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="" src="" />
+                <Avatar sx={{ backgroundColor: "#ffffff", color: "#283583" }}>
+                  <Settings />
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu

@@ -12,8 +12,9 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { CssBaseline } from "@mui/material";
+import { Settings } from "@mui/icons-material";
 
-const pages = ["Subir Contenido", "Personal"];
+const pages = ["Personal", "Protocolos", "Subir Contenido"];
 const settings = ["Perfil", "Cerrar Sesión"];
 
 function DashAppBar() {
@@ -38,6 +39,7 @@ function DashAppBar() {
   const pageUrls = {
     "Subir Contenido": "http://localhost:3000/protocol/upload",
     "Personal": "http://localhost:3000/dashboard",
+    "Protocolos": "http://localhost:3000/dashboard/protocol"
   };
 
   const appBarStyle = {
@@ -136,7 +138,9 @@ function DashAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Opciones">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="" src="" />
+                <Avatar sx={{ backgroundColor:"#ffffff", color:"#283583" }}>
+                  <Settings />
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
