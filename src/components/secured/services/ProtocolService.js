@@ -38,6 +38,10 @@ class ProtocolService {
   improveViews (id) {
     return axios.post(USER_API_BASE_URL+"mostviewed/"+id);
   }
+
+  deleteProtocol(id) {
+    return axios.get(USER_API_BASE_URL+"delete/"+id);
+  }
 }
 
 const instance = new ProtocolService();

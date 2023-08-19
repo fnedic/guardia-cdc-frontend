@@ -76,6 +76,7 @@ export const useProtocolView = () => {
   return {
     editorStates,
     protocol,
+    renderFormatedContent,
     ImproveViews
   };
 };

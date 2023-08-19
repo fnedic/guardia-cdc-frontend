@@ -65,8 +65,34 @@ export const useProtocolList = () => {
   //   ))
   // }, [protocolArray]);
   ///////////////////////////////////////////////////////////////////////////////
+
+  const fetchProtocolList = async () => {
+    try {
+      const response = await ProtocolService.protocolList();
+      const updatedProtocolList = response.data;
+      
+      const updatedProtocolArray = updatedProtocolList.map((element) => ({
+        id: element.id,
+        title: renderFormatedContent({
+          section: element.title,
+        }).getPlainText(),
+        intro: renderFormatedContent({
+          section: element.intro,
+        }).getPlainText(),
+        protocolGroup: element.protocolGroup,
+        publicationDate: myDate(element.publicationDate),
+        views: element.views,
+      }));
+
+      setProtocolList(updatedProtocolList);
+      setProtocolArray(updatedProtocolArray);
+    } catch (error) {
+      console.error("Error fetching protocol list: ", error);
+    }
+  };
   return {
     protocolArray,
-    myDate
+    myDate,
+    fetchProtocolList,
   };
 };
