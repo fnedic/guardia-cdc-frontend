@@ -109,7 +109,7 @@ export default function ProtocolForm() {
   };
 
   const handleRedirect = () => {
-    window.location.href = "/dashboard";
+    window.location.href = "/dashboard/protocol";
   };
 
   const customBoxStyle = {

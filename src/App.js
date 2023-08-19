@@ -12,7 +12,7 @@ import ProtocolForm from "./components/secured/ProtocolForm";
 import ProtocolView from "./components/secured/ProtocolView";
 import UpdateUser from "./components/secured/UpdateUser";
 import ProtocolList from './components/secured/ProtocolList';
-import ProtocolDashboard from "./components/secured/ProtocolDashboard.js"
+import ProtocolDashboard from "./components/secured/ProtocolDashboard.js";
 
 function App() {
   return (

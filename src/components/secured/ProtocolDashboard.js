@@ -1,19 +1,39 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Container, CssBaseline } from "@mui/material";
+import {
+  Container,
+  CssBaseline,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 import { Button } from "@mui/material";
 import { useProtocolList } from "./../../hooks/useProtocolList";
-import { Edit } from "@mui/icons-material";
-// import { useNavigate } from "react-router-dom";
+import { Delete } from "@mui/icons-material";
+import { useState } from "react";
+import ProtocolService from "../secured/services/ProtocolService.js";
 
 export default function Dashboard() {
-  const { protocolArray } = useProtocolList();
+  const { protocolArray, fetchProtocolList } = useProtocolList(); // Agrega la función fetchProtocolList para actualizar la lista
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [selectedProtocolId, setSelectedProtocolId] = useState(null);
 
-  // const navigate = useNavigate();
-  // const editUser = (id) => {
-  //   navigate(`/user/update/${id}`);
-  // };
+  const deleteProtocol = (id) => {
+    setSelectedProtocolId(id);
+    setDeleteDialogOpen(true);
+  };
+  
+  const handleDeleteConfirmed = async () => {
+    await ProtocolService.deleteProtocol(selectedProtocolId);
+    await fetchProtocolList(); // Actualiza la lista después de borrar
+    setDeleteDialogOpen(false); // Cierra el diálogo
+  };
+
+  const handleCloseDeleteDialog = () => {
+    setDeleteDialogOpen(false);
+  };
   const columns = [
     {
       field: "title",
@@ -57,14 +77,14 @@ export default function Dashboard() {
       headerAlign: "center",
       renderCell: (params) => (
         <Button
-          sx={{ backgroundColor: "#8a96db", boxShadow: 0 }}
+          sx={{ backgroundColor: "#ff8080", boxShadow: 0 }}
           variant="contained"
           size="small"
           disableElevation
-          endIcon={<Edit />}
-          //onClick={() => editUser(params.id)}
+          endIcon={<Delete />}
+          onClick={() => deleteProtocol(params.id)}
         >
-          Editar
+          Borrar
         </Button>
       ),
     },
@@ -83,6 +103,24 @@ export default function Dashboard() {
       }}
     >
       <CssBaseline />
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={handleCloseDeleteDialog}
+        aria-labelledby="delete-dialog-title"
+      >
+        <DialogTitle id="delete-dialog-title">Confirmar Borrado</DialogTitle>
+        <DialogContent>
+          ¿Estás seguro de que deseas borrar este protocolo?
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDeleteDialog} color="primary">
+            Cancelar
+          </Button>
+          <Button onClick={handleDeleteConfirmed} color="primary">
+            Borrar
+          </Button>
+        </DialogActions>
+      </Dialog>
       {protocolArray && (
         <Box sx={{ width: "85%" }}>
           <DataGrid
