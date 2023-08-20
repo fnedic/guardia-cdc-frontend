@@ -19,7 +19,7 @@ export const useMostViewedProtocol = () => {
             const mvProtocol = {
                 id: mvProtocolUpdate.id,
                 title: renderFormatedContent({ section: mvProtocolUpdate.title}).getPlainText(),
-                intro: renderFormatedContent({ section: mvProtocolUpdate.intro}).getPlainText(),
+                intro: renderFormatedContent({ section: mvProtocolUpdate.intro}).getPlainText().slice(0, 300),
                 protocolGroup: mvProtocolUpdate.protocolGroup
             };
             setMostViewedProtocol(mvProtocol);

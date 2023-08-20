@@ -1,15 +1,13 @@
-import { Typography } from '@mui/material';
 import React from 'react';
+import { Container } from '@mui/material';
 
 export default function Profile () {
 
     return (
 
-        <main>
-            
-            <Typography></Typography>
+        <Container component={"main"} maxWidth="xs">
 
-        </main>
+        </Container>
 
     )
 

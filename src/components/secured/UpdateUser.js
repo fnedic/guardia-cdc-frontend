@@ -155,7 +155,7 @@ function UpdateUser() {
                   value={medicalRegistration}
                 />
               </Grid>
-              <Grid item xs={8.7}>
+              <Grid item xs={8.2}>
                 <TextField
                   fullWidth
                   id="email"
@@ -165,7 +165,7 @@ function UpdateUser() {
                   value={email}
                 />
               </Grid>
-              <Grid item sm={2}>
+              <Grid item >
                 <FormControl>
                   <InputLabel>Estado</InputLabel>
                   <Select
@@ -194,7 +194,7 @@ function UpdateUser() {
                 }}
                 onClick={updateUser}
               >
-                Guardar
+                Actualizar
               </Button>
               <Button
                 type="button"

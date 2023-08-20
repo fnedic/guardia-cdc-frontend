@@ -49,7 +49,7 @@ function LoggedAppBar() {
 
   const pageUrls = {
     Protocolos: "http://localhost:3000/protocol/list",
-    Videos: "http://localhost:3000/",
+    Videos: "http://localhost:3000/videos",
   };
 
   return (

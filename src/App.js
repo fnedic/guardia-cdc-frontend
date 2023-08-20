@@ -13,6 +13,7 @@ import ProtocolView from "./components/secured/ProtocolView";
 import UpdateUser from "./components/secured/UpdateUser";
 import ProtocolList from './components/secured/ProtocolList';
 import ProtocolDashboard from "./components/secured/ProtocolDashboard.js";
+import YouTubeVideos from "./components/secured/YouTubeVideos.js";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/register" element={<SignBar />} />
         <Route path="/login" element={<SignBar />} />
         <Route path="/user/update/:id" element={<DashAppBar/>} />
+        <Route path="/videos" element={<LoggedAppBar />} />
         
       </Routes>
       <Routes>
@@ -42,6 +44,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/user/update/:id" element={<UpdateUser/>} />
+        <Route path="/videos" element={<YouTubeVideos />} />
       </Routes>
       <Footer />
     </BrowserRouter>
