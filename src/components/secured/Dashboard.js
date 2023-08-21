@@ -1,27 +1,28 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Container, CssBaseline } from "@mui/material";
-import { useState } from "react";
-import { useEffect } from "react";
-import ProtocolService from "./services/UserService";
+import {
+  Container,
+  CssBaseline,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { Edit } from "@mui/icons-material";
+import { Delete, Edit } from "@mui/icons-material";
+import { useUserList } from "../../hooks/useUserList";
 
 export default function Dashboard() {
-  const [users, setUsers] = useState([]);
+  const {
+    userList,
+    editUser,
+    deleteDialogOpen,
+    handleCloseDeleteDialog,
+    handleDeleteConfirmed,
+    deleteUser,
+  } = useUserList();
 
-  useEffect(() => {
-    ProtocolService.getUser().then((res) => {
-      setUsers(res.data);
-    });
-  }, []);
-
-  const navigate = useNavigate();
-  const editUser = (id) => {
-    navigate(`/user/update/${id}`);
-  };
   const columns = [
     {
       field: "name",
@@ -77,7 +78,7 @@ export default function Dashboard() {
     {
       field: "role",
       headerName: "Rol",
-      width: 80,
+      width: 85,
       editable: false,
       align: "center",
       headerAlign: "center",
@@ -85,21 +86,33 @@ export default function Dashboard() {
     {
       field: "actions",
       headerName: "Acciones",
-      width: 150,
+      width: 250,
       editable: false,
       align: "center",
       headerAlign: "center",
       renderCell: (params) => (
-        <Button
-          sx={{ backgroundColor: "#8a96db", boxShadow: 0 }}
-          variant="contained"
-          size="small"
-          disableElevation
-          endIcon={<Edit />}
-          onClick={() => editUser(params.id)}
-        >
-          Editar
-        </Button>
+        <>
+          <Button
+            sx={{ backgroundColor: "#8a96db", boxShadow: 0, marginRight: 1.5 }}
+            variant="contained"
+            size="small"
+            disableElevation
+            endIcon={<Edit />}
+            onClick={() => editUser(params.id)}
+          >
+            Editar
+          </Button>
+          <Button
+            sx={{ backgroundColor: "#ff8080", boxShadow: 0 }}
+            variant="contained"
+            size="small"
+            disableElevation
+            endIcon={<Delete />}
+            onClick={() => deleteUser(params.id)}
+          >
+            Borrar
+          </Button>
+        </>
       ),
     },
   ];
@@ -117,7 +130,24 @@ export default function Dashboard() {
       }}
     >
       <CssBaseline />
-      <Box sx={{ width: "85%" }}>
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={handleCloseDeleteDialog}
+        aria-labelledby="delete-dialog-title"
+        style={{ textAlign: "center" }}
+      >
+        <DialogTitle id="delete-dialog-title">Confirmar Borrado</DialogTitle>
+        <DialogContent>¿Desea borrar el usuario?</DialogContent>
+        <DialogActions style={{ justifyContent: "center" }}>
+          <Button onClick={handleCloseDeleteDialog} color="primary">
+            Cancelar
+          </Button>
+          <Button onClick={handleDeleteConfirmed} color="error">
+            Borrar
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Box sx={{ width: "95%" }}>
         <DataGrid
           sx={{
             boxShadow: 3,
@@ -127,7 +157,7 @@ export default function Dashboard() {
               color: "#283583",
             },
           }}
-          rows={users}
+          rows={userList}
           columns={[...columns]}
           initialState={{
             pagination: { paginationModel: { pageSize: 10 } },

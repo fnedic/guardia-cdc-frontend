@@ -6,6 +6,8 @@ export const useProtocolList = () => {
   // LOGIC FOR PROTOCOL RENDERING ////////////////////////////////////////////////
   const [protocolList, setProtocolList] = useState();
   const [protocolArray, setProtocolArray] = useState([]);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [selectedProtocolId, setSelectedProtocolId] = useState(null);
 
   useEffect(() => {
     ProtocolService.protocolList().then((r) => {
@@ -60,11 +62,6 @@ export const useProtocolList = () => {
     const formattedDate = `${day}/${month}/${year}`;
     return formattedDate;
   }
-  // useEffect(() => {
-  //   protocolArray.map((p) => (
-  //       console.log("Title: ", p.id)
-  //   ))
-  // }, [protocolArray]);
   ///////////////////////////////////////////////////////////////////////////////
 
   const fetchProtocolList = async () => {
@@ -91,9 +88,27 @@ export const useProtocolList = () => {
       console.error("Error fetching protocol list: ", error);
     }
   };
+
+  const deleteProtocol = (id) => {
+    setSelectedProtocolId(id);
+    setDeleteDialogOpen(true);
+  };
+  
+  const handleDeleteConfirmed = async () => {
+    await ProtocolService.deleteProtocol(selectedProtocolId);
+    await fetchProtocolList(); 
+    setDeleteDialogOpen(false); 
+  };
+
+  const handleCloseDeleteDialog = () => {
+    setDeleteDialogOpen(false);
+  };
   return {
     protocolArray,
+    deleteDialogOpen,
     myDate,
-    fetchProtocolList,
+    deleteProtocol,
+    handleDeleteConfirmed,
+    handleCloseDeleteDialog,
   };
 };
