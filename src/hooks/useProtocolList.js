@@ -29,9 +29,7 @@ export const useProtocolList = () => {
           protocolGroup: element.protocolGroup,
           publicationDate: myDate(element.publicationDate),
           views: element.views,
-          videoLink: renderFormatedContent({
-            section: element.videoLink,
-          }).getPlainText(),
+          videoLink: element.videoLink
         };
         setProtocolArray(updatedProtocolArray);
       }
