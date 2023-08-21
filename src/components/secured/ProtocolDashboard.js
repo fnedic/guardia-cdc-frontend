@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Button } from "@mui/material";
 import { useProtocolList } from "./../../hooks/useProtocolList";
-import { Delete } from "@mui/icons-material";
+import { Delete, OpenInBrowser } from "@mui/icons-material";
 
 export default function Dashboard() {
   const {
@@ -59,13 +59,14 @@ export default function Dashboard() {
     {
       field: "actions",
       headerName: "Acciones",
-      width: 150,
+      width: 250,
       editable: false,
       align: "center",
       headerAlign: "center",
       renderCell: (params) => (
-        <Button
-          sx={{ backgroundColor: "#ff8080", boxShadow: 0 }}
+        <>
+          <Button
+          sx={{ backgroundColor: "#ff8080", boxShadow: 0, marginRight: 1.5 }}
           variant="contained"
           size="small"
           disableElevation
@@ -74,6 +75,17 @@ export default function Dashboard() {
         >
           Borrar
         </Button>
+        <Button
+          sx={{ backgroundColor: "#jj8080", boxShadow: 0 }}
+          variant="contained"
+          size="small"
+          disableElevation
+          endIcon={<OpenInBrowser />}
+          href={`../protocol/view/${params.id}`}
+        >
+          Abrir
+        </Button>
+        </>
       ),
     },
   ];
@@ -109,7 +121,7 @@ export default function Dashboard() {
         </DialogActions>
       </Dialog>
       {protocolArray && (
-        <Box sx={{ width: "85%" }}>
+        <Box sx={{ width: "90%" }}>
           <DataGrid
             sx={{
               boxShadow: 3,

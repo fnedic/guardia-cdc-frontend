@@ -98,7 +98,7 @@ export default function ProtocolForm() {
   const [group, setGroup] = React.useState("");
   const [video, setVideo] = React.useState();
   const [drive, setDrive] = React.useState();
-  
+
   const handleInputChange = (e) => {
     setGroup(e.target.value);
   };
@@ -119,11 +119,6 @@ export default function ProtocolForm() {
     color: "#fafafa",
     borderTopLeftRadius: "0.7rem",
     borderTopRightRadius: "0.7rem",
-  };
-
-  const customTextArea = {
-    minWidth: "100%",
-    borderBottomRadius: "0.7rem",
   };
 
   return (
@@ -240,7 +235,7 @@ export default function ProtocolForm() {
                   </Typography>
                 </Box>
                 <TextField
-                  sx={customTextArea}
+                  fullWidth
                   id="videoLink"
                   value={video}
                   onChange={handleInputChangeV}
@@ -254,7 +249,7 @@ export default function ProtocolForm() {
                   </Typography>
                 </Box>
                 <TextField
-                  sx={customTextArea}
+                  fullWidth
                   id="driveLink"
                   value={drive}
                   onChange={handleInputChangeD}
