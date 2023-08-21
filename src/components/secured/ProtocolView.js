@@ -149,6 +149,7 @@ function ProtocolView() {
             {editorStates.annexed && (
               <Editor editorState={editorStates.annexed} readOnly />
             )}
+            <Divider sx={{ mt:3 }} />
           </Grid>
         </Grid>
         <Grid item xs={12} md={4}>
@@ -174,7 +175,7 @@ function ProtocolView() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Avatar>
+              <Avatar sx={{ backgroundColor: "#283583", color: "#ffffff" }}>
                 <CloudDownload />
               </Avatar>
             </IconButton>
@@ -182,6 +183,7 @@ function ProtocolView() {
               href={`${protocol.driveLink}`}
               target="_blank"
               rel="noopener noreferrer"
+              underline="hover"
             >
               Descargar protocolo
             </Link>

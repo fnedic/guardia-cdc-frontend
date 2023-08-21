@@ -2,6 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import {
+  ButtonGroup,
   Container,
   CssBaseline,
   Dialog,
@@ -10,8 +11,8 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { Button } from "@mui/material";
-import { useProtocolList } from "./../../hooks/useProtocolList";
 import { Delete, OpenInBrowser } from "@mui/icons-material";
+import { useProtocolList } from "./../../hooks/useProtocolList";
 
 export default function Dashboard() {
   const {
@@ -64,28 +65,27 @@ export default function Dashboard() {
       align: "center",
       headerAlign: "center",
       renderCell: (params) => (
-        <>
+        <ButtonGroup
+          disableElevation
+          size="small"
+          variant="contained"
+          sx={{ boxShadow: "0" }}
+        >
           <Button
-          sx={{ backgroundColor: "#ff8080", boxShadow: 0, marginRight: 1.5 }}
-          variant="contained"
-          size="small"
-          disableElevation
-          endIcon={<Delete />}
-          onClick={() => deleteProtocol(params.id)}
-        >
-          Borrar
-        </Button>
-        <Button
-          sx={{ backgroundColor: "#jj8080", boxShadow: 0 }}
-          variant="contained"
-          size="small"
-          disableElevation
-          endIcon={<OpenInBrowser />}
-          href={`../protocol/view/${params.id}`}
-        >
-          Abrir
-        </Button>
-        </>
+            sx={{ backgroundColor: "#8a96db" }}
+            endIcon={<OpenInBrowser />}
+            href={`../protocol/view/${params.id}`}
+          >
+            Abrir
+          </Button>
+          <Button
+            sx={{ backgroundColor: "#ff8080" }}
+            endIcon={<Delete />}
+            onClick={() => deleteProtocol(params.id)}
+          >
+            Borrar
+          </Button>
+        </ButtonGroup>
       ),
     },
   ];
@@ -124,9 +124,8 @@ export default function Dashboard() {
         <Box sx={{ width: "90%" }}>
           <DataGrid
             sx={{
-              boxShadow: 3,
               border: 2,
-              borderColor: "#799A3D",
+              borderColor: "#c2c2c2",
               "& .MuiDataGrid-cell:hover": {
                 color: "#283583",
               },

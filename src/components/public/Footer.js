@@ -12,7 +12,6 @@ const StyledFooter = styled("footer")(({ theme }) => ({
   backgroundColor: "#283583",
   width: "100%",
   height: "8rem",
-  boxShadow: "0px -2px 6px rgba(0, 0, 0, 0.2)",
   position: "sticky",
   bottom: 0,
 }));
