@@ -186,6 +186,7 @@ function UpdateUser() {
                 type="button"
                 fullWidth
                 variant="contained"
+                disableElevation
                 sx={{
                   mr: 2,
                   backgroundColor: "#799A3D",
@@ -200,6 +201,7 @@ function UpdateUser() {
                 type="button"
                 fullWidth
                 variant="contained"
+                disableElevation
                 sx={{
                   backgroundColor: "#942121",
                   boxShadow: "0",

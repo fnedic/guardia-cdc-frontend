@@ -2,6 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import {
+  ButtonGroup,
   Container,
   CssBaseline,
   Dialog,
@@ -91,28 +92,29 @@ export default function Dashboard() {
       align: "center",
       headerAlign: "center",
       renderCell: (params) => (
-        <>
+        <ButtonGroup
+          disableElevation
+          size="small"
+          variant="contained"
+          sx={{ boxShadow: "0" }}
+        >
           <Button
-            sx={{ backgroundColor: "#8a96db", boxShadow: 0, marginRight: 1.5 }}
-            variant="contained"
-            size="small"
-            disableElevation
+            sx={{
+              backgroundColor: "#8a96db",
+            }}
             endIcon={<Edit />}
             onClick={() => editUser(params.id)}
           >
             Editar
           </Button>
           <Button
-            sx={{ backgroundColor: "#ff8080", boxShadow: 0 }}
-            variant="contained"
-            size="small"
-            disableElevation
+            sx={{ backgroundColor: "#ff8080" }}
             endIcon={<Delete />}
             onClick={() => deleteUser(params.id)}
           >
             Borrar
           </Button>
-        </>
+        </ButtonGroup>
       ),
     },
   ];
@@ -150,9 +152,8 @@ export default function Dashboard() {
       <Box sx={{ width: "95%" }}>
         <DataGrid
           sx={{
-            boxShadow: 3,
             border: 2,
-            borderColor: "#799A3D",
+            borderColor: "#c2c2c2",
             "& .MuiDataGrid-cell:hover": {
               color: "#283583",
             },

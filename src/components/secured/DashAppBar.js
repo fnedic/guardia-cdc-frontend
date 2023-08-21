@@ -49,8 +49,7 @@ function DashAppBar() {
     height: "5rem",
     width: "100%",
     backgroundColor: "#283583",
-    boxShadow:
-      "0px 4px 4px -3px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)",
+    boxShadow: "0px 0px 0px",
   };
 
   return (
