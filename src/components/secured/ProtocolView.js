@@ -4,7 +4,15 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
-import { Badge, Button, Container, Divider } from "@mui/material";
+import {
+  Avatar,
+  Badge,
+  Button,
+  Container,
+  Divider,
+  IconButton,
+  Link,
+} from "@mui/material";
 import { useProtocolView } from "../../hooks/useProtocolView.js";
 import { Editor } from "draft-js";
 import { useMostViewedProtocol } from "../../hooks/useMostViewedProtocol.js";
@@ -14,6 +22,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import Sidebar from "./Sidebar.js";
+import { CloudDownload } from "@mui/icons-material";
 
 function ProtocolView() {
   const { mostViewedProtocol } = useMostViewedProtocol();
@@ -97,66 +106,88 @@ function ProtocolView() {
           </Badge>
         </Grid>
       )}
-        <Grid container mt={5}>
-          <Grid item xs={12} md={8}>
-            <Grid>
-              {protocol.protocolGroup}
-              <Divider />
-            </Grid>
-            {editorStates.title && (
-              <Editor editorState={editorStates.title} readOnly />
-            )}
-            <Grid fontStyle="italic" color="text.secondary" display="flex">
-              {myDate(protocol.publicationDate)}
-              <Typography>, &nbsp; por &nbsp;</Typography>
-              {editorStates.autor1 && (
-                <Editor editorState={editorStates.autor1} readOnly />
-              )}
-              <Typography
-                fontStyle="italic"
-                color="text.secondary"
-                component="div"
-                display="flex"
-              >
-                , &nbsp;
-              </Typography>
-              {editorStates.autor2 && (
-                <Editor editorState={editorStates.autor2} readOnly />
-              )}
-            </Grid>
-            <Grid mt={3}>
-              {editorStates.intro && (
-                <Editor editorState={editorStates.intro} readOnly />
-              )}
-              <Divider />
-              {editorStates.generalInfo && (
-                <Editor editorState={editorStates.generalInfo} readOnly />
-              )}
-              <Divider />
-              {editorStates.procedures && (
-                <Editor editorState={editorStates.procedures} readOnly />
-              )}
-              <Divider />
-              {editorStates.annexed && (
-                <Editor editorState={editorStates.annexed} readOnly />
-              )}
-              {editorStates.driveLink && (
-                <Editor editorState={editorStates.driveLink} readOnly />
-              )}
-              {editorStates.videoLink && (
-                <Editor editorState={editorStates.videoLink} readOnly />
-              )}
-            </Grid>
+      <Grid container mt={5}>
+        <Grid item xs={12} md={8}>
+          <Grid>
+            {protocol.protocolGroup}
+            <Divider />
           </Grid>
-          <Grid item xs={12} md={4}>
-            <Sidebar
-              title={sidebar.title}
-              description={sidebar.description}
-              archives={sidebar.archives}
-              social={sidebar.social}
-            />
+          {editorStates.title && (
+            <Editor editorState={editorStates.title} readOnly />
+          )}
+          <Grid fontStyle="italic" color="text.secondary" display="flex">
+            {myDate(protocol.publicationDate)}
+            <Typography>, &nbsp; por &nbsp;</Typography>
+            {editorStates.autor1 && (
+              <Editor editorState={editorStates.autor1} readOnly />
+            )}
+            <Typography
+              fontStyle="italic"
+              color="text.secondary"
+              component="div"
+              display="flex"
+            >
+              , &nbsp;
+            </Typography>
+            {editorStates.autor2 && (
+              <Editor editorState={editorStates.autor2} readOnly />
+            )}
+          </Grid>
+          <Grid mt={3}>
+            {editorStates.intro && (
+              <Editor editorState={editorStates.intro} readOnly />
+            )}
+            <Divider sx={{ mb: 3, mt:3 }} />
+            {editorStates.generalInfo && (
+              <Editor editorState={editorStates.generalInfo} readOnly />
+            )}
+            <Divider sx={{ mb: 3, mt:3 }} />
+            {editorStates.procedures && (
+              <Editor editorState={editorStates.procedures} readOnly />
+            )}
+            <Divider sx={{ mb: 3, mt:3 }} />
+            {editorStates.annexed && (
+              <Editor editorState={editorStates.annexed} readOnly />
+            )}
           </Grid>
         </Grid>
+        <Grid item xs={12} md={4}>
+          <Sidebar
+            title={sidebar.title}
+            description={sidebar.description}
+            archives={sidebar.archives}
+            social={sidebar.social}
+          />
+          <Grid
+            item
+            xs={12}
+            mt={5}
+            ml={3}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "left",
+            }}
+          >
+            <IconButton
+              href={`${protocol.driveLink}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Avatar>
+                <CloudDownload />
+              </Avatar>
+            </IconButton>
+            <Link
+              href={`${protocol.driveLink}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Descargar protocolo
+            </Link>
+          </Grid>
+        </Grid>
+      </Grid>
     </Container>
   );
 }

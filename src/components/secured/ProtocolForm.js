@@ -10,6 +10,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  TextField,
   Typography,
 } from "@mui/material";
 import { useRef } from "react";
@@ -39,8 +40,6 @@ export default function ProtocolForm() {
   const generalInfoRef = useRef(null);
   const proceduresRef = useRef(null);
   const anexxedRef = useRef(null);
-  const videoLinkRef = useRef(null);
-  const driveLinkRef = useRef(null);
 
   const handleRichTextChange = (id, editorState) => {
     // eslint-disable-next-line
@@ -66,17 +65,10 @@ export default function ProtocolForm() {
       case "anexxed":
         anexxedRef.current = editorState;
         break;
-      case "videoLink":
-        videoLinkRef.current = editorState;
-        break;
-      case "driveLink":
-        driveLinkRef.current = editorState;
-        break;
     }
   };
 
   const handleSubmit = (e) => {
-    
     e.preventDefault();
 
     const protocol = {
@@ -87,8 +79,8 @@ export default function ProtocolForm() {
       generalInfo: generalInfoRef.current.getContentWithFormat(),
       procedures: proceduresRef.current.getContentWithFormat(),
       annexed: anexxedRef.current.getContentWithFormat(),
-      videoLink: videoLinkRef.current.getContentWithFormat(),
-      driveLink: driveLinkRef.current.getContentWithFormat(),
+      videoLink: video,
+      driveLink: drive,
       publicationDate: selectedDate,
       protocolGroup: group,
     };
@@ -104,8 +96,17 @@ export default function ProtocolForm() {
   };
 
   const [group, setGroup] = React.useState("");
+  const [video, setVideo] = React.useState();
+  const [drive, setDrive] = React.useState();
+  
   const handleInputChange = (e) => {
     setGroup(e.target.value);
+  };
+  const handleInputChangeV = (e) => {
+    setVideo(e.target.value);
+  };
+  const handleInputChangeD = (e) => {
+    setDrive(e.target.value);
   };
 
   const handleRedirect = () => {
@@ -118,6 +119,11 @@ export default function ProtocolForm() {
     color: "#fafafa",
     borderTopLeftRadius: "0.7rem",
     borderTopRightRadius: "0.7rem",
+  };
+
+  const customTextArea = {
+    minWidth: "100%",
+    borderBottomRadius: "0.7rem",
   };
 
   return (
@@ -233,10 +239,11 @@ export default function ProtocolForm() {
                     Video (link YouTube)
                   </Typography>
                 </Box>
-                <RichTextEditor
-                  ref={videoLinkRef}
+                <TextField
+                  sx={customTextArea}
                   id="videoLink"
-                  onContentChange={handleRichTextChange}
+                  value={video}
+                  onChange={handleInputChangeV}
                 />
               </Grid>
 
@@ -246,10 +253,11 @@ export default function ProtocolForm() {
                     Protocolo (link Google Drive)
                   </Typography>
                 </Box>
-                <RichTextEditor
-                  ref={driveLinkRef}
+                <TextField
+                  sx={customTextArea}
                   id="driveLink"
-                  onContentChange={handleRichTextChange}
+                  value={drive}
+                  onChange={handleInputChangeD}
                 />
               </Grid>
             </Grid>
@@ -289,7 +297,7 @@ export default function ProtocolForm() {
               <Button
                 type="submit"
                 variant="contained"
-                endIcon={<Send/>}
+                endIcon={<Send />}
                 disableElevation
                 sx={{
                   mt: 0.2,

@@ -39,7 +39,7 @@ export const useProtocolView = () => {
 
     // Iterate through protocol properties and create editor states for each section
     for (const key in protocol) {
-      if (key !== "protocolGroup" || key !== "publicationDate") {
+      if (key !== "protocolGroup" && key !== "publicationDate" && key !== "videoLink" && key !== "driveLink") {
         const contentState = renderFormatedContent({ section: protocol[key] });
         if (contentState) {
           updatedEditorStates[key] =
