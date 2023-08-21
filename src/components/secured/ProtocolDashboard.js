@@ -12,28 +12,16 @@ import {
 import { Button } from "@mui/material";
 import { useProtocolList } from "./../../hooks/useProtocolList";
 import { Delete } from "@mui/icons-material";
-import { useState } from "react";
-import ProtocolService from "../secured/services/ProtocolService.js";
 
 export default function Dashboard() {
-  const { protocolArray, fetchProtocolList } = useProtocolList(); // Agrega la función fetchProtocolList para actualizar la lista
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [selectedProtocolId, setSelectedProtocolId] = useState(null);
+  const {
+    protocolArray,
+    deleteDialogOpen,
+    handleCloseDeleteDialog,
+    handleDeleteConfirmed,
+    deleteProtocol,
+  } = useProtocolList();
 
-  const deleteProtocol = (id) => {
-    setSelectedProtocolId(id);
-    setDeleteDialogOpen(true);
-  };
-  
-  const handleDeleteConfirmed = async () => {
-    await ProtocolService.deleteProtocol(selectedProtocolId);
-    await fetchProtocolList(); // Actualiza la lista después de borrar
-    setDeleteDialogOpen(false); // Cierra el diálogo
-  };
-
-  const handleCloseDeleteDialog = () => {
-    setDeleteDialogOpen(false);
-  };
   const columns = [
     {
       field: "title",
@@ -107,16 +95,15 @@ export default function Dashboard() {
         open={deleteDialogOpen}
         onClose={handleCloseDeleteDialog}
         aria-labelledby="delete-dialog-title"
+        style={{ textAlign: "center" }}
       >
         <DialogTitle id="delete-dialog-title">Confirmar Borrado</DialogTitle>
-        <DialogContent>
-          ¿Estás seguro de que deseas borrar este protocolo?
-        </DialogContent>
-        <DialogActions>
+        <DialogContent>¿Desea borrar el usuario?</DialogContent>
+        <DialogActions style={{ justifyContent: "center" }}>
           <Button onClick={handleCloseDeleteDialog} color="primary">
             Cancelar
           </Button>
-          <Button onClick={handleDeleteConfirmed} color="primary">
+          <Button onClick={handleDeleteConfirmed} color="error">
             Borrar
           </Button>
         </DialogActions>
