@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { CssBaseline } from "@mui/material";
 import { Settings } from "@mui/icons-material";
 
-const pages = ["Personal", "Protocolos", "Subir Contenido"];
+const pages = ["Personal", "Subir Contenido"];
 const settings = ["Perfil", "Cerrar Sesión"];
 
 function DashAppBar() {

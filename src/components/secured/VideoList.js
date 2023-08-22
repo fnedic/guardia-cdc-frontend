@@ -13,8 +13,9 @@ import {
 import { KeyboardArrowRight, YouTube } from "@mui/icons-material";
 import { useProtocolList } from "../../hooks/useProtocolList";
 import Link from "@mui/material/Link";
+import LoggedAppBar from "./LoggedAppBar";
 
-export default function ProtocolList() {
+export default function VideoList() {
   const { protocolArray } = useProtocolList();
 
   function generate() {
@@ -93,12 +94,15 @@ export default function ProtocolList() {
   }
 
   return (
-    <Container component="main" sx={{ marginBottom: 5, marginTop: 3 }}>
-      <Box>
-        <Grid item xs={12} md={12}>
-          <List>{generate()}</List>
-        </Grid>
-      </Box>
-    </Container>
+    <>
+      <LoggedAppBar />
+      <Container component="main" sx={{ marginBottom: 5, marginTop: 3 }}>
+        <Box>
+          <Grid item xs={12} md={12}>
+            <List>{generate()}</List>
+          </Grid>
+        </Box>
+      </Container>
+    </>
   );
 }

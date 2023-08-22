@@ -17,6 +17,7 @@ import {
 import UserService from "./services/UserService";
 import { useParams, useNavigate } from "react-router-dom";
 import { Edit } from "@mui/icons-material";
+import DashAppBar from "./DashAppBar";
 
 const customTheme = createTheme({
   palette: {
@@ -96,126 +97,129 @@ function UpdateUser() {
   };
 
   return (
-    <ThemeProvider theme={customTheme}>
-      <CssBaseline />
-      <Container component="main" maxWidth="xs">
-        <Box
-          sx={{
-            marginTop: 5,
-            marginBottom: 10,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ bgcolor: "#283583", width: 50, height: 50 }}>
-            <Edit sx={{ fontSize: 35 }} />
-          </Avatar>
-          <Box component="form" sx={{ mt: 3 }}>
-            <Grid container spacing={1}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  name="name"
+    <>
+      <DashAppBar />
+      <ThemeProvider theme={customTheme}>
+        <CssBaseline />
+        <Container component="main" maxWidth="xs">
+          <Box
+            sx={{
+              marginTop: 5,
+              marginBottom: 10,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ bgcolor: "#283583", width: 50, height: 50 }}>
+              <Edit sx={{ fontSize: 35 }} />
+            </Avatar>
+            <Box component="form" sx={{ mt: 3 }}>
+              <Grid container spacing={1}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name="name"
+                    fullWidth
+                    id="name"
+                    label="Nombre"
+                    autoFocus
+                    onChange={changeNameHandler}
+                    value={name}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    id="lastname"
+                    label="Apellido"
+                    name="lastname"
+                    onChange={changeLastnameHandler}
+                    value={lastname}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name="dni"
+                    fullWidth
+                    id="dni"
+                    label="DNI"
+                    autoFocus
+                    onChange={changeDniHandler}
+                    value={dni}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    id="medicalRegistration"
+                    label="Matrícula Médica"
+                    name="medicalRegistration"
+                    onChange={changeMedicalRegistrationHandler}
+                    value={medicalRegistration}
+                  />
+                </Grid>
+                <Grid item xs={8.2}>
+                  <TextField
+                    fullWidth
+                    id="email"
+                    label="Email"
+                    name="email"
+                    onChange={changeEmailHandler}
+                    value={email}
+                  />
+                </Grid>
+                <Grid item>
+                  <FormControl>
+                    <InputLabel>Estado</InputLabel>
+                    <Select
+                      id="status"
+                      value={status}
+                      label="Estado"
+                      onChange={changeStatusHandler}
+                    >
+                      <MenuItem value={"ACTIVE"}>Activo</MenuItem>
+                      <MenuItem value={"PENDING"}>Pendiente</MenuItem>
+                      <MenuItem value={"INACTIVE"}>Inactivo</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Grid display={"flex"} mt={3}>
+                <Button
+                  type="button"
                   fullWidth
-                  id="name"
-                  label="Nombre"
-                  autoFocus
-                  onChange={changeNameHandler}
-                  value={name}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
+                  variant="contained"
+                  disableElevation
+                  sx={{
+                    mr: 2,
+                    backgroundColor: "#799A3D",
+                    boxShadow: "0",
+                    borderRadius: 1,
+                  }}
+                  onClick={updateUser}
+                >
+                  Actualizar
+                </Button>
+                <Button
+                  type="button"
                   fullWidth
-                  id="lastname"
-                  label="Apellido"
-                  name="lastname"
-                  onChange={changeLastnameHandler}
-                  value={lastname}
-                />
+                  variant="contained"
+                  disableElevation
+                  sx={{
+                    backgroundColor: "#942121",
+                    boxShadow: "0",
+                    borderRadius: 1,
+                  }}
+                  onClick={cancel}
+                >
+                  Cancelar
+                </Button>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  name="dni"
-                  fullWidth
-                  id="dni"
-                  label="DNI"
-                  autoFocus
-                  onChange={changeDniHandler}
-                  value={dni}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  id="medicalRegistration"
-                  label="Matrícula Médica"
-                  name="medicalRegistration"
-                  onChange={changeMedicalRegistrationHandler}
-                  value={medicalRegistration}
-                />
-              </Grid>
-              <Grid item xs={8.2}>
-                <TextField
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  name="email"
-                  onChange={changeEmailHandler}
-                  value={email}
-                />
-              </Grid>
-              <Grid item >
-                <FormControl>
-                  <InputLabel>Estado</InputLabel>
-                  <Select
-                    id="status"
-                    value={status}
-                    label="Estado"
-                    onChange={changeStatusHandler}
-                  >
-                    <MenuItem value={"ACTIVE"}>Activo</MenuItem>
-                    <MenuItem value={"PENDING"}>Pendiente</MenuItem>
-                    <MenuItem value={"INACTIVE"}>Inactivo</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-            </Grid>
-            <Grid display={"flex"} mt={3}>
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                disableElevation
-                sx={{
-                  mr: 2,
-                  backgroundColor: "#799A3D",
-                  boxShadow: "0",
-                  borderRadius: 1,
-                }}
-                onClick={updateUser}
-              >
-                Actualizar
-              </Button>
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                disableElevation
-                sx={{
-                  backgroundColor: "#942121",
-                  boxShadow: "0",
-                  borderRadius: 1,
-                }}
-                onClick={cancel}
-              >
-                Cancelar
-              </Button>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+        </Container>
+      </ThemeProvider>
+    </>
   );
 }
 export default UpdateUser;
