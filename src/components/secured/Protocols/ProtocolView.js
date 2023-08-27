@@ -13,18 +13,17 @@ import {
   IconButton,
   Link,
 } from "@mui/material";
-import { useProtocolView } from "../../hooks/useProtocolView.js";
 import { Editor } from "draft-js";
-import { useMostViewedProtocol } from "../../hooks/useMostViewedProtocol.js";
-import { useProtocolList } from "../../hooks/useProtocolList.js";
+import { useProtocolView } from "../../../hooks/useProtocolView.js";
+import { useMostViewedProtocol } from "../../../hooks/useMostViewedProtocol.js";
+import { useProtocolList } from "../../../hooks/useProtocolList.js";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import Sidebar from "./Sidebar.js";
 import { CloudDownload } from "@mui/icons-material";
-import DashAppBar from "./DashAppBar.js";
-import LoggedAppBar from "./LoggedAppBar.js";
+import LoggedAppBar from "../LoggedAppBar.js";
 
 function ProtocolView() {
   const { mostViewedProtocol } = useMostViewedProtocol();
@@ -139,21 +138,30 @@ function ProtocolView() {
             </Grid>
             <Grid mt={3}>
               {editorStates.intro && (
-                <Editor editorState={editorStates.intro} readOnly />
+                <>
+                  <Editor editorState={editorStates.intro} readOnly />
+                  <Divider sx={{ mb: 3, mt: 3 }} />
+                </>
               )}
-              <Divider sx={{ mb: 3, mt: 3 }} />
               {editorStates.generalInfo && (
-                <Editor editorState={editorStates.generalInfo} readOnly />
+                <>
+                  <Editor editorState={editorStates.generalInfo} readOnly />
+                  <Divider sx={{ mb: 3, mt: 3 }} />
+                </>
               )}
-              <Divider sx={{ mb: 3, mt: 3 }} />
+
               {editorStates.procedures && (
-                <Editor editorState={editorStates.procedures} readOnly />
+                <>
+                  <Editor editorState={editorStates.procedures} readOnly />
+                  <Divider sx={{ mb: 3, mt: 3 }} />
+                </>
               )}
-              <Divider sx={{ mb: 3, mt: 3 }} />
               {editorStates.annexed && (
-                <Editor editorState={editorStates.annexed} readOnly />
+                <>
+                  <Editor editorState={editorStates.annexed} readOnly />
+                  <Divider sx={{ mt: 3 }} />
+                </>
               )}
-              <Divider sx={{ mt: 3 }} />
             </Grid>
           </Grid>
           <Grid item xs={12} md={4}>

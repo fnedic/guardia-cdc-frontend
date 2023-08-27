@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import UserService from "../components/secured/services/UserService.js";
+import UserService from "../services/UserService.js";
+import { request, setAuthHeader, setRole } from "../helpers/axios_helper.js";
+import { useNavigate } from "react-router-dom";
 
 export const useForm = (initialForm) => {
   const [form, setForm] = useState(initialForm);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -11,6 +14,45 @@ export const useForm = (initialForm) => {
       ...form,
       [name]: value,
     });
+  };
+  
+  const onLogin = (e) => {
+    e.preventDefault();
+    request("POST", "/login", {
+      email: form.email,
+      password: form.password,
+    })
+      .then((response) => {
+        setAuthHeader(response.data.token);
+        setRole(response.data.role);
+        console.log("Usuario logueado exitosamente!");
+        window.location.href = "/dashboard";
+      })
+      .catch((error) => {
+        console.log("ERROR AL INICIAR SESION", error);
+        setAuthHeader(null);
+        setRole(null);
+      });
+  };
+
+  const onRegister = (event) => {
+    event.preventDefault();
+    request("POST", "/register", {
+      name: form.name,
+      lastname: form.lastname,
+      email: form.email,
+      password: form.password,
+      dni: form.dni,
+      medicalRegistration: form.medicalRegistration,
+    })
+      .then((response) => {
+        setAuthHeader(response.data.token);
+        navigate("/login");
+      })
+      .catch((error) => {
+        setAuthHeader(null);
+        
+      });
   };
 
   const [showSnackbar, setShowSnackbar] = useState(false);
@@ -22,7 +64,7 @@ export const useForm = (initialForm) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // handle empty form send /////////////////////////////////////////////////////
     if (
       form.name.trim() === "" ||
@@ -36,7 +78,7 @@ export const useForm = (initialForm) => {
       setShowSnackbar(true);
       return;
     }
-   ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
     setForm(initialForm);
 
     UserService.createUser(form).then(() => {
@@ -66,10 +108,25 @@ export const useForm = (initialForm) => {
     form,
     handleChange,
     handleSubmit,
+    onLogin,
+    onRegister,
     areEquals,
     handlePasswordConfirmation,
     showSnackbar,
     snackbarMessage,
     handleCloseSnackbar,
+  };
+};
+
+export const useLogout = () => {
+
+  const logout = () => {
+    window.location.href = "/login";
+    setAuthHeader(null);
+    setRole(null);
+  };
+
+  return {
+    logout,
   };
 };

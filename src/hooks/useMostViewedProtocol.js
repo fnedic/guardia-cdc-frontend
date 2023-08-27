@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ProtocolService from "../components/secured/services/ProtocolService.js"
+import ProtocolService from "../services/ProtocolService.js"
 import { useProtocolView } from './useProtocolView';
 
 export const useMostViewedProtocol = () => {

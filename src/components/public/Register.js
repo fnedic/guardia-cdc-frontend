@@ -39,10 +39,9 @@ const initialForm = {
 
 export default function Register() {
   const {
-    form,
     handleChange,
-    handleSubmit,
     areEquals,
+    onRegister,
     handlePasswordConfirmation,
     showSnackbar,
     snackbarMessage,
@@ -78,7 +77,6 @@ export default function Register() {
                     label="Nombre"
                     autoFocus
                     onChange={handleChange}
-                    value={form.name}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -89,7 +87,6 @@ export default function Register() {
                     label="Apellido"
                     name="lastname"
                     onChange={handleChange}
-                    value={form.lastname}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -100,7 +97,6 @@ export default function Register() {
                     label="Email"
                     name="email"
                     onChange={handleChange}
-                    value={form.email}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -112,7 +108,6 @@ export default function Register() {
                     label="DNI"
                     autoFocus
                     onChange={handleChange}
-                    value={form.dni}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -123,7 +118,6 @@ export default function Register() {
                     label="Matrícula Médica"
                     name="medicalRegistration"
                     onChange={handleChange}
-                    value={form.medicalRegistration}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -135,7 +129,6 @@ export default function Register() {
                     type="password"
                     id="password"
                     onChange={handleChange}
-                    value={form.password}
                   />
                 </Grid>
 
@@ -174,7 +167,7 @@ export default function Register() {
                   boxShadow: "0",
                   borderRadius: 1,
                 }}
-                onClick={handleSubmit}
+                onClick={onRegister}
                 disabled={!areEquals}
               >
                 Registrarme

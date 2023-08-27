@@ -11,9 +11,9 @@ import {
   Typography,
 } from "@mui/material";
 import { KeyboardArrowRight, YouTube } from "@mui/icons-material";
-import { useProtocolList } from "../../hooks/useProtocolList";
+import { useProtocolList } from "../../../hooks/useProtocolList";
 import Link from "@mui/material/Link";
-import LoggedAppBar from "./LoggedAppBar";
+import LoggedAppBar from "../LoggedAppBar";
 
 export default function VideoList() {
   const { protocolArray } = useProtocolList();

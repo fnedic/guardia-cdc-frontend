@@ -12,9 +12,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Key } from "@mui/icons-material";
 import { CssBaseline } from "@mui/material";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { SignBar } from "./SignBar";
+import { useForm } from "../../hooks/useForm";
 
 const customTheme = createTheme({
   palette: {
@@ -24,38 +23,13 @@ const customTheme = createTheme({
   },
 });
 
-export default function LogIn() {
-  const navigate = useNavigate();
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const formData = {
-      email: data.get("email"),
-      password: data.get("password"),
-    };
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+const initialForm = {
+  email: "",
+  password: "",
+};
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/cdc/login",
-        formData
-      );
-
-      if (response.data === "Login exitoso!") {
-        console.log("Inicio de sesión exitoso");
-        navigate("/dashboard");
-        // Realizar redirección u otras acciones después del inicio de sesión exitoso
-      } else if (response.data === "Inicio de sesión fallido") {
-        console.log("Inicio de sesión fallido ");
-        // Manejar el inicio de sesión fallido
-      }
-    } catch (error) {
-      console.error("Error al procesar la solicitud:", error);
-    }
-  };
+export default function Login() {
+  const { handleChange, onLogin } = useForm(initialForm);
 
   return (
     <>
@@ -75,12 +49,7 @@ export default function LogIn() {
             <Avatar sx={{ bgcolor: "#283583", width: 50, height: 50 }}>
               <Key sx={{ fontSize: 30 }} />
             </Avatar>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
-            >
+            <Box component="form" sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -90,6 +59,7 @@ export default function LogIn() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={handleChange}
               />
               <TextField
                 margin="normal"
@@ -100,6 +70,7 @@ export default function LogIn() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={handleChange}
               />
               <FormControlLabel
                 sx={{ color: "#6c737f" }}
@@ -107,9 +78,10 @@ export default function LogIn() {
                 label="Recuérdame"
               />
               <Button
-                type="submit"
+                type="button"
                 fullWidth
                 variant="contained"
+                onClick={onLogin}
                 disableElevation
                 sx={{
                   mt: 1,

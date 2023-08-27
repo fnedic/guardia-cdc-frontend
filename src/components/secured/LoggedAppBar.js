@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { CssBaseline } from "@mui/material";
 import { Settings } from "@mui/icons-material";
+import { useLogout } from "../../hooks/useForm";
 
 const pages = ["Protocolos", "Videos"];
 const settings = ["Perfil", "Cerrar Sesión"];
@@ -20,6 +21,12 @@ const settings = ["Perfil", "Cerrar Sesión"];
 function LoggedAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { logout } = useLogout();
+
+  const handleLogout = () => {
+    logout();
+    handleCloseUserMenu();
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -87,9 +94,7 @@ function LoggedAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Button href={pageUrls[page]} textAlign="center">
-                    {page}
-                  </Button>
+                  <Button href={pageUrls[page]}>{page}</Button>
                 </MenuItem>
               ))}
             </Menu>
@@ -160,7 +165,7 @@ function LoggedAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={setting === "Cerrar Sesión" ? handleLogout : handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
