@@ -19,8 +19,7 @@ import { Home } from "./components/secured/Home";
 function App() {
   
   const isAdmin = localStorage.getItem("role") === "ADMIN";
-  console.log(isAdmin);
-
+  
   return (
     <BrowserRouter>
       <Header />
@@ -29,7 +28,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
-        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
 
         {isAdmin ? (
           <Route path="/dashboard" element={<Dashboard />} />

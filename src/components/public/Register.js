@@ -165,7 +165,7 @@ export default function Register() {
                   mb: 1,
                   backgroundColor: "#799A3D",
                   boxShadow: "0",
-                  borderRadius: 1,
+                  borderRadius: 0,
                 }}
                 onClick={onRegister}
                 disabled={!areEquals}
@@ -178,7 +178,7 @@ export default function Register() {
                 </Typography>
                 &nbsp;
                 <Link
-                  href="http://localhost:3000/login"
+                  href="/login"
                   variant="body2"
                   color="#283583e0"
                 >

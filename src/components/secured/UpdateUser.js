@@ -194,7 +194,7 @@ function UpdateUser() {
                     mr: 2,
                     backgroundColor: "#799A3D",
                     boxShadow: "0",
-                    borderRadius: 1,
+                    borderRadius: 0,
                   }}
                   onClick={updateUser}
                 >
@@ -208,7 +208,7 @@ function UpdateUser() {
                   sx={{
                     backgroundColor: "#942121",
                     boxShadow: "0",
-                    borderRadius: 1,
+                    borderRadius: 0,
                   }}
                   onClick={cancel}
                 >
