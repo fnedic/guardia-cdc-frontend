@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import UserService from "../../services/UserService.js";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -14,10 +15,9 @@ import {
   MenuItem,
   FormControl,
 } from "@mui/material";
-import UserService from "./services/UserService";
 import { useParams, useNavigate } from "react-router-dom";
 import { Edit } from "@mui/icons-material";
-import DashAppBar from "./DashAppBar";
+import DashAppBar from "./Dashboard/DashAppBar.js";
 
 const customTheme = createTheme({
   palette: {

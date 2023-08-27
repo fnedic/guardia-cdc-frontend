@@ -11,8 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Book, KeyboardArrowRight } from "@mui/icons-material";
-import { useProtocolList } from "../../hooks/useProtocolList";
-import LoggedAppBar from "./LoggedAppBar";
+import { useProtocolList } from "../../../hooks/useProtocolList";
+import LoggedAppBar from "../LoggedAppBar";
 export default function ProtocolList() {
   const { protocolArray } = useProtocolList();
 

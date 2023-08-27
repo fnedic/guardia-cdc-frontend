@@ -19,11 +19,11 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers";
 
-import "../../../node_modules/draft-js/dist/Draft.css";
+import "../../../../node_modules/draft-js/dist/Draft.css";
 import RichTextEditor from "./RichTextEditor";
-import ProtocolService from "../secured/services/ProtocolService.js";
+import ProtocolService from "../../../services/ProtocolService.js";
 import { Send } from "@mui/icons-material";
-import DashAppBar from "./DashAppBar";
+import DashAppBar from "../Dashboard/DashAppBar";
 
 const customTheme = createTheme({
   palette: {

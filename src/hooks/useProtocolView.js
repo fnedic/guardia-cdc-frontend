@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ProtocolService from "../components/secured/services/ProtocolService.js";
+import ProtocolService from "../services/ProtocolService.js";
 import { EditorState, convertFromRaw } from "draft-js";
 import { useParams } from "react-router-dom";
 

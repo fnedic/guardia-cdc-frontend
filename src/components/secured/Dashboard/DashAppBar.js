@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { CssBaseline } from "@mui/material";
 import { Settings } from "@mui/icons-material";
+import { useLogout } from '../../../hooks/useForm';
 
 const pages = ["Personal", "Subir Contenido"];
 const settings = ["Perfil", "Cerrar Sesión"];
@@ -20,6 +21,7 @@ const settings = ["Perfil", "Cerrar Sesión"];
 function DashAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { logout } = useLogout();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -40,6 +42,11 @@ function DashAppBar() {
     "Subir Contenido": "http://localhost:3000/protocol/upload",
     "Personal": "http://localhost:3000/dashboard",
     "Protocolos": "http://localhost:3000/dashboard/protocol"
+  };
+
+  const handleLogout = () => {
+    logout();
+    handleCloseUserMenu();
   };
 
   const appBarStyle = {
@@ -88,7 +95,7 @@ function DashAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Button href={pageUrls[page]} textAlign="center">{page}</Button>
+                  <Button href={pageUrls[page]}>{page}</Button>
                 </MenuItem>
               ))}
             </Menu>
@@ -159,8 +166,8 @@ function DashAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting} onClick={setting === "Cerrar Sesión" ? handleLogout : handleCloseUserMenu}>
+                  <Button>{setting}</Button>
                 </MenuItem>
               ))}
             </Menu>
