@@ -305,8 +305,8 @@ export default function ProtocolForm() {
                     ml: 6,
                     backgroundColor: "#799A3D",
                     boxShadow: "0",
-                    borderRadius: 1,
-                    width: "15%",
+                    borderRadius: 0,
+                    width: "20%",
                   }}
                   onClick={handleSubmit}
                 >

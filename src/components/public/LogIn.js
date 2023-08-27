@@ -2,8 +2,6 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -72,11 +70,6 @@ export default function Login() {
                 autoComplete="current-password"
                 onChange={handleChange}
               />
-              <FormControlLabel
-                sx={{ color: "#6c737f" }}
-                control={<Checkbox value="remember" />}
-                label="Recuérdame"
-              />
               <Button
                 type="button"
                 fullWidth
@@ -84,11 +77,11 @@ export default function Login() {
                 onClick={onLogin}
                 disableElevation
                 sx={{
-                  mt: 1,
+                  mt: 3,
                   mb: 1,
                   backgroundColor: "#799A3D",
                   boxShadow: "0",
-                  borderRadius: 1,
+                  borderRadius: 0,
                   width: "100%",
                 }}
               >
@@ -106,7 +99,7 @@ export default function Login() {
                   </Typography>
                   &nbsp;
                   <Link
-                    href="http://localhost:3000/register"
+                    href="/register"
                     variant="body2"
                     color="#283583e0"
                   >
