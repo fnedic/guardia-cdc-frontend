@@ -1,30 +1,19 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
+import React from "react";
 import Box from "@mui/material/Box";
-import { Container, Link, Typography } from "@mui/material";
-import logo from "../public/images/logo-cdc-footer.svg";
+import { Link, Typography } from "@mui/material";
+import logo from "../public/images/logo-cdc-footer.png";
 
-const StyledFooter = styled("footer")(({ theme }) => ({
+const footerStyle = {
+  backgroundColor: "#69445d",
   display: "flex",
-  justifyContent: "space-between",
   alignItems: "center",
-  padding: theme.spacing(2),
-  backgroundColor: "#283583",
+  height: "10rem",
   width: "100%",
-  height: "8rem",
-  position: "sticky",
-  bottom: 0,
-}));
-
-const imgStyle = {
-  maxWidth: "100%",
-  maxHeight: "100%",
-  display: "block",
 };
 
 function Copyright() {
   return (
-    <Typography color="white" variant="body2" align="center">
+    <Typography color="white" variant="body2">
       {"© "}
       <Link href="#" color={"#FFFFFF"}>
         Servicio de Guardia CDC
@@ -36,16 +25,33 @@ function Copyright() {
 
 export default function Footer() {
   return (
-    <Box sx={{ flexGrow: 0 }}>
-      <StyledFooter>
-        <Box>
-          <img alt="" style={imgStyle} src={logo} />
-        </Box>
-        <Container></Container>
-        <Box>
-          <Copyright />
-        </Box>
-      </StyledFooter>
+    <Box style={footerStyle}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          backgroundImage: `url(${logo})`,
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "left",
+          width: "30%",
+          height: "150%",
+        }}
+      ></Box>
+      <Box
+        sx={{
+          marginLeft: "auto",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "15%",
+          height: "100%",
+        }}
+      >
+        <Copyright />
+      </Box>
     </Box>
   );
 }

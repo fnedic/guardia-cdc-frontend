@@ -19,27 +19,25 @@ import { Home } from "./components/secured/Home";
 function App() {
   
   const isAdmin = localStorage.getItem("role") === "ADMIN";
-  
+
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
 
         {isAdmin ? (
           <Route path="/dashboard" element={<Dashboard />} />
         ) : (
-          <Route path="/dashboard" element={<Navigate to="/home" />} />
+          <Route path="/dashboard" element={<Navigate to="/protocol/list" />} />
         )}
 
         <Route path="/videos" element={<VideoList />} />
         <Route path="/protocol/list" element={<ProtocolList />} />
         <Route path="/protocol/view/:id" element={<ProtocolView />} />
-
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/protocol/upload" element={<ProtocolForm />} />
         <Route path="/user/update/:id" element={<UpdateUser />} />
       </Routes>

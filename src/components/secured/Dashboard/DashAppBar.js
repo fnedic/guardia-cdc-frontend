@@ -55,7 +55,7 @@ function DashAppBar() {
     alignItems: "center",
     height: "5rem",
     width: "100%",
-    backgroundColor: "#283583",
+    backgroundColor: "#69445d",
     boxShadow: "0px 0px 0px",
   };
 
@@ -144,7 +144,7 @@ function DashAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Opciones">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ backgroundColor:"#ffffff", color:"#283583" }}>
+                <Avatar sx={{ backgroundColor:"#ffffff", color:"#a19ba8" }}>
                   <Settings />
                 </Avatar>
               </IconButton>

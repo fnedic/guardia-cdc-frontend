@@ -121,9 +121,9 @@ export const useForm = (initialForm) => {
 export const useLogout = () => {
 
   const logout = () => {
-    window.location.href = "/login";
     setAuthHeader(null);
     setRole(null);
+    window.location.href = "/login";
   };
 
   return {

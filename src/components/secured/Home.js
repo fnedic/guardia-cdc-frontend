@@ -1,11 +1,11 @@
 import React from "react";
-import LoggedAppBar from "./LoggedAppBar";
 import { HomeContent } from './HomeContent';
+import { SignBar } from './../public/SignBar';
 
 export const Home = () => {
   return (
     <>
-      <LoggedAppBar />
+      <SignBar />
       <HomeContent />
     </>
   );
