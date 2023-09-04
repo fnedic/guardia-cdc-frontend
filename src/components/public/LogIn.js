@@ -16,7 +16,7 @@ import { useForm } from "../../hooks/useForm";
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#283583",
+      main: "#69445d",
     },
   },
 });
@@ -44,7 +44,7 @@ export default function Login() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ bgcolor: "#283583", width: 50, height: 50 }}>
+            <Avatar sx={{ bgcolor: "#6d7dac", width: 50, height: 50 }}>
               <Key sx={{ fontSize: 30 }} />
             </Avatar>
             <Box component="form" sx={{ mt: 1 }}>
@@ -79,7 +79,7 @@ export default function Login() {
                 sx={{
                   mt: 3,
                   mb: 1,
-                  backgroundColor: "#799A3D",
+                  backgroundColor: "#6d7dac",
                   boxShadow: "0",
                   borderRadius: 0,
                   width: "100%",

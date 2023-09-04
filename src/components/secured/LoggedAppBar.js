@@ -15,7 +15,7 @@ import { CssBaseline } from "@mui/material";
 import { Settings } from "@mui/icons-material";
 import { useLogout } from "../../hooks/useForm";
 
-const pages = ["Protocolos", "Videos"];
+const pages = ["Protocolos", "Videos", "Proc. Institucionales"];
 const settings = ["Perfil", "Cerrar Sesión"];
 
 function LoggedAppBar() {
@@ -49,7 +49,7 @@ function LoggedAppBar() {
     alignItems: "center",
     height: "5rem",
     width: "100%",
-    backgroundColor: "#283583",
+    backgroundColor: "#69445d",
     boxShadow: "0px 0px 0px",
   };
 
@@ -143,7 +143,7 @@ function LoggedAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Opciones">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ backgroundColor: "#ffffff", color: "#283583" }}>
+                <Avatar sx={{ backgroundColor: "#ffffff", color: "#a19ba8" }}>
                   <Settings />
                 </Avatar>
               </IconButton>
