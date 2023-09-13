@@ -23,16 +23,11 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import Sidebar from "./Sidebar.js";
 import { CloudDownload } from "@mui/icons-material";
-import LoggedAppBar from "../LoggedAppBar.js";
 
 function ProtocolView() {
   const { mostViewedProtocol } = useMostViewedProtocol();
   const { editorStates, protocol, ImproveViews } = useProtocolView();
   const { myDate } = useProtocolList();
-
-  if (protocol) {
-    ImproveViews();
-  }
 
   const gradientColors = "linear-gradient(18deg, #283583 30%, #799A3D 85%)";
 
@@ -60,150 +55,151 @@ function ProtocolView() {
     ],
   };
 
-  return (
-    <>
-      <LoggedAppBar />
-      <Container component="main" sx={{ mt: 5, mb: 5 }}>
-        {mostViewedProtocol && (
-          <Grid item xs={12} md={6}>
-            <Badge
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              badgeContent={"Top!"}
-              color="primary"
-            >
-              <CardActionArea>
-                <Card
-                  sx={{
-                    display: "flex",
-                    color: "white",
-                    padding: "1.5rem",
-                    backgroundImage: gradientColors,
-                    borderRadius: "0.8rem",
-                    opacity: "0.95",
-                  }}
-                >
-                  <CardContent
-                    sx={{ flex: 1, zIndex: 1, backdropFilter: "blur(0.5px)" }}
-                  >
-                    <Typography fontSize={15}>
-                      {mostViewedProtocol.protocolGroup}
-                    </Typography>
-                    <Divider />
-                    <Grid mt={2}>
-                      <Typography component="h4" variant="h4" paragraph>
-                        {mostViewedProtocol.title}
-                      </Typography>
-                    </Grid>
-                    <Typography variant="subtitle1" paragraph>
-                      {mostViewedProtocol.intro}...
-                    </Typography>
-                    <Button href={`${mostViewedProtocol.id}`}>
-                      Continuar leyendo...
-                    </Button>
-                  </CardContent>
-                </Card>
-              </CardActionArea>
-            </Badge>
-          </Grid>
-        )}
-        <Grid container mt={5}>
-          <Grid item xs={12} md={8}>
-            <Grid>
-              {protocol.protocolGroup}
-              <Divider />
-            </Grid>
-            {editorStates.title && (
-              <Editor editorState={editorStates.title} readOnly />
-            )}
-            <Grid fontStyle="italic" color="text.secondary" display="flex">
-              {myDate(protocol.publicationDate)}
-              <Typography>, &nbsp; por &nbsp;</Typography>
-              {editorStates.autor1 && (
-                <Editor editorState={editorStates.autor1} readOnly />
-              )}
-              <Typography
-                fontStyle="italic"
-                color="text.secondary"
-                component="div"
-                display="flex"
-              >
-                , &nbsp;
-              </Typography>
-              {editorStates.autor2 && (
-                <Editor editorState={editorStates.autor2} readOnly />
-              )}
-            </Grid>
-            <Grid mt={3}>
-              {editorStates.intro && (
-                <>
-                  <Editor editorState={editorStates.intro} readOnly />
-                  <Divider sx={{ mb: 3, mt: 3 }} />
-                </>
-              )}
-              {editorStates.generalInfo && (
-                <>
-                  <Editor editorState={editorStates.generalInfo} readOnly />
-                  <Divider sx={{ mb: 3, mt: 3 }} />
-                </>
-              )}
+  if (protocol) {
+    ImproveViews();
+  }
 
-              {editorStates.procedures && (
-                <>
-                  <Editor editorState={editorStates.procedures} readOnly />
-                  <Divider sx={{ mb: 3, mt: 3 }} />
-                </>
-              )}
-              {editorStates.annexed && (
-                <>
-                  <Editor editorState={editorStates.annexed} readOnly />
-                  <Divider sx={{ mt: 3 }} />
-                </>
-              )}
-            </Grid>
+  return (
+    <Container component="main" sx={{ mt: 5, mb: 5 }}>
+      {mostViewedProtocol && (
+        <Grid item xs={12} md={6}>
+          <Badge
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+            badgeContent={"Top!"}
+            color="primary"
+          >
+            <CardActionArea>
+              <Card
+                sx={{
+                  display: "flex",
+                  color: "white",
+                  padding: "1.5rem",
+                  backgroundImage: gradientColors,
+                  borderRadius: "0.8rem",
+                  opacity: "0.95",
+                }}
+              >
+                <CardContent
+                  sx={{ flex: 1, zIndex: 1, backdropFilter: "blur(0.5px)" }}
+                >
+                  <Typography fontSize={15}>
+                    {mostViewedProtocol.protocolGroup}
+                  </Typography>
+                  <Divider />
+                  <Grid mt={2}>
+                    <Typography component="h4" variant="h4" paragraph>
+                      {mostViewedProtocol.title}
+                    </Typography>
+                  </Grid>
+                  <Typography variant="subtitle1" paragraph>
+                    {mostViewedProtocol.intro}...
+                  </Typography>
+                  <Button href={`${mostViewedProtocol.id}`}>
+                    Continuar leyendo...
+                  </Button>
+                </CardContent>
+              </Card>
+            </CardActionArea>
+          </Badge>
+        </Grid>
+      )}
+      <Grid container mt={5}>
+        <Grid item xs={12} md={8}>
+          <Grid>
+            {protocol.protocolGroup}
+            <Divider />
           </Grid>
-          <Grid item xs={12} md={4}>
-            <Sidebar
-              title={sidebar.title}
-              description={sidebar.description}
-              archives={sidebar.archives}
-              social={sidebar.social}
-            />
-            <Grid
-              item
-              xs={12}
-              mt={5}
-              ml={3}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "left",
-              }}
+          {editorStates.title && (
+            <Editor editorState={editorStates.title} readOnly />
+          )}
+          <Grid fontStyle="italic" color="text.secondary" display="flex">
+            {myDate(protocol.publicationDate)}
+            <Typography>, &nbsp; por &nbsp;</Typography>
+            {editorStates.autor1 && (
+              <Editor editorState={editorStates.autor1} readOnly />
+            )}
+            <Typography
+              fontStyle="italic"
+              color="text.secondary"
+              component="div"
+              display="flex"
             >
-              <IconButton
-                href={`${protocol.driveLink}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Avatar sx={{ backgroundColor: "#283583", color: "#ffffff" }}>
-                  <CloudDownload />
-                </Avatar>
-              </IconButton>
-              <Link
-                href={`${protocol.driveLink}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                underline="hover"
-              >
-                Descargar protocolo
-              </Link>
-            </Grid>
+              , &nbsp;
+            </Typography>
+            {editorStates.autor2 && (
+              <Editor editorState={editorStates.autor2} readOnly />
+            )}
+          </Grid>
+          <Grid mt={3}>
+            {editorStates.intro && (
+              <>
+                <Editor editorState={editorStates.intro} readOnly />
+                <Divider sx={{ mb: 3, mt: 3 }} />
+              </>
+            )}
+            {editorStates.generalInfo && (
+              <>
+                <Editor editorState={editorStates.generalInfo} readOnly />
+                <Divider sx={{ mb: 3, mt: 3 }} />
+              </>
+            )}
+
+            {editorStates.procedures && (
+              <>
+                <Editor editorState={editorStates.procedures} readOnly />
+                <Divider sx={{ mb: 3, mt: 3 }} />
+              </>
+            )}
+            {editorStates.annexed && (
+              <>
+                <Editor editorState={editorStates.annexed} readOnly />
+                <Divider sx={{ mt: 3 }} />
+              </>
+            )}
           </Grid>
         </Grid>
-      </Container>
-    </>
+        <Grid item xs={12} md={4}>
+          <Sidebar
+            title={sidebar.title}
+            description={sidebar.description}
+            archives={sidebar.archives}
+            social={sidebar.social}
+          />
+          <Grid
+            item
+            xs={12}
+            mt={5}
+            ml={3}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "left",
+            }}
+          >
+            <IconButton
+              href={`${protocol.driveLink}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Avatar sx={{ backgroundColor: "#283583", color: "#ffffff" }}>
+                <CloudDownload />
+              </Avatar>
+            </IconButton>
+            <Link
+              href={`${protocol.driveLink}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              underline="hover"
+            >
+              Descargar protocolo
+            </Link>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 

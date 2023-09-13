@@ -1,12 +1,6 @@
 import React from "react";
-import { HomeContent } from './HomeContent';
-import { SignBar } from './../public/SignBar';
+import { HomeContent } from "./HomeContent";
 
 export const Home = () => {
-  return (
-    <>
-      <SignBar />
-      <HomeContent />
-    </>
-  );
+  return <HomeContent />;
 };

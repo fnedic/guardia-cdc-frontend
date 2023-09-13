@@ -1,14 +1,10 @@
-import React from 'react';
-import { Container } from '@mui/material';
+import ProfileContent from "./ProfileContent";
 
-export default function Profile () {
+export default function Profile() {
 
-    return (
-
-        <Container component={"main"} maxWidth="xs">
-
-        </Container>
-
-    )
-
+  return (
+    <div>
+      <ProfileContent />
+    </div>
+  );
 }

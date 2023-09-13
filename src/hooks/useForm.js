@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import UserService from "../services/UserService.js";
-import { request, setAuthHeader, setRole } from "../helpers/axios_helper.js";
+import { request, setAuthHeader } from "../helpers/axios_helper.js";
 import { useNavigate } from "react-router-dom";
 
 export const useForm = (initialForm) => {
@@ -24,19 +23,27 @@ export const useForm = (initialForm) => {
     })
       .then((response) => {
         setAuthHeader(response.data.token);
-        setRole(response.data.role);
-        console.log("Usuario logueado exitosamente!");
         window.location.href = "/dashboard";
       })
       .catch((error) => {
-        console.log("ERROR AL INICIAR SESION", error);
         setAuthHeader(null);
-        setRole(null);
       });
   };
 
   const onRegister = (event) => {
     event.preventDefault();
+    if (
+      form.name.trim() === "" ||
+      form.lastname.trim() === "" ||
+      form.email.trim() === "" ||
+      form.password.trim() === "" ||
+      form.dni.trim() === "" ||
+      form.medicalRegistration.trim() === ""
+    ) {
+      setSnackbarMessage("Algunos campos se encuentran vacíos!");
+      setShowSnackbar(true);
+      return;
+    }
     request("POST", "/register", {
       name: form.name,
       lastname: form.lastname,
@@ -51,7 +58,6 @@ export const useForm = (initialForm) => {
       })
       .catch((error) => {
         setAuthHeader(null);
-        
       });
   };
 
@@ -60,34 +66,6 @@ export const useForm = (initialForm) => {
 
   const handleCloseSnackbar = () => {
     setShowSnackbar(false);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // handle empty form send /////////////////////////////////////////////////////
-    if (
-      form.name.trim() === "" ||
-      form.lastname.trim() === "" ||
-      form.email.trim() === "" ||
-      form.password.trim() === "" ||
-      form.dni.trim() === "" ||
-      form.medicalRegistration.trim() === ""
-    ) {
-      setSnackbarMessage("Algunos campos se encuentran vacíos!");
-      setShowSnackbar(true);
-      return;
-    }
-    ///////////////////////////////////////////////////////////////////////////////
-    setForm(initialForm);
-
-    UserService.createUser(form).then(() => {
-      handleRedirect();
-    });
-  };
-
-  const handleRedirect = () => {
-    window.location.href = "/login";
   };
 
   // handle password confirmation ////////////////////////////////////////////////
@@ -107,7 +85,6 @@ export const useForm = (initialForm) => {
   return {
     form,
     handleChange,
-    handleSubmit,
     onLogin,
     onRegister,
     areEquals,
@@ -115,18 +92,5 @@ export const useForm = (initialForm) => {
     showSnackbar,
     snackbarMessage,
     handleCloseSnackbar,
-  };
-};
-
-export const useLogout = () => {
-
-  const logout = () => {
-    setAuthHeader(null);
-    setRole(null);
-    window.location.href = "/login";
-  };
-
-  return {
-    logout,
   };
 };

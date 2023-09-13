@@ -16,12 +16,11 @@ import {
   Alert,
 } from "@mui/material";
 import { useForm } from "./../../hooks/useForm";
-import { SignBar } from "./SignBar";
 
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#283583",
+      main: "#69445d",
     },
   },
 });
@@ -50,7 +49,6 @@ export default function Register() {
 
   return (
     <>
-      <SignBar />
       <ThemeProvider theme={customTheme}>
         <CssBaseline />
         <Container component="main" maxWidth="xs">
@@ -163,7 +161,7 @@ export default function Register() {
                 sx={{
                   mt: 3,
                   mb: 1,
-                  backgroundColor: "#799A3D",
+                  backgroundColor: "#6d7dac",
                   boxShadow: "0",
                   borderRadius: 0,
                 }}
