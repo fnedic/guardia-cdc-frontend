@@ -10,7 +10,6 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Key } from "@mui/icons-material";
 import { CssBaseline } from "@mui/material";
-import { SignBar } from "./SignBar";
 import { useForm } from "../../hooks/useForm";
 
 const customTheme = createTheme({
@@ -31,7 +30,6 @@ export default function Login() {
 
   return (
     <>
-      <SignBar />
       <ThemeProvider theme={customTheme}>
         <CssBaseline />
         <Container component="main" maxWidth="xs">

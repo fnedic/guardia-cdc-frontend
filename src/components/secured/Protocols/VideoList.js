@@ -13,7 +13,6 @@ import {
 import { KeyboardArrowRight, YouTube } from "@mui/icons-material";
 import { useProtocolList } from "../../../hooks/useProtocolList";
 import Link from "@mui/material/Link";
-import LoggedAppBar from "../LoggedAppBar";
 
 export default function VideoList() {
   const { protocolArray } = useProtocolList();
@@ -95,7 +94,6 @@ export default function VideoList() {
 
   return (
     <>
-      <LoggedAppBar />
       <Container component="main" sx={{ marginBottom: 5, marginTop: 3 }}>
         <Box>
           <Grid item xs={12} md={12}>
