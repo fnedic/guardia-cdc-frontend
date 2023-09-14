@@ -14,8 +14,15 @@ import {
   ThemeProvider,
   Snackbar,
   Alert,
+  InputAdornment,
+  IconButton,
+  FormControl,
+  OutlinedInput,
+  InputLabel,
 } from "@mui/material";
 import { useForm } from "./../../hooks/useForm";
+import { useRegister } from "../../hooks/useRegister";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const customTheme = createTheme({
   palette: {
@@ -37,15 +44,22 @@ const initialForm = {
 };
 
 export default function Register() {
+  const { form, handleChange } = useForm(initialForm);
+
   const {
-    handleChange,
-    areEquals,
     onRegister,
-    handlePasswordConfirmation,
+    areEquals,
     showSnackbar,
     snackbarMessage,
+    handlePasswordConfirmation,
     handleCloseSnackbar,
-  } = useForm(initialForm);
+    showPassword,
+    handleClickShowPassword,
+    handleMouseDownPassword,
+    showPassword2,
+    handleClickShowPassword2,
+    handleMouseDownPassword2,
+  } = useRegister(form);
 
   return (
     <>
@@ -99,6 +113,7 @@ export default function Register() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    type="number"
                     name="dni"
                     required
                     fullWidth
@@ -110,6 +125,7 @@ export default function Register() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    type="number"
                     required
                     fullWidth
                     id="medicalRegistration"
@@ -119,26 +135,55 @@ export default function Register() {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="password"
-                    label="Contraseña"
-                    type="password"
-                    id="password"
-                    onChange={handleChange}
-                  />
+                  <FormControl fullWidth>
+                    <InputLabel>Contraseña</InputLabel>
+                    <OutlinedInput
+                      required
+                      fullWidth
+                      label="Contraseñ"
+                      id="password"
+                      name="password"
+                      onChange={handleChange}
+                      type={showPassword ? "text" : "password"}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
                 </Grid>
 
                 <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="Repite tu contraseña"
-                    type="password"
-                    id="password2"
-                    onChange={handlePasswordConfirmation}
-                  />
+                  <FormControl fullWidth variant="outlined">
+                    <InputLabel>Repite tu contraseña</InputLabel>
+                    <OutlinedInput
+                      required
+                      fullWidth
+                      label="repitetucontraseña"
+                      name="password2"
+                      id="password2"
+                      onChange={handlePasswordConfirmation}
+                      type={showPassword2 ? "text" : "password"}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={handleClickShowPassword2}
+                            onMouseDown={handleMouseDownPassword2}
+                            edge="end"
+                          >
+                            {showPassword2 ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
                   {!areEquals && (
                     <Typography
                       align="center"
@@ -175,11 +220,7 @@ export default function Register() {
                   Ya tienes una cuenta?
                 </Typography>
                 &nbsp;
-                <Link
-                  href="/login"
-                  variant="body2"
-                  color="#283583e0"
-                >
+                <Link href="/login" variant="body2" color="#283583e0">
                   {"Ingresa!"}
                 </Link>
               </Grid>
@@ -188,7 +229,7 @@ export default function Register() {
         </Container>
         <Snackbar
           open={showSnackbar}
-          autoHideDuration={2000}
+          autoHideDuration={2500}
           onClose={handleCloseSnackbar}
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         >

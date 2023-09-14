@@ -21,8 +21,6 @@ import { Settings } from "@mui/icons-material";
 
 export const UserAppBar = ({userRole}) => {
 
-  console.log("Role appBar: " + userRole);
-
   const appBarStyle = {
     display: "flex",
     justifyContent: "center",

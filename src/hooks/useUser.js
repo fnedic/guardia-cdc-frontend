@@ -1,6 +1,6 @@
 import UserService from "../services/UserService.js"
 
-export const UseRole = async () => { // Declara la función como async
+export const UseUser = async () => { // Declara la función como async
     
     try {
       const response = await UserService.getRole(); // Espera la respuesta del servicio

@@ -11,7 +11,7 @@ import VideoList from "./components/secured/Protocols/VideoList.js";
 import ProtocolList from "./components/secured/Protocols/ProtocolList";
 import { Home } from "./components/secured/Home";
 import Profile from "./components/secured/Profile";
-import { UseRole } from "./hooks/useRole";
+import { UseUser } from "./hooks/useUser";
 import { useEffect, useState } from "react";
 import LoadingPage from "./components/public/LoadingPage";
 import { UserAppBar } from "./components/secured/UserAppBar";
@@ -23,8 +23,8 @@ function App() {
   useEffect(() => {
     // Llama a la función async y espera la respuesta antes de actualizar el estado
     const fetchRole = async () => {
-      const userRole = await UseRole();
-      setRole(userRole);
+      const user = await UseUser();
+      setRole(user.role);
       setIsLoading(false); // Cuando se completa la carga, actualiza isLoading
     };
 
