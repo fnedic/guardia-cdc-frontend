@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../public/images/logo-cdc-header.png";
-import { Box, Container } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 export const Header = () => {
   const headerStyle = {
@@ -12,7 +12,7 @@ export const Header = () => {
   };
 
   return (
-    <Container style={headerStyle}>
+    <Button style={headerStyle} href="/home">
       <Box
         sx={{
           display: "flex",
@@ -26,6 +26,6 @@ export const Header = () => {
           height: "200%",
         }}
       ></Box>
-    </Container>
+    </Button>
   );
 };

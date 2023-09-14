@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Key } from "@mui/icons-material";
 import { CssBaseline } from "@mui/material";
 import { useForm } from "../../hooks/useForm";
+import { useLogin } from "../../hooks/useLogin";
 
 const customTheme = createTheme({
   palette: {
@@ -26,7 +27,8 @@ const initialForm = {
 };
 
 export default function Login() {
-  const { handleChange, onLogin } = useForm(initialForm);
+  const { handleChange, form } = useForm(initialForm);
+  const { onLogin } = useLogin(form);
 
   return (
     <>
@@ -86,11 +88,11 @@ export default function Login() {
                 <Typography>Iniciar Sesión</Typography>
               </Button>
               <Grid container>
-                <Grid item xs>
+                {/* <Grid item xs>
                   <Link href="#" variant="body2" color="#283583e0">
                     Olvide mi contraseña
                   </Link>
-                </Grid>
+                </Grid> */}
                 <Grid item display={"flex"}>
                   <Typography variant="body2" color="#6c737f">
                     No tienes una cuenta?
