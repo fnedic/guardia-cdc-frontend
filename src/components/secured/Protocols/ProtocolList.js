@@ -17,7 +17,7 @@ export default function ProtocolList() {
 
   function generate() {
     return protocolArray.map((protocol) => (
-      <ListItem>
+      <ListItem key={protocol.id}>
         <ListItemAvatar>
           <IconButton href={`view/${protocol.id}`}>
             <Avatar>

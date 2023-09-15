@@ -20,34 +20,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Settings } from "@mui/icons-material";
 
 export const UserAppBar = ({ userRole }) => {
-  const appBarStyle = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "5rem",
-    width: "100%",
-    backgroundColor: "#69445d",
-    boxShadow: "0px 0px 0px",
-  };
-
+  const navigate = useNavigate();
   const adminPages = ["Personal", "Subir Contenido"];
   const adminSettings = ["Perfil", "Cerrar Sesión"];
-  const adminPageUrls = {
-    "Subir Contenido": "http://localhost:3000/protocol/upload",
-    Personal: "http://localhost:3000/admin",
-  };
-
   const userPages = ["Protocolos", "Videos", "Proc. Institucionales"];
   const userSettings = ["Perfil", "Cerrar Sesión"];
-  const userPageUrls = {
-    Protocolos: "http://localhost:3000/protocol/list",
-    Videos: "http://localhost:3000/videos",
-  };
-
-  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -58,16 +37,13 @@ export const UserAppBar = ({ userRole }) => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
   const handleLogout = () => {
     setAuthHeader(null);
     window.location.href = "/login";
   };
-
   const handleSettingClick = (selectedSetting) => {
     if (selectedSetting === "Cerrar Sesión") {
       handleCloseUserMenu();
@@ -77,7 +53,6 @@ export const UserAppBar = ({ userRole }) => {
       navigate("/profile");
     }
   };
-
   const handlePageClick = (selectedPage) => {
     if (selectedPage === "Personal") {
       handleCloseNavMenu();
@@ -95,6 +70,15 @@ export const UserAppBar = ({ userRole }) => {
       handleCloseNavMenu();
       navigate("/protocol/list");
     } 
+  };
+  const appBarStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "5rem",
+    width: "100%",
+    backgroundColor: "#69445d",
+    boxShadow: "0px 0px 0px",
   };
 
   if (userRole === "ADMIN") {
@@ -169,8 +153,7 @@ export const UserAppBar = ({ userRole }) => {
               {adminPages.map((page) => (
                 <Button
                   key={page}
-                  onClick={handleCloseNavMenu}
-                  href={adminPageUrls[page]}
+                  onClick={() => handlePageClick(page)}
                   sx={{
                     mx: 1,
                     color: "white",
@@ -292,9 +275,8 @@ export const UserAppBar = ({ userRole }) => {
             >
               {userPages.map((page) => (
                 <Button
-                  href={userPageUrls[page]}
                   key={page}
-                  onClick={handleCloseNavMenu}
+                  onClick={() => handlePageClick(page)}
                   sx={{
                     mx: 1,
                     color: "white",
