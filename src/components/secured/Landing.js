@@ -12,7 +12,7 @@ import {
   createTheme,
 } from "@mui/material";
 
-export const HomeContent = () => {
+export const Landing = () => {
   const defaultTheme = createTheme({
     palette: {
       primary: {

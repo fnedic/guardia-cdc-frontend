@@ -30,7 +30,7 @@ class UserService {
     return axios.get(USER_API_BASE_URL + "/delete/" + id, config);
   }
 
-  getRole() {
+  getUser() {
     return axios.get(USER_API_BASE_URL + "/role", config);
   }
 }

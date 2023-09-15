@@ -10,7 +10,7 @@ export const useLogin = (form) => {
     })
       .then((response) => {
         setAuthHeader(response.data.token);
-        window.location.href = "/dashboard";
+        window.location.href = "/admin";
       })
       .catch((error) => {
         setAuthHeader(null);

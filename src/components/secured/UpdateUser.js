@@ -63,7 +63,7 @@ function UpdateUser() {
 
     UserService.updateUser(id, user)
       .then((red) => {
-        navigate("/dashboard");
+        navigate("/admin");
       })
       .catch((error) => {
         console.log(error);
@@ -92,7 +92,7 @@ function UpdateUser() {
   };
 
   const cancel = () => {
-    navigate("/dashboard");
+    navigate("/admin");
   };
 
   return (
@@ -155,7 +155,7 @@ function UpdateUser() {
                   value={medicalRegistration}
                 />
               </Grid>
-              <Grid item xs={8.2}>
+              <Grid item xs={8}>
                 <TextField
                   fullWidth
                   id="email"
@@ -165,17 +165,17 @@ function UpdateUser() {
                   value={email}
                 />
               </Grid>
-              <Grid item>
+              <Grid item xs={4}>
                 <FormControl>
                   <InputLabel>Estado</InputLabel>
                   <Select
+                    sx={{ minWidth:"8rem" }}
                     id="status"
                     value={status}
                     label="Estado"
                     onChange={changeStatusHandler}
                   >
                     <MenuItem value={"ACTIVE"}>Activo</MenuItem>
-                    <MenuItem value={"PENDING"}>Pendiente</MenuItem>
                     <MenuItem value={"INACTIVE"}>Inactivo</MenuItem>
                   </Select>
                 </FormControl>
