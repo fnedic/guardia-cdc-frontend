@@ -4,6 +4,15 @@ import { request, setAuthHeader } from "../helpers/axios_helper";
 export const useLogin = (form) => {
   const onLogin = (e) => {
     e.preventDefault();
+    if (
+      form.email.trim() === "" ||
+      form.password.trim() === ""
+    ) {
+      setSnackbarMessage("Algunos campos se encuentran vacíos!");
+      setSeverity("warning");
+      setShowSnackbar(true);
+      return;
+    }
     request("POST", "/login", {
       email: form.email,
       password: form.password,
