@@ -9,9 +9,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Key } from "@mui/icons-material";
-import { CssBaseline } from "@mui/material";
+import { Alert, CssBaseline, Snackbar } from "@mui/material";
 import { useForm } from "../../hooks/useForm";
 import { useLogin } from "../../hooks/useLogin";
+import { useLocation } from "react-router-dom";
 
 const customTheme = createTheme({
   palette: {
@@ -28,89 +29,119 @@ const initialForm = {
 
 export default function Login() {
   const { handleChange, form } = useForm(initialForm);
-  const { onLogin } = useLogin(form);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const status = queryParams.get("status");
+  const {
+    onLogin,
+    handleCloseSnackbar,
+    setShowSnackbar,
+    setSnackbarMessage,
+    showSnackbar,
+    snackbarMessage,
+    severity
+  } = useLogin(form);
+
+  React.useEffect(() => {
+    if (status === "registered") {
+      setSnackbarMessage(
+        "Usuario registrado, aguarde autorización del administrador para iniciar sesión!"
+      );
+      setShowSnackbar(true);
+    } else if (status === "rejected") {
+      setSnackbarMessage(
+        "Aun no tiene permisos para ingresar!"
+      );
+      setShowSnackbar(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
 
   return (
-    <>
-      <ThemeProvider theme={customTheme}>
-        <CssBaseline />
-        <Container component="main" maxWidth="xs">
-          <Box
-            sx={{
-              marginTop: 8,
-              marginBottom: 15,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Avatar sx={{ bgcolor: "#6d7dac", width: 50, height: 50 }}>
-              <Key sx={{ fontSize: 30 }} />
-            </Avatar>
-            <Box component="form" sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                onChange={handleChange}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Contraseña"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={handleChange}
-              />
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                onClick={onLogin}
-                disableElevation
-                sx={{
-                  mt: 3,
-                  mb: 1,
-                  backgroundColor: "#6d7dac",
-                  boxShadow: "0",
-                  borderRadius: 0,
-                  width: "100%",
-                }}
-              >
-                <Typography>Iniciar Sesión</Typography>
-              </Button>
-              <Grid container>
-                {/* <Grid item xs>
-                  <Link href="#" variant="body2" color="#283583e0">
-                    Olvide mi contraseña
-                  </Link>
-                </Grid> */}
-                <Grid item display={"flex"}>
-                  <Typography variant="body2" color="#6c737f">
-                    No tienes una cuenta?
-                  </Typography>
-                  &nbsp;
-                  <Link
-                    href="/register"
-                    variant="body2"
-                    color="#283583e0"
-                  >
-                    {"Crea una!"}
-                  </Link>
-                </Grid>
+    <ThemeProvider theme={customTheme}>
+      <CssBaseline />
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 8,
+            marginBottom: 15,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ bgcolor: "#6d7dac", width: 50, height: 50 }}>
+            <Key sx={{ fontSize: 30 }} />
+          </Avatar>
+          <Box component="form" sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              onChange={handleChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Contraseña"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={handleChange}
+            />
+            <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              onClick={onLogin}
+              disableElevation
+              sx={{
+                mt: 3,
+                mb: 1,
+                backgroundColor: "#6d7dac",
+                boxShadow: "0",
+                borderRadius: 0,
+                width: "100%",
+              }}
+            >
+              <Typography>Iniciar Sesión</Typography>
+            </Button>
+            <Grid container>
+              <Grid item display={"flex"}>
+                <Typography variant="body2" color="#6c737f">
+                  No tienes una cuenta?
+                </Typography>
+                &nbsp;
+                <Link href="/register" variant="body2" color="#283583e0">
+                  {"Crea una!"}
+                </Link>
               </Grid>
-            </Box>
+            </Grid>
           </Box>
-        </Container>
-      </ThemeProvider>
-    </>
+        </Box>
+      </Container>
+      <Snackbar
+        open={showSnackbar}
+        autoHideDuration={4000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={severity}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+    </ThemeProvider>
   );
 }

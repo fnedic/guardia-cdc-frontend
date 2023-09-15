@@ -20,8 +20,6 @@ export const useRegister = (form) => {
       return;
     }
 
-
-
     request("POST", "/register", {
       name: form.name,
       lastname: form.lastname,
@@ -32,7 +30,7 @@ export const useRegister = (form) => {
     })
       .then((response) => {
         if (response.status === 201) {
-          navigate("/login");
+          navigate("/login?status=registered");
         }
       })
       .catch((error) => {

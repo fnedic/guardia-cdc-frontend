@@ -19,9 +19,9 @@ export default function VideoList() {
 
   function generate() {
     return protocolArray.map((protocol) => (
-      <Box>
+      <ListItem key={protocol.id}>
         {protocol.videoLink && (
-          <ListItem>
+          <>
             <ListItemAvatar>
               <IconButton
                 href={`${protocol.videoLink}`}
@@ -86,9 +86,9 @@ export default function VideoList() {
                 <KeyboardArrowRight />
               </Avatar>
             </IconButton>
-          </ListItem>
+          </>
         )}
-      </Box>
+      </ListItem>
     ));
   }
 
