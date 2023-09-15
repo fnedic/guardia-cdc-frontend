@@ -46,7 +46,7 @@ function App() {
         <Route
           element={
             <ProtectedRoute
-              redirectTo="/login"
+              redirectTo="/landing"
               isAllowed={!!user && user.status === "ACTIVE"}
             />
           }

@@ -14,12 +14,11 @@ import {
 import { setAuthHeader } from "../../helpers/axios_helper";
 
 export const Home = () => {
-
+  
   const handleLogout = () => {
     setAuthHeader(null);
     window.location.href = "/login";
   };
-
   const defaultTheme = createTheme({
     palette: {
       primary: {
@@ -31,14 +30,13 @@ export const Home = () => {
         fontSize: 50,
         color: "#283583",
       },
-      h3: undefined,
     },
     components: {
       MuiTypography: {
         defaultProps: {
           variantMapping: {
             // Map the new variant to render a <h1> by default
-            poster: "h3",
+            poster: "h2",
           },
         },
       },
@@ -47,7 +45,7 @@ export const Home = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ minHeight: "100vh" }}>
+      <Grid container component="main" sx={{ maxHeight: "100vh" }}>
         <CssBaseline />
         <Grid
           item
@@ -57,10 +55,6 @@ export const Home = () => {
           sx={{
             backgroundImage: `url(${image})`,
             backgroundRepeat: "no-repeat",
-            backgroundColor: (t) =>
-              t.palette.mode === "light"
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -82,18 +76,17 @@ export const Home = () => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                textAlign: "center",
               }}
             >
               <Grid>
-                <Typography variant="poster">
-                  Bienvenido/a al HOMEPAGE !!{" "}
-                </Typography>
+                <Typography variant="poster">¡Bienvenido de nuevo!</Typography>
+                <Typography variant="h3">¿Que desear hacer?</Typography>
               </Grid>
-              <Divider />
               <Box>
-                <Box mt={5} mb={5}>
+                <Box mt={10} mb={8}>
                   <Box>
-                    <Typography variant="h3">Perfil</Typography>
+                    <Typography variant="h5">Editar mi perfil:</Typography>
                   </Box>
                   <Button
                     type="button"
@@ -110,20 +103,22 @@ export const Home = () => {
                       width: "100%",
                     }}
                   >
-                    Ir
+                    editar perfil
                   </Button>
                 </Box>
                 <Divider />
-                <Box mt={5} mb={5}>
+                <Box mt={8} mb={5}>
                   <Box>
-                    <Typography variant="h3">Cerrar Sesión</Typography>
+                    <Typography variant="h5">
+                      Cerrar mi sesión:
+                    </Typography>
                   </Box>
                   <Button
                     type="button"
                     fullWidth
                     variant="contained"
-                    onClick={() => handleLogout()}
                     disableElevation
+                    onClick={() => handleLogout()}
                     sx={{
                       mt: 3,
                       mb: 1,

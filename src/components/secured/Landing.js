@@ -24,14 +24,13 @@ export const Landing = () => {
         fontSize: 50,
         color: "#283583",
       },
-      h3: undefined,
     },
     components: {
       MuiTypography: {
         defaultProps: {
           variantMapping: {
             // Map the new variant to render a <h1> by default
-            poster: "h3",
+            poster: "h2",
           },
         },
       },
@@ -40,7 +39,7 @@ export const Landing = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ minHeight: "100vh" }}>
+      <Grid container component="main" sx={{ maxHeight: "100vh" }}>
         <CssBaseline />
         <Grid
           item
@@ -50,10 +49,6 @@ export const Landing = () => {
           sx={{
             backgroundImage: `url(${image})`,
             backgroundRepeat: "no-repeat",
-            backgroundColor: (t) =>
-              t.palette.mode === "light"
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -75,16 +70,17 @@ export const Landing = () => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                textAlign: "center",
               }}
             >
               <Grid>
-                <Typography variant="poster">Bienvenido/a</Typography>
+                <Typography variant="poster">¡Hola!</Typography>
+                <Typography variant="h3">Te damos la bienvenida</Typography>
               </Grid>
-              <Divider />
               <Box>
-                <Box mt={5} mb={5}>
+                <Box mt={10} mb={8}>
                   <Box>
-                    <Typography variant="h3">Ya tienes cuenta?</Typography>
+                    <Typography variant="h5">Ya tienes cuenta?</Typography>
                   </Box>
                   <Button
                     type="button"
@@ -105,9 +101,9 @@ export const Landing = () => {
                   </Button>
                 </Box>
                 <Divider />
-                <Box mt={5} mb={5}>
+                <Box mt={8} mb={5}>
                   <Box>
-                    <Typography variant="h3">
+                    <Typography variant="h5">
                       Aun no tienes una cuenta?
                     </Typography>
                   </Box>
