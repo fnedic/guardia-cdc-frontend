@@ -19,8 +19,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { Settings } from "@mui/icons-material";
 
-export const UserAppBar = ({userRole}) => {
-
+export const UserAppBar = ({ userRole }) => {
   const appBarStyle = {
     display: "flex",
     justifyContent: "center",
@@ -35,8 +34,7 @@ export const UserAppBar = ({userRole}) => {
   const adminSettings = ["Perfil", "Cerrar Sesión"];
   const adminPageUrls = {
     "Subir Contenido": "http://localhost:3000/protocol/upload",
-    Personal: "http://localhost:3000/dashboard",
-    Protocolos: "http://localhost:3000/dashboard/protocol",
+    Personal: "http://localhost:3000/admin",
   };
 
   const userPages = ["Protocolos", "Videos", "Proc. Institucionales"];
@@ -66,8 +64,8 @@ export const UserAppBar = ({userRole}) => {
   };
 
   const handleLogout = () => {
-    window.location.href = "/login";
     setAuthHeader(null);
+    window.location.href = "/login";
   };
 
   const handleSettingClick = (selectedSetting) => {
@@ -78,6 +76,25 @@ export const UserAppBar = ({userRole}) => {
       handleCloseUserMenu();
       navigate("/profile");
     }
+  };
+
+  const handlePageClick = (selectedPage) => {
+    if (selectedPage === "Personal") {
+      handleCloseNavMenu();
+      navigate("/admin");
+    } else if (selectedPage === "Subir Contenido") {
+      handleCloseNavMenu();
+      navigate("/protocol/upload");
+    } else if (selectedPage === "Protocolos") {
+      handleCloseNavMenu();
+      navigate("/protocol/list");
+    } else if (selectedPage === "Videos") {
+      handleCloseNavMenu();
+      navigate("/videos");
+    } else if (selectedPage === "Proc. Institucionales") {
+      handleCloseNavMenu();
+      navigate("/protocol/list");
+    } 
   };
 
   if (userRole === "ADMIN") {
@@ -115,9 +132,12 @@ export const UserAppBar = ({userRole}) => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {adminPages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Button href={adminPageUrls[page]}>{page}</Button>
+                {adminPages.map((pages) => (
+                  <MenuItem
+                    key={pages}
+                    onClick={() => handlePageClick(pages)}
+                  >
+                    <Typography textAlign="center">{pages}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -236,9 +256,12 @@ export const UserAppBar = ({userRole}) => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {userPages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Button href={adminPageUrls[page]}>{page}</Button>
+                {userPages.map((pages) => (
+                  <MenuItem
+                    key={pages}
+                    onClick={() => handlePageClick(pages)}
+                  >
+                    <Typography textAlign="center">{pages}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
