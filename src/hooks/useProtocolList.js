@@ -31,12 +31,11 @@ export const useProtocolList = () => {
           protocolGroup: element.protocolGroup,
           publicationDate: myDate(element.publicationDate),
           views: element.views,
-          videoLink: element.videoLink
+          videoLink: element.videoLink,
         };
         setProtocolArray(updatedProtocolArray);
       }
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [protocolList]);
 
@@ -68,22 +67,7 @@ export const useProtocolList = () => {
     try {
       const response = await ProtocolService.protocolList();
       const updatedProtocolList = response.data;
-      
-      const updatedProtocolArray = updatedProtocolList.map((element) => ({
-        id: element.id,
-        title: renderFormatedContent({
-          section: element.title,
-        }).getPlainText(),
-        intro: renderFormatedContent({
-          section: element.intro,
-        }).getPlainText(),
-        protocolGroup: element.protocolGroup,
-        publicationDate: myDate(element.publicationDate),
-        views: element.views,
-      }));
-
       setProtocolList(updatedProtocolList);
-      setProtocolArray(updatedProtocolArray);
     } catch (error) {
       console.error("Error fetching protocol list: ", error);
     }
@@ -93,11 +77,11 @@ export const useProtocolList = () => {
     setSelectedProtocolId(id);
     setDeleteDialogOpen(true);
   };
-  
+
   const handleDeleteConfirmed = async () => {
     await ProtocolService.deleteProtocol(selectedProtocolId);
-    await fetchProtocolList(); 
-    setDeleteDialogOpen(false); 
+    await fetchProtocolList();
+    setDeleteDialogOpen(false);
   };
 
   const handleCloseDeleteDialog = () => {

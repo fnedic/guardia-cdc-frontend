@@ -81,7 +81,7 @@ export const Home = () => {
             >
               <Grid>
                 <Typography variant="poster">¡Bienvenido de nuevo!</Typography>
-                <Typography variant="h3">¿Que desear hacer?</Typography>
+                <Typography variant="h3">¿Que deseas hacer?</Typography>
               </Grid>
               <Box>
                 <Box mt={10} mb={8}>
