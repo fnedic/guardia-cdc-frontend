@@ -140,7 +140,7 @@ export function DashboardUsers() {
         style={{ textAlign: "center" }}
       >
         <DialogTitle id="delete-dialog-title">Confirmar Borrado</DialogTitle>
-        <DialogContent>¿Desea borrar el usuario?</DialogContent>
+        <DialogContent>Seguro/a desea borrar el usuario seleccionado?</DialogContent>
         <DialogActions style={{ justifyContent: "center" }}>
           <Button onClick={handleCloseDeleteDialog} color="primary">
             Cancelar
@@ -283,7 +283,7 @@ export function DashboardProtocols() {
         style={{ textAlign: "center" }}
       >
         <DialogTitle id="delete-dialog-title">Confirmar Borrado</DialogTitle>
-        <DialogContent>¿Desea borrar del protocolo?</DialogContent>
+        <DialogContent>Seguro/a desea borrar  el contenido seleccionado?</DialogContent>
         <DialogActions style={{ justifyContent: "center" }}>
           <Button onClick={handleCloseDeleteDialog} color="primary">
             Cancelar

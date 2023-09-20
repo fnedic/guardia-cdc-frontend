@@ -1,14 +1,14 @@
 .RichEditor-root {
     background: #fafafa;
-    border: 1.5px solid #69445d;
+    border: 1.5px solid #bababa;
     font-family: 'Arial';
     font-size: 14px;
     padding: 1rem;
-    border-bottom-left-radius: 0.7rem;
-    border-bottom-right-radius: 0.7rem;  }
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;  }
   
   .RichEditor-editor {
-    border-top: 1px solid #69445d;
+    border-top: 1px solid #bababa;
     cursor: text;
     font-size: 16px;
     margin-top: 10px;

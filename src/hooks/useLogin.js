@@ -1,13 +1,13 @@
-import { useState } from "react";
 import { request, setAuthHeader } from "../helpers/axios_helper";
+import { useSnackBar } from "./useSnackbar";
 
 export const useLogin = (form) => {
+  const { setSnackbarMessage, setShowSnackbar, setSeverity, SnackBar } =
+    useSnackBar();
+  const SnackBar2 = SnackBar;
   const onLogin = (e) => {
     e.preventDefault();
-    if (
-      form.email.trim() === "" ||
-      form.password.trim() === ""
-    ) {
+    if (form.email.trim() === "" || form.password.trim() === "") {
       setSnackbarMessage("Algunos campos se encuentran vacíos!");
       setSeverity("warning");
       setShowSnackbar(true);
@@ -39,23 +39,8 @@ export const useLogin = (form) => {
       });
   };
 
-  // handle snackbar message ////////////////////////////////////////////////
-  const [showSnackbar, setShowSnackbar] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [ severity, setSeverity ] = useState("success");
-
-  const handleCloseSnackbar = () => {
-    setShowSnackbar(false);
-  };
-  ///////////////////////////////////////////////////////////////////////////////
-
   return {
     onLogin,
-    showSnackbar,
-    snackbarMessage,
-    setSnackbarMessage,
-    handleCloseSnackbar,
-    setShowSnackbar,
-    severity
+    SnackBar2
   };
 };

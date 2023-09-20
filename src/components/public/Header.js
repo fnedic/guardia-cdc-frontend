@@ -12,7 +12,12 @@ export const Header = () => {
   };
 
   return (
-    <Button style={headerStyle} href="/home">
+    <Button
+      disableRipple
+      sx={{ "&:hover": { backgroundColor: "inherit" } }}
+      style={headerStyle}
+      href="/home"
+    >
       <Box
         sx={{
           display: "flex",

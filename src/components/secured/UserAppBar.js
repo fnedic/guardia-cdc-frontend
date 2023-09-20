@@ -10,6 +10,7 @@ import {
   Container,
   CssBaseline,
   IconButton,
+  ListItemIcon,
   Menu,
   MenuItem,
   Toolbar,
@@ -17,7 +18,16 @@ import {
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Settings } from "@mui/icons-material";
+import {
+  AccountCircle,
+  Description,
+  Logout,
+  Newspaper,
+  PersonSearch,
+  Settings,
+  UploadFile,
+  YouTube,
+} from "@mui/icons-material";
 
 export const UserAppBar = ({ userRole }) => {
   const navigate = useNavigate();
@@ -69,7 +79,7 @@ export const UserAppBar = ({ userRole }) => {
     } else if (selectedPage === "Proc. Institucionales") {
       handleCloseNavMenu();
       navigate("/protocol/list");
-    } 
+    }
   };
   const appBarStyle = {
     display: "flex",
@@ -88,16 +98,18 @@ export const UserAppBar = ({ userRole }) => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
+              <Tooltip title="Menu">
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Tooltip>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
@@ -120,7 +132,19 @@ export const UserAppBar = ({ userRole }) => {
                   <MenuItem
                     key={pages}
                     onClick={() => handlePageClick(pages)}
+                    sx={{
+                      "&:hover": {
+                        backgroundColor: "#ebebeb",
+                      },
+                    }}
                   >
+                    <ListItemIcon>
+                      {pages === "Personal" ? (
+                        <PersonSearch />
+                      ) : pages === "Subir Contenido" ? (
+                        <UploadFile />
+                      ) : null}
+                    </ListItemIcon>
                     <Typography textAlign="center">{pages}</Typography>
                   </MenuItem>
                 ))}
@@ -194,7 +218,19 @@ export const UserAppBar = ({ userRole }) => {
                   <MenuItem
                     key={setting}
                     onClick={() => handleSettingClick(setting)}
+                    sx={{
+                      "&:hover": {
+                        backgroundColor: "#ebebeb",
+                      },
+                    }}
                   >
+                    <ListItemIcon>
+                      {setting === "Perfil" ? (
+                        <AccountCircle />
+                      ) : setting === "Cerrar Sesión" ? (
+                        <Logout />
+                      ) : null}
+                    </ListItemIcon>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
@@ -211,16 +247,11 @@ export const UserAppBar = ({ userRole }) => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
+              <Tooltip title="Menu">
+                <IconButton onClick={handleOpenNavMenu} color="inherit">
+                  <MenuIcon />
+                </IconButton>
+              </Tooltip>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
@@ -235,15 +266,26 @@ export const UserAppBar = ({ userRole }) => {
                 }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
               >
                 {userPages.map((pages) => (
                   <MenuItem
                     key={pages}
                     onClick={() => handlePageClick(pages)}
+                    sx={{
+                      "&:hover": {
+                        backgroundColor: "#ebebeb",
+                      },
+                    }}
                   >
+                    <ListItemIcon>
+                      {pages === "Protocolos" ? (
+                        <Description />
+                      ) : pages === "Videos" ? (
+                        <YouTube />
+                      ) : pages === "Proc. Institucionales" ? (
+                        <Newspaper />
+                      ) : null}
+                    </ListItemIcon>
                     <Typography textAlign="center">{pages}</Typography>
                   </MenuItem>
                 ))}
@@ -317,7 +359,19 @@ export const UserAppBar = ({ userRole }) => {
                   <MenuItem
                     key={setting}
                     onClick={() => handleSettingClick(setting)}
+                    sx={{
+                      "&:hover": {
+                        backgroundColor: "#ebebeb",
+                      },
+                    }}
                   >
+                    <ListItemIcon>
+                      {setting === "Perfil" ? (
+                        <AccountCircle />
+                      ) : setting === "Cerrar Sesión" ? (
+                        <Logout />
+                      ) : null}
+                    </ListItemIcon>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
@@ -327,7 +381,7 @@ export const UserAppBar = ({ userRole }) => {
         </Container>
       </AppBar>
     );
-  } else if (userRole === "" || userRole === null || userRole === undefined) {
+  } else {
     return (
       <header style={appBarStyle}>
         <CssBaseline />

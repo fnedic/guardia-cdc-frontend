@@ -9,10 +9,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Key } from "@mui/icons-material";
-import { Alert, CssBaseline, Snackbar } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import { useForm } from "../../hooks/useForm";
 import { useLogin } from "../../hooks/useLogin";
 import { useLocation } from "react-router-dom";
+import { useSnackBar } from "../../hooks/useSnackbar";
 
 const customTheme = createTheme({
   palette: {
@@ -29,29 +30,23 @@ const initialForm = {
 
 export default function Login() {
   const { handleChange, form } = useForm(initialForm);
+  const { setSnackbarMessage, setShowSnackbar, setSeverity, SnackBar } =
+    useSnackBar();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const status = queryParams.get("status");
-  const {
-    onLogin,
-    handleCloseSnackbar,
-    setShowSnackbar,
-    setSnackbarMessage,
-    showSnackbar,
-    snackbarMessage,
-    severity
-  } = useLogin(form);
+  const { onLogin, SnackBar2 } = useLogin(form);
 
   React.useEffect(() => {
     if (status === "registered") {
       setSnackbarMessage(
         "Usuario registrado, aguarde autorización del administrador para iniciar sesión!"
       );
+      setSeverity("info")
       setShowSnackbar(true);
     } else if (status === "rejected") {
-      setSnackbarMessage(
-        "Aun no tiene permisos para ingresar!"
-      );
+      setSnackbarMessage("Aun no tiene permisos para ingresar!");
+      setSeverity("error");
       setShowSnackbar(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -127,21 +122,8 @@ export default function Login() {
           </Box>
         </Box>
       </Container>
-      <Snackbar
-        open={showSnackbar}
-        autoHideDuration={4000}
-        onClose={handleCloseSnackbar}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert
-          onClose={handleCloseSnackbar}
-          severity={severity}
-          variant="filled"
-          sx={{ width: "100%" }}
-        >
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
+      {SnackBar2}
+      {SnackBar}
     </ThemeProvider>
   );
 }

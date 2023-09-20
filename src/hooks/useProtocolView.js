@@ -47,7 +47,6 @@ export const useProtocolView = () => {
         }
       }
     }
-
     setEditorStates(updatedEditorStates);
   }, [protocol]);
 
