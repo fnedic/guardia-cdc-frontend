@@ -61,7 +61,7 @@ export default function ProtocolForm() {
   const [selectedDate, setSelectedDate] = useState();
   const [videoTitle, setTitle] = useState();
   const [videoLink, setLink] = useState();
-  const [videoGroup, setVideoGroup] = useState();
+  const [videoGroup, setVideoGroup] = useState("");
   const [videoDate, setDate] = useState();
 
   const navigate = useNavigate();
@@ -388,13 +388,18 @@ export default function ProtocolForm() {
                   >
                     <MenuItem value={"CARDIOVASCULAR"}>Cardiología</MenuItem>
                     <MenuItem value={"CIRUGIA"}>Cirugía</MenuItem>
-                    <MenuItem value={"GENERALES"}>Generales</MenuItem>
+                    <MenuItem value={"ENDOCRINOMETABOLICO"}>Endocrinometabolico</MenuItem>
+                    <MenuItem value={"GASTROENTEROLOGIA"}>Gastroenterología</MenuItem>
+                    <MenuItem value={"GINECOOBSTETRICIA"}>Ginecoobstetricia</MenuItem>
+                    <MenuItem value={"HOMEOSTASIS"}>Homeostasis</MenuItem>
                     <MenuItem value={"INFECTOLOGIA"}>Infectología</MenuItem>
+                    <MenuItem value={"NEFROLOGIA"}>Nefrología</MenuItem>
+                    <MenuItem value={"NEUMONOLOGIA"}>Neumonología</MenuItem>
+                    <MenuItem value={"NEUROLOGIA"}>Neurologia</MenuItem>
                     <MenuItem value={"OTORRINOLARINGOLOGIA"}>ORL</MenuItem>
-                    <MenuItem value={"RESPIRATORIO"}>Respiratorio</MenuItem>
-                    <MenuItem value={"TRAUMATOLOGIA"}>Traumatología</MenuItem>
+                    <MenuItem value={"PROCEDIMIENTO"}>Procedimiento Institucional</MenuItem>
                     <MenuItem value={"TOXICOLOGIA"}>Toxicología</MenuItem>
-                    <MenuItem value={"URGENCIAS"}>Urgencias</MenuItem>
+                    <MenuItem value={"TRAUMATOLOGIA"}>Traumatología</MenuItem>
                     <MenuItem value={"UROLOGIA"}>Urología</MenuItem>
                   </Select>
                 </FormControl>
@@ -476,13 +481,17 @@ export default function ProtocolForm() {
                   >
                     <MenuItem value={"CARDIOVASCULAR"}>Cardiología</MenuItem>
                     <MenuItem value={"CIRUGIA"}>Cirugía</MenuItem>
-                    <MenuItem value={"GENERALES"}>Generales</MenuItem>
+                    <MenuItem value={"ENDOCRINOMETABOLICO"}>Endocrinometabolico</MenuItem>
+                    <MenuItem value={"GASTROENTEROLOGIA"}>Gastroenterología</MenuItem>
+                    <MenuItem value={"GINECOOBSTETRICIA"}>Ginecoobstetricia</MenuItem>
+                    <MenuItem value={"HOMEOSTASIS"}>Homeostasis</MenuItem>
                     <MenuItem value={"INFECTOLOGIA"}>Infectología</MenuItem>
+                    <MenuItem value={"NEFROLOGIA"}>Nefrología</MenuItem>
+                    <MenuItem value={"NEUMONOLOGIA"}>Neumonología</MenuItem>
+                    <MenuItem value={"NEUROLOGIA"}>Neurologia</MenuItem>
                     <MenuItem value={"OTORRINOLARINGOLOGIA"}>ORL</MenuItem>
-                    <MenuItem value={"RESPIRATORIO"}>Respiratorio</MenuItem>
-                    <MenuItem value={"TRAUMATOLOGIA"}>Traumatología</MenuItem>
                     <MenuItem value={"TOXICOLOGIA"}>Toxicología</MenuItem>
-                    <MenuItem value={"URGENCIAS"}>Urgencias</MenuItem>
+                    <MenuItem value={"TRAUMATOLOGIA"}>Traumatología</MenuItem>
                     <MenuItem value={"UROLOGIA"}>Urología</MenuItem>
                   </Select>
                 </FormControl>
