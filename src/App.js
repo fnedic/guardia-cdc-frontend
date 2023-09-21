@@ -3,10 +3,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Header } from "./components/public/Header";
 import Footer from "./components/public/Footer";
 import Login from "./components/public/Login";
-import Dashboard from "./components/secured/Dashboard/Dashboard";
 import ProtocolForm from "./components/secured/Protocols/ProtocolForm";
 import ProtocolView from "./components/secured/Protocols/ProtocolView";
-import UpdateUser from "./components/secured/UpdateUser";
+import UpdateUser from "./components/secured/Dashboard/UpdateUser";
 import VideoList from "./components/secured/Protocols/VideoList.js";
 import ProtocolList from "./components/secured/Protocols/ProtocolList";
 import Profile from "./components/secured/Profile";
@@ -17,6 +16,9 @@ import { UserAppBar } from "./components/secured/UserAppBar";
 import { ProtectedRoute } from "./constants/ProtectedRoute";
 import { Landing } from "./components/secured/Landing";
 import { Home } from './components/secured/Home';
+import { DashboardHome } from "./components/secured/Dashboard/DashboardHome";
+import Dashboard from "./components/secured/Dashboard/Dashboard";
+import UpdateVideo from "./components/secured/Dashboard/UpdateVideo";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -65,9 +67,11 @@ function App() {
             />
           }
         >
-          <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin" element={<DashboardHome />} />
+          <Route path="/admin/data" element={<Dashboard />} />
           <Route path="/protocol/upload" element={<ProtocolForm />} />
           <Route path="/user/update/:id" element={<UpdateUser />} />
+          <Route path="/video/update/:id" element={<UpdateVideo />} />
         </Route>
       </Routes>
       <Footer />

@@ -31,7 +31,13 @@ import {
 
 export const UserAppBar = ({ userRole }) => {
   const navigate = useNavigate();
-  const adminPages = ["Personal", "Subir Contenido"];
+  const adminPages = [
+    "Personal",
+    "Protocolos",
+    "Proc. Institucionales",
+    "Videos",
+    "Subir Contenido",
+  ];
   const adminSettings = ["Perfil", "Cerrar Sesión"];
   const userPages = ["Protocolos", "Videos", "Proc. Institucionales"];
   const userSettings = ["Perfil", "Cerrar Sesión"];
@@ -43,7 +49,6 @@ export const UserAppBar = ({ userRole }) => {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -79,6 +84,24 @@ export const UserAppBar = ({ userRole }) => {
     } else if (selectedPage === "Proc. Institucionales") {
       handleCloseNavMenu();
       navigate("/protocol/list");
+    }
+  };
+  const handleAdminPageClick = (selectedPage) => {
+    if (selectedPage === "Personal") {
+      handleCloseNavMenu();
+      navigate("/admin/data?table=personal");
+    } else if (selectedPage === "Subir Contenido") {
+      handleCloseNavMenu();
+      navigate("/protocol/upload");
+    } else if (selectedPage === "Protocolos") {
+      handleCloseNavMenu();
+      navigate("/admin/data?table=protocol");
+    } else if (selectedPage === "Videos") {
+      handleCloseNavMenu();
+      navigate("/admin/data?table=video");
+    } else if (selectedPage === "Proc. Institucionales") {
+      handleCloseNavMenu();
+      navigate("/admin/data?table=procedures");
     }
   };
   const appBarStyle = {
@@ -131,7 +154,7 @@ export const UserAppBar = ({ userRole }) => {
                 {adminPages.map((pages) => (
                   <MenuItem
                     key={pages}
-                    onClick={() => handlePageClick(pages)}
+                    onClick={() => handleAdminPageClick(pages)}
                     sx={{
                       "&:hover": {
                         backgroundColor: "#ebebeb",
@@ -143,6 +166,12 @@ export const UserAppBar = ({ userRole }) => {
                         <PersonSearch />
                       ) : pages === "Subir Contenido" ? (
                         <UploadFile />
+                      ) : pages === "Protocolos" ? (
+                        <Description />
+                      ) : pages === "Videos" ? (
+                        <YouTube />
+                      ) : pages === "Proc. Institucionales" ? (
+                        <Newspaper />
                       ) : null}
                     </ListItemIcon>
                     <Typography textAlign="center">{pages}</Typography>
@@ -177,12 +206,17 @@ export const UserAppBar = ({ userRole }) => {
               {adminPages.map((page) => (
                 <Button
                   key={page}
-                  onClick={() => handlePageClick(page)}
+                  onClick={() => handleAdminPageClick(page)}
                   sx={{
                     mx: 1,
                     color: "white",
                     display: "block",
                     letterSpacing: 1,
+                    borderRadius: 0,
+                    "&:hover": {
+                      backgroundColor: "#ffffff", // Cambia "hoverColor" por el color deseado en hover
+                      color: "#69445d", // Cambia "hoverTextColor" por el color de texto deseado en hover
+                    },
                   }}
                 >
                   {page}
@@ -324,6 +358,11 @@ export const UserAppBar = ({ userRole }) => {
                     color: "white",
                     display: "block",
                     letterSpacing: 1,
+                    borderRadius: 0,
+                    "&:hover": {
+                      backgroundColor: "#ffffff", // Cambia "hoverColor" por el color deseado en hover
+                      color: "#69445d", // Cambia "hoverTextColor" por el color de texto deseado en hover
+                    },
                   }}
                 >
                   {page}
