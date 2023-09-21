@@ -27,6 +27,14 @@ const initialForm = {
   email: "",
   password: "",
 };
+const inputStyle = {
+  "& .MuiOutlinedInput-root": {
+    borderRadius: 0,
+    "& fieldset": {
+      borderWidth: 1,
+    },
+  },
+};
 
 export default function Login() {
   const { handleChange, form } = useForm(initialForm);
@@ -42,7 +50,7 @@ export default function Login() {
       setSnackbarMessage(
         "Usuario registrado, aguarde autorización del administrador para iniciar sesión!"
       );
-      setSeverity("info")
+      setSeverity("info");
       setShowSnackbar(true);
     } else if (status === "rejected") {
       setSnackbarMessage("Aun no tiene permisos para ingresar!");
@@ -79,6 +87,7 @@ export default function Login() {
               autoComplete="email"
               autoFocus
               onChange={handleChange}
+              sx={inputStyle}
             />
             <TextField
               margin="normal"
@@ -90,6 +99,7 @@ export default function Login() {
               id="password"
               autoComplete="current-password"
               onChange={handleChange}
+              sx={inputStyle}
             />
             <Button
               type="button"
