@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../public/images/home-background.svg";
+import image from "../../public/images/home-background.svg";
 import {
   Box,
   Button,
@@ -11,8 +11,14 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
+import { setAuthHeader } from "../../../helpers/axios_helper";
 
-export const Landing = () => {
+export const DashboardHome = () => {
+  
+  const handleLogout = () => {
+    setAuthHeader(null);
+    window.location.href = "/login";
+  };
   const defaultTheme = createTheme({
     palette: {
       primary: {
@@ -39,7 +45,7 @@ export const Landing = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" >
+      <Grid container component="main" sx={{ maxHeight: "100vh" }}>
         <CssBaseline />
         <Grid
           item
@@ -74,19 +80,19 @@ export const Landing = () => {
               }}
             >
               <Grid>
-                <Typography variant="poster">¡Hola!</Typography>
-                <Typography variant="h3">Te damos la bienvenida</Typography>
+                <Typography variant="poster">¡Bienvenido Admin!</Typography>
+                <Typography variant="h3">¿Que deseas hacer?</Typography>
               </Grid>
               <Box>
                 <Box mt={10} mb={8}>
                   <Box>
-                    <Typography variant="h5">Ya tienes cuenta?</Typography>
+                    <Typography variant="h5">Editar mi perfil:</Typography>
                   </Box>
                   <Button
                     type="button"
                     fullWidth
                     variant="contained"
-                    href="/login"
+                    href="/profile"
                     disableElevation
                     sx={{
                       mt: 3,
@@ -97,22 +103,22 @@ export const Landing = () => {
                       width: "100%",
                     }}
                   >
-                    inicia sesión
+                    editar perfil
                   </Button>
                 </Box>
                 <Divider />
                 <Box mt={8} mb={5}>
                   <Box>
                     <Typography variant="h5">
-                      Aun no tienes una cuenta?
+                      Cerrar mi sesión:
                     </Typography>
                   </Box>
                   <Button
                     type="button"
                     fullWidth
                     variant="contained"
-                    href="/register"
                     disableElevation
+                    onClick={() => handleLogout()}
                     sx={{
                       mt: 3,
                       mb: 1,
@@ -122,7 +128,7 @@ export const Landing = () => {
                       width: "100%",
                     }}
                   >
-                    Registrarse
+                    Cerrar Sesión
                   </Button>
                 </Box>
                 <Divider />

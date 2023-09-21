@@ -18,12 +18,12 @@ class UserService {
   createUser(user) {
     return axios.post(USER_API_BASE_URL, user, config);
   }
-  getUserById(userId) {
-    return axios.get(USER_API_BASE_URL + "/" + userId, config);
+  getUserById(id) {
+    return axios.get(USER_API_BASE_URL + "/" + id, config);
   }
 
-  updateUser(userId, user) {
-    return axios.put(USER_API_BASE_URL + "/" + userId, user, config);
+  updateUser(id, user) {
+    return axios.put(USER_API_BASE_URL + "/"+id, user, config);
   }
 
   deleteUser(id) {

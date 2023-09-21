@@ -23,17 +23,23 @@ export const useLogin = (form) => {
       })
       .catch((error) => {
         setAuthHeader(null);
-        if (error.response.status === 404) {
-          setSnackbarMessage(error.response.data.message);
-          setSeverity("error");
-          setShowSnackbar(true);
-        } else if (error.response.status === 403) {
-          setSnackbarMessage(error.response.data.message);
-          setSeverity("info");
-          setShowSnackbar(true);
-        } else if (error.response.status === 401) {
-          setSnackbarMessage(error.response.data.message);
-          setSeverity("info");
+        if (error.response !== undefined) {
+          if (error.response.status === 404) {
+            setSnackbarMessage(error.response.data.message);
+            setSeverity("error");
+            setShowSnackbar(true);
+          } else if (error.response.status === 403) {
+            setSnackbarMessage(error.response.data.message);
+            setSeverity("info");
+            setShowSnackbar(true);
+          } else if (error.response.status === 401) {
+            setSnackbarMessage(error.response.data.message);
+            setSeverity("info");
+            setShowSnackbar(true);
+          }
+        } else {
+          setSnackbarMessage(error.toString());
+          setSeverity("warning");
           setShowSnackbar(true);
         }
       });
@@ -41,6 +47,6 @@ export const useLogin = (form) => {
 
   return {
     onLogin,
-    SnackBar2
+    SnackBar2,
   };
 };

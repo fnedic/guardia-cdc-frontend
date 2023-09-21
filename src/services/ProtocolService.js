@@ -67,8 +67,16 @@ class ProtocolService {
     return axios.get(VIDEO_API_BASE_URL+"/get", config);
   }
 
+  getVideoById(id) {
+    return axios.get(VIDEO_API_BASE_URL+"/update/"+id, config);
+  }
+
+  updateVideo(id, video) {
+    return axios.put(VIDEO_API_BASE_URL+"/update/"+id, video, config);
+  }
+
   deleteVideo(id) {
-    return axios.post(VIDEO_API_BASE_URL+"/delete/" + id, config);
+    return axios.get(VIDEO_API_BASE_URL+"/delete/" + id, config);
   }
 }
 

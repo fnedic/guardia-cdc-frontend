@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import ProtocolService from "../services/ProtocolService.js";
+import { useNavigate } from "react-router-dom";
 
 export const useVideoList = () => {
   // LOGIC FOR PROTOCOL RENDERING ////////////////////////////////////////////////
   const [videoList, setVideoList] = useState();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedVideoId, setSelectedVideoId] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     ProtocolService.videoList().then((r) => {
       setVideoList(r.data);
@@ -22,6 +23,10 @@ export const useVideoList = () => {
     } catch (error) {
       console.error("Error fetching protocol list: ", error);
     }
+  };
+
+  const editVideo = (id) => {
+    navigate(`/video/update/${id}`);
   };
 
   const deleteVideo = (id) => {
@@ -51,6 +56,7 @@ export const useVideoList = () => {
   return {
     videoList,
     deleteDialogOpen,
+    editVideo,
     myDate,
     deleteVideo,
     handleDeleteConfirmed,

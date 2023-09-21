@@ -45,6 +45,7 @@ const customBoxStyle = {
   color: "#fafafa",
   borderTopLeftRadius: "0",
   borderTopRightRadius: "0",
+  marginBottom: -0.1,
 };
 
 export default function ProtocolForm() {
@@ -119,7 +120,9 @@ export default function ProtocolForm() {
     ProtocolService.createProtocol(protocol)
       .then((response) => {
         const messageParam = encodeURIComponent(response.data);
-        navigate(`/admin?status=success&mssg=${messageParam}`);
+        navigate(
+          `/admin/data?table=protocol&status=success&mssg=${messageParam}`
+        );
       })
       .catch((error) => {
         setSnackbarMessage(error.response.data.message);
@@ -152,7 +155,7 @@ export default function ProtocolForm() {
     ProtocolService.createVideo(video)
       .then((response) => {
         const messageParam = encodeURIComponent(response.data);
-        navigate(`/admin?status=success&mssg=${messageParam}`);
+        navigate(`/admin/data?table=video&status=success&mssg=${messageParam}`);
       })
       .catch((error) => {
         setSnackbarMessage(error.response.data.message);
@@ -359,6 +362,14 @@ export default function ProtocolForm() {
                     id="videoLink"
                     value={video}
                     onChange={handleInputChangeV}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos rectos
+                        "& fieldset": {
+                          borderWidth: 1, // Puedes ajustar el ancho del borde como desees
+                        },
+                      },
+                    }}
                   />
                 </Grid>
 
@@ -373,6 +384,14 @@ export default function ProtocolForm() {
                     id="driveLink"
                     value={drive}
                     onChange={handleInputChangeD}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos rectos
+                        "& fieldset": {
+                          borderWidth: 1, // Puedes ajustar el ancho del borde como desees
+                        },
+                      },
+                    }}
                   />
                 </Grid>
               </Grid>
@@ -385,19 +404,28 @@ export default function ProtocolForm() {
                     value={group}
                     label="Group"
                     onChange={handleInputChange}
+                    sx={{ borderRadius: 0 }}
                   >
                     <MenuItem value={"CARDIOVASCULAR"}>Cardiología</MenuItem>
                     <MenuItem value={"CIRUGIA"}>Cirugía</MenuItem>
-                    <MenuItem value={"ENDOCRINOMETABOLICO"}>Endocrinometabolico</MenuItem>
-                    <MenuItem value={"GASTROENTEROLOGIA"}>Gastroenterología</MenuItem>
-                    <MenuItem value={"GINECOOBSTETRICIA"}>Ginecoobstetricia</MenuItem>
+                    <MenuItem value={"ENDOCRINOMETABOLICO"}>
+                      Endocrinometabolico
+                    </MenuItem>
+                    <MenuItem value={"GASTROENTEROLOGIA"}>
+                      Gastroenterología
+                    </MenuItem>
+                    <MenuItem value={"GINECOOBSTETRICIA"}>
+                      Ginecoobstetricia
+                    </MenuItem>
                     <MenuItem value={"HOMEOSTASIS"}>Homeostasis</MenuItem>
                     <MenuItem value={"INFECTOLOGIA"}>Infectología</MenuItem>
                     <MenuItem value={"NEFROLOGIA"}>Nefrología</MenuItem>
                     <MenuItem value={"NEUMONOLOGIA"}>Neumonología</MenuItem>
                     <MenuItem value={"NEUROLOGIA"}>Neurologia</MenuItem>
                     <MenuItem value={"OTORRINOLARINGOLOGIA"}>ORL</MenuItem>
-                    <MenuItem value={"PROCEDIMIENTO"}>Procedimiento Institucional</MenuItem>
+                    <MenuItem value={"PROCEDIMIENTO"}>
+                      Procedimiento Institucional
+                    </MenuItem>
                     <MenuItem value={"TOXICOLOGIA"}>Toxicología</MenuItem>
                     <MenuItem value={"TRAUMATOLOGIA"}>Traumatología</MenuItem>
                     <MenuItem value={"UROLOGIA"}>Urología</MenuItem>
@@ -411,6 +439,11 @@ export default function ProtocolForm() {
                     id="createdDate"
                     value={selectedDate}
                     onChange={handleDateChange}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos cuadrados
+                      },
+                    }}
                   />
                 </LocalizationProvider>
 
@@ -456,6 +489,14 @@ export default function ProtocolForm() {
                     id="title"
                     value={videoTitle}
                     onChange={handleInputChangeV2}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos rectos
+                        "& fieldset": {
+                          borderWidth: 1, // Puedes ajustar el ancho del borde como desees
+                        },
+                      },
+                    }}
                   />
                 </Box>
                 <Box mb={5}>
@@ -469,58 +510,80 @@ export default function ProtocolForm() {
                     id="videoLink"
                     value={videoLink}
                     onChange={handleInputChangeD2}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos rectos
+                        "& fieldset": {
+                          borderWidth: 1, // Puedes ajustar el ancho del borde como desees
+                        },
+                      },
+                    }}
                   />
                 </Box>
-                <FormControl sx={{ minWidth: 200, mr: 2 }} size="small">
-                  <InputLabel>Grupo</InputLabel>
-                  <Select
-                    id="protocolGroup"
-                    label="Group"
-                    value={videoGroup}
-                    onChange={handleInputChange2}
+                <Grid>
+                  <FormControl sx={{ minWidth: 200, mr: 2 }} size="small">
+                    <InputLabel>Grupo</InputLabel>
+                    <Select
+                      id="videoGroup"
+                      label="Group"
+                      value={videoGroup}
+                      onChange={handleInputChange2}
+                      sx={{ borderRadius: 0 }}
+                    >
+                      <MenuItem value={"CARDIOVASCULAR"}>Cardiología</MenuItem>
+                      <MenuItem value={"CIRUGIA"}>Cirugía</MenuItem>
+                      <MenuItem value={"ENDOCRINOMETABOLICO"}>
+                        Endocrinometabolico
+                      </MenuItem>
+                      <MenuItem value={"GASTROENTEROLOGIA"}>
+                        Gastroenterología
+                      </MenuItem>
+                      <MenuItem value={"GINECOOBSTETRICIA"}>
+                        Ginecoobstetricia
+                      </MenuItem>
+                      <MenuItem value={"HOMEOSTASIS"}>Homeostasis</MenuItem>
+                      <MenuItem value={"INFECTOLOGIA"}>Infectología</MenuItem>
+                      <MenuItem value={"NEFROLOGIA"}>Nefrología</MenuItem>
+                      <MenuItem value={"NEUMONOLOGIA"}>Neumonología</MenuItem>
+                      <MenuItem value={"NEUROLOGIA"}>Neurologia</MenuItem>
+                      <MenuItem value={"OTORRINOLARINGOLOGIA"}>ORL</MenuItem>
+                      <MenuItem value={"TOXICOLOGIA"}>Toxicología</MenuItem>
+                      <MenuItem value={"TRAUMATOLOGIA"}>Traumatología</MenuItem>
+                      <MenuItem value={"UROLOGIA"}>Urología</MenuItem>
+                    </Select>
+                  </FormControl>
+
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      label="Publicación"
+                      slotProps={{ textField: { size: "small" } }}
+                      id="date"
+                      value={videoDate}
+                      onChange={handleDateChange2}
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos cuadrados
+                        },
+                      }}
+                    />
+                  </LocalizationProvider>
+
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    endIcon={<Send />}
+                    disableElevation
+                    sx={{
+                      backgroundColor: "#6d7dac",
+                      boxShadow: "0",
+                      borderRadius: 0,
+                      ml: 2,
+                    }}
+                    onClick={handleVideoSubmit}
                   >
-                    <MenuItem value={"CARDIOVASCULAR"}>Cardiología</MenuItem>
-                    <MenuItem value={"CIRUGIA"}>Cirugía</MenuItem>
-                    <MenuItem value={"ENDOCRINOMETABOLICO"}>Endocrinometabolico</MenuItem>
-                    <MenuItem value={"GASTROENTEROLOGIA"}>Gastroenterología</MenuItem>
-                    <MenuItem value={"GINECOOBSTETRICIA"}>Ginecoobstetricia</MenuItem>
-                    <MenuItem value={"HOMEOSTASIS"}>Homeostasis</MenuItem>
-                    <MenuItem value={"INFECTOLOGIA"}>Infectología</MenuItem>
-                    <MenuItem value={"NEFROLOGIA"}>Nefrología</MenuItem>
-                    <MenuItem value={"NEUMONOLOGIA"}>Neumonología</MenuItem>
-                    <MenuItem value={"NEUROLOGIA"}>Neurologia</MenuItem>
-                    <MenuItem value={"OTORRINOLARINGOLOGIA"}>ORL</MenuItem>
-                    <MenuItem value={"TOXICOLOGIA"}>Toxicología</MenuItem>
-                    <MenuItem value={"TRAUMATOLOGIA"}>Traumatología</MenuItem>
-                    <MenuItem value={"UROLOGIA"}>Urología</MenuItem>
-                  </Select>
-                </FormControl>
-
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                    label="Publicación"
-                    slotProps={{ textField: { size: "small" } }}
-                    id="date"
-                    value={videoDate}
-                    onChange={handleDateChange2}
-                  />
-                </LocalizationProvider>
-
-                <Button
-                  type="submit"
-                  variant="contained"
-                  endIcon={<Send />}
-                  disableElevation
-                  sx={{
-                    backgroundColor: "#6d7dac",
-                    boxShadow: "0",
-                    borderRadius: 0,
-                    ml: 2,
-                  }}
-                  onClick={handleVideoSubmit}
-                >
-                  Publicar
-                </Button>
+                    Publicar
+                  </Button>
+                </Grid>
               </Grid>
             </Box>
           </Box>
