@@ -32,6 +32,15 @@ const customTheme = createTheme({
   },
 });
 
+const inputStyle = {
+  "& .MuiOutlinedInput-root": {
+    borderRadius: 0,
+    "& fieldset": {
+      borderWidth: 1,
+    },
+  },
+};
+
 const initialForm = {
   name: "",
   lastname: "",
@@ -75,7 +84,7 @@ export default function Register() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ bgcolor: "#283583", width: 50, height: 50 }}>
+            <Avatar sx={{ bgcolor: "#6d7dac", width: 50, height: 50 }}>
               <AppRegistrationIcon sx={{ fontSize: 35 }} />
             </Avatar>
             <Box component="form" sx={{ mt: 3 }}>
@@ -87,8 +96,8 @@ export default function Register() {
                     fullWidth
                     id="name"
                     label="Nombre"
-                    autoFocus
                     onChange={handleChange}
+                    sx={inputStyle}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -99,6 +108,7 @@ export default function Register() {
                     label="Apellido"
                     name="lastname"
                     onChange={handleChange}
+                    sx={inputStyle}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -109,6 +119,7 @@ export default function Register() {
                     label="Email"
                     name="email"
                     onChange={handleChange}
+                    sx={inputStyle}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -119,8 +130,8 @@ export default function Register() {
                     fullWidth
                     id="dni"
                     label="DNI"
-                    autoFocus
                     onChange={handleChange}
+                    sx={inputStyle}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -132,6 +143,7 @@ export default function Register() {
                     label="Matrícula Médica"
                     name="medicalRegistration"
                     onChange={handleChange}
+                    sx={inputStyle}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -144,6 +156,7 @@ export default function Register() {
                       id="password"
                       name="password"
                       onChange={handleChange}
+                      sx={{ borderRadius:0 }}
                       type={showPassword ? "text" : "password"}
                       endAdornment={
                         <InputAdornment position="end">
@@ -170,6 +183,7 @@ export default function Register() {
                       name="password2"
                       id="password2"
                       onChange={handlePasswordConfirmation}
+                      sx={{ borderRadius:0 }}
                       type={showPassword2 ? "text" : "password"}
                       endAdornment={
                         <InputAdornment position="end">

@@ -491,9 +491,9 @@ export default function ProtocolForm() {
                     onChange={handleInputChangeV2}
                     sx={{
                       "& .MuiOutlinedInput-root": {
-                        borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos rectos
+                        borderRadius: 0,
                         "& fieldset": {
-                          borderWidth: 1, // Puedes ajustar el ancho del borde como desees
+                          borderWidth: 1,
                         },
                       },
                     }}
@@ -512,9 +512,9 @@ export default function ProtocolForm() {
                     onChange={handleInputChangeD2}
                     sx={{
                       "& .MuiOutlinedInput-root": {
-                        borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos rectos
+                        borderRadius: 0,
                         "& fieldset": {
-                          borderWidth: 1, // Puedes ajustar el ancho del borde como desees
+                          borderWidth: 1,
                         },
                       },
                     }}
@@ -562,8 +562,8 @@ export default function ProtocolForm() {
                       onChange={handleDateChange2}
                       sx={{
                         "& .MuiOutlinedInput-root": {
-                          borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos cuadrados
-                        },
+                          borderRadius: 0,
+                        }
                       }}
                     />
                   </LocalizationProvider>
