@@ -113,14 +113,12 @@ function ProtocolView() {
             <Divider />
           </Grid>
           {editorStates.title && (
-            <Editor editorState={editorStates.title} readOnly />
+            <Typography>{protocol.title}</Typography>
           )}
           <Grid fontStyle="italic" color="text.secondary" display="flex">
             {myDate(protocol.publicationDate)}
             <Typography>, &nbsp; por &nbsp;</Typography>
-            {editorStates.autor1 && (
-              <Editor editorState={editorStates.autor1} readOnly />
-            )}
+            <Typography>{protocol.autor1}</Typography>
             <Typography
               fontStyle="italic"
               color="text.secondary"
@@ -129,9 +127,7 @@ function ProtocolView() {
             >
               , &nbsp;
             </Typography>
-            {editorStates.autor2 && (
-              <Editor editorState={editorStates.autor2} readOnly />
-            )}
+            <Typography>{protocol.autor2}</Typography>
           </Grid>
           <Grid mt={3}>
             {editorStates.intro && (

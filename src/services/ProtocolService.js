@@ -28,7 +28,6 @@ class ProtocolService {
     return axios
       .get(USER_API_BASE_URL + "/view/" + id, config)
       .then((response) => {
-        // console.log("Exito!", response.data);
         return Promise.resolve(response.data);
       })
       .catch((err) => {

@@ -22,9 +22,7 @@ export const useProtocolList = () => {
         const element = protocolList[i];
         updatedProtocolArray[i] = {
           id: element.id,
-          title: renderFormatedContent({
-            section: element.title,
-          }).getPlainText(),
+          title: element.title,
           intro: renderFormatedContent({
             section: element.intro,
           }).getPlainText(),

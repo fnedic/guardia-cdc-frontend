@@ -56,11 +56,14 @@ export default function ProtocolForm() {
   const generalInfoRef = useRef(null);
   const proceduresRef = useRef(null);
   const anexxedRef = useRef(null);
+  const [title, setTitle] = useState("");
+  const [autor1, setAutor1] = useState("");
+  const [autor2, setAutor2] = useState("");
   const [group, setGroup] = useState("");
   const [video, setVideo] = useState();
   const [drive, setDrive] = useState();
   const [selectedDate, setSelectedDate] = useState();
-  const [videoTitle, setTitle] = useState();
+  const [videoTitle, setVideoTitle] = useState();
   const [videoLink, setLink] = useState();
   const [videoGroup, setVideoGroup] = useState("");
   const [videoDate, setDate] = useState();
@@ -105,9 +108,9 @@ export default function ProtocolForm() {
       return;
     }
     const protocol = {
-      title: titleRef.current.getContentWithFormat(),
-      autor1: autor1Ref.current.getContentWithFormat(),
-      autor2: autor2Ref.current.getContentWithFormat(),
+      title: title,
+      autor1: autor1,
+      autor2: autor2,
       intro: introRef.current.getContentWithFormat(),
       generalInfo: generalInfoRef.current.getContentWithFormat(),
       procedures: proceduresRef.current.getContentWithFormat(),
@@ -117,6 +120,7 @@ export default function ProtocolForm() {
       publicationDate: selectedDate,
       protocolGroup: group,
     };
+
     ProtocolService.createProtocol(protocol)
       .then((response) => {
         const messageParam = encodeURIComponent(response.data);
@@ -163,6 +167,15 @@ export default function ProtocolForm() {
         setShowSnackbar(true);
       });
   };
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const handleAutor1 = (e) => {
+    setAutor1(e.target.value);
+  };
+  const handleAutor2 = (e) => {
+    setAutor2(e.target.value);
+  };
   const handleDateChange = (e) => {
     setSelectedDate(e);
   };
@@ -182,7 +195,7 @@ export default function ProtocolForm() {
     setVideoGroup(e.target.value);
   };
   const handleInputChangeV2 = (e) => {
-    setTitle(e.target.value);
+    setVideoTitle(e.target.value);
   };
   const handleInputChangeD2 = (e) => {
     setLink(e.target.value);
@@ -259,30 +272,48 @@ export default function ProtocolForm() {
               noValidate
               sx={{ mt: 0, textAlign: "center" }}
             >
-              <Grid container spacing={1}>
-                <Grid item xs={12} marginBottom={"2rem"}>
-                  <Box sx={customBoxStyle}>
-                    <Typography variant="h6" letterSpacing={0.5}>
-                      Título
-                    </Typography>
-                  </Box>
-                  <RichTextEditor
-                    ref={titleRef}
-                    id="title"
-                    onContentChange={handleRichTextChange}
-                  />
-                </Grid>
+              <Grid item xs={12} sm={6} marginBottom={"2rem"}>
+                <Box sx={customBoxStyle}>
+                  <Typography variant="h6" letterSpacing={0.5}>
+                    Título
+                  </Typography>
+                </Box>
+                <TextField
+                  fullWidth
+                  id="title"
+                  value={title}
+                  onChange={handleTitle}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 0,
+                      "& fieldset": {
+                        borderWidth: 1,
+                      },
+                    },
+                  }}
+                />
+              </Grid>
 
+              <Grid container spacing={1}>
                 <Grid item xs={12} sm={6} marginBottom={"2rem"}>
                   <Box sx={customBoxStyle}>
                     <Typography variant="h6" letterSpacing={0.5}>
                       Autor Primario
                     </Typography>
                   </Box>
-                  <RichTextEditor
-                    ref={autor1Ref}
+                  <TextField
+                    fullWidth
                     id="autor1"
-                    onContentChange={handleRichTextChange}
+                    value={autor1}
+                    onChange={handleAutor1}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 0,
+                        "& fieldset": {
+                          borderWidth: 1,
+                        },
+                      },
+                    }}
                   />
                 </Grid>
 
@@ -292,10 +323,19 @@ export default function ProtocolForm() {
                       Autor Secundario
                     </Typography>
                   </Box>
-                  <RichTextEditor
-                    ref={autor2Ref}
+                  <TextField
+                    fullWidth
                     id="autor2"
-                    onContentChange={handleRichTextChange}
+                    value={autor2}
+                    onChange={handleAutor2}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 0,
+                        "& fieldset": {
+                          borderWidth: 1,
+                        },
+                      },
+                    }}
                   />
                 </Grid>
 
@@ -364,9 +404,9 @@ export default function ProtocolForm() {
                     onChange={handleInputChangeV}
                     sx={{
                       "& .MuiOutlinedInput-root": {
-                        borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos rectos
+                        borderRadius: 0,
                         "& fieldset": {
-                          borderWidth: 1, // Puedes ajustar el ancho del borde como desees
+                          borderWidth: 1,
                         },
                       },
                     }}
@@ -386,9 +426,9 @@ export default function ProtocolForm() {
                     onChange={handleInputChangeD}
                     sx={{
                       "& .MuiOutlinedInput-root": {
-                        borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos rectos
+                        borderRadius: 0,
                         "& fieldset": {
-                          borderWidth: 1, // Puedes ajustar el ancho del borde como desees
+                          borderWidth: 1,
                         },
                       },
                     }}
@@ -441,7 +481,7 @@ export default function ProtocolForm() {
                     onChange={handleDateChange}
                     sx={{
                       "& .MuiOutlinedInput-root": {
-                        borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos cuadrados
+                        borderRadius: 0,
                       },
                     }}
                   />
@@ -563,7 +603,7 @@ export default function ProtocolForm() {
                       sx={{
                         "& .MuiOutlinedInput-root": {
                           borderRadius: 0,
-                        }
+                        },
                       }}
                     />
                   </LocalizationProvider>
