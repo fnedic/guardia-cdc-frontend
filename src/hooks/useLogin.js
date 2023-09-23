@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { request, setAuthHeader } from "../helpers/axios_helper";
 import { useSnackBar } from "./useSnackbar";
 
@@ -45,8 +46,18 @@ export const useLogin = (form) => {
       });
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return {
     onLogin,
     SnackBar2,
+    showPassword,
+    handleClickShowPassword,
+    handleMouseDownPassword
   };
 };
