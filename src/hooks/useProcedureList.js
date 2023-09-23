@@ -8,7 +8,6 @@ export const useProcedureList = () => {
   const [procedureArray, setProcedureArray] = useState([]);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedProcedureId, setSelectedProcedureId] = useState(null);
-
   useEffect(() => {
     ProtocolService.procedureList().then((r) => {
         setProcedureList(r.data);
@@ -63,7 +62,7 @@ export const useProcedureList = () => {
 
   const fetchProcedureList = async () => {
     try {
-      const response = await ProtocolService.ProcedureList();
+      const response = await ProtocolService.procedureList();
       const updatedProcedureList = response.data;
       setProcedureList(updatedProcedureList);
     } catch (error) {
