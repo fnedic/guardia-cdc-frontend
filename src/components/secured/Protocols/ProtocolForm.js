@@ -124,8 +124,12 @@ export default function ProtocolForm() {
     ProtocolService.createProtocol(protocol)
       .then((response) => {
         const messageParam = encodeURIComponent(response.data);
+        const tableName =
+          protocol.protocolGroup === "PROCEDIMIENTO"
+            ? "procedure"
+            : "protocol";
         navigate(
-          `/admin/data?table=protocol&status=success&mssg=${messageParam}`
+          `/admin/data?table=${tableName}&status=success&mssg=${messageParam}`
         );
       })
       .catch((error) => {

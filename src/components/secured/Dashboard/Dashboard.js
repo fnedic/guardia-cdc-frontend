@@ -6,6 +6,7 @@ import { ProtocolTable } from './ProtocolTable';
 import { PersonalTable } from "./PersonalTable";
 import { Box } from "@mui/material";
 import { VideoTable } from "./VideoTable";
+import { ProcedureTable } from "./ProcedureTable";
 
 export default function Dashboard() {
   const location = useLocation();
@@ -32,6 +33,8 @@ export default function Dashboard() {
         <ProtocolTable/>
       ) : table === "video" ? (
         <VideoTable/>
+      ) : table === "procedure" ? (
+        <ProcedureTable/>
       ) : null}
       {SnackBar}
     </Box>

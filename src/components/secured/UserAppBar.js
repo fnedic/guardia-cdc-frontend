@@ -100,7 +100,7 @@ export const UserAppBar = ({ userRole }) => {
       navigate("/admin/data?table=video");
     } else if (selectedPage === "Proc. Institucionales") {
       handleCloseNavMenu();
-      navigate("/admin/data?table=procedures");
+      navigate("/admin/data?table=procedure");
     }
   };
   const appBarStyle = {

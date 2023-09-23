@@ -3,6 +3,7 @@ import { getAuthToken } from "../helpers/axios_helper";
 
 const USER_API_BASE_URL = "http://localhost:8080/protocol";
 const VIDEO_API_BASE_URL = "http://localhost:8080/video";
+const PROCEDURE_API_BASE_URL = "http://localhost:8080/procedure";
 
 const token = getAuthToken();
 
@@ -37,10 +38,6 @@ class ProtocolService {
 
   protocolList() {
     return axios.get(USER_API_BASE_URL + "/list", config);
-  }
-
-  procedureList() {
-    return axios.get(USER_API_BASE_URL + "/procedures/list", config);
   }
 
   mostViewedProtocol() {
@@ -80,6 +77,14 @@ class ProtocolService {
 
   deleteVideo(id) {
     return axios.get(VIDEO_API_BASE_URL+"/delete/" + id, config);
+  }
+
+  procedureList() {
+    return axios.get(PROCEDURE_API_BASE_URL + "/list", config);
+  }
+
+  deleteProcedure(id) {
+    return axios.get(PROCEDURE_API_BASE_URL + "/delete/" + id, config);
   }
 }
 

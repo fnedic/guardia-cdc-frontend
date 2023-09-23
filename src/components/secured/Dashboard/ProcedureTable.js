@@ -12,19 +12,19 @@ import {
 } from "@mui/material";
 import { Button } from "@mui/material";
 import { Delete, OpenInBrowser } from "@mui/icons-material";
-import { useProtocolList } from "../../../hooks/useProtocolList";
 import LoadingMain from "../../public/LoadingMain";
+import { useProcedureList } from "../../../hooks/useProcedureList";
 
-export function ProtocolTable() {
+export function ProcedureTable() {
   const {
-    protocolArray,
+    procedureArray,
     deleteDialogOpen,
-    handleCloseDeleteDialog,
     handleDeleteConfirmed,
-    deleteProtocol,
-  } = useProtocolList();
+    handleCloseDeleteDialog,
+    deleteProcedure, 
+  } = useProcedureList();
   
-  if (!protocolArray || protocolArray.length === 0) {
+  if (!procedureArray || procedureArray.length === 0) {
     return <LoadingMain />;
   }
   const columns = [
@@ -37,7 +37,7 @@ export function ProtocolTable() {
       headerAlign: "center",
     },
     {
-      field: "protocolGroup",
+      field: "group",
       headerName: "Grupo",
       width: 180,
       editable: false,
@@ -89,7 +89,7 @@ export function ProtocolTable() {
           <Button
             sx={{ backgroundColor: "#ad1421", borderRadius: 0 }}
             endIcon={<Delete />}
-            onClick={() => deleteProtocol(params.id)}
+            onClick={() => deleteProcedure(params.id)}
           >
             Borrar
           </Button>
@@ -140,7 +140,7 @@ export function ProtocolTable() {
               color: "#69445d",
             },
           }}
-          rows={protocolArray}
+          rows={procedureArray}
           columns={[...columns]}
           initialState={{
             pagination: { paginationModel: { pageSize: 10 } },
