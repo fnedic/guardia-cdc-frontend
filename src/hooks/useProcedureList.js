@@ -2,40 +2,40 @@ import { useEffect, useState } from "react";
 import ProtocolService from "../services/ProtocolService.js";
 import { convertFromRaw } from "draft-js";
 
-export const useProtocolList = () => {
-  // LOGIC FOR PROTOCOL RENDERING ////////////////////////////////////////////////
-  const [protocolList, setProtocolList] = useState();
-  const [protocolArray, setProtocolArray] = useState([]);
+export const useProcedureList = () => {
+  // LOGIC FOR PROCEDURE RENDERING ////////////////////////////////////////////////
+  const [procedureList, setProcedureList] = useState();
+  const [procedureArray, setProcedureArray] = useState([]);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [selectedProtocolId, setSelectedProtocolId] = useState(null);
+  const [selectedProcedureId, setSelectedProcedureId] = useState(null);
 
   useEffect(() => {
-    ProtocolService.protocolList().then((r) => {
-      setProtocolList(r.data);
+    ProtocolService.procedureList().then((r) => {
+        setProcedureList(r.data);
     });
   }, []);
 
   useEffect(() => {
-    if (protocolList) {
-      const updatedProtocolArray = [...protocolArray];
-      for (let i = 0; i < protocolList.length; i++) {
-        const element = protocolList[i];
-        updatedProtocolArray[i] = {
+    if (procedureList) {
+      const updatedProcedureArray = [...procedureArray];
+      for (let i = 0; i < procedureList.length; i++) {
+        const element = procedureList[i];
+        updatedProcedureArray[i] = {
           id: element.id,
           title: element.title,
           intro: renderFormatedContent({
             section: element.intro,
           }).getPlainText(),
-          protocolGroup: element.protocolGroup,
+          group: element.protocolGroup,
           publicationDate: myDate(element.publicationDate),
           views: element.views,
           videoLink: element.videoLink,
         };
-        setProtocolArray(updatedProtocolArray);
+        setProcedureArray(updatedProcedureArray);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [protocolList]);
+  }, [procedureList]);
 
   function renderFormatedContent({ section }) {
     try {
@@ -61,24 +61,24 @@ export const useProtocolList = () => {
   }
   ///////////////////////////////////////////////////////////////////////////////
 
-  const fetchProtocolList = async () => {
+  const fetchProcedureList = async () => {
     try {
-      const response = await ProtocolService.protocolList();
-      const updatedProtocolList = response.data;
-      setProtocolList(updatedProtocolList);
+      const response = await ProtocolService.ProcedureList();
+      const updatedProcedureList = response.data;
+      setProcedureList(updatedProcedureList);
     } catch (error) {
-      console.error("Error fetching protocol list: ", error);
+      console.error("Error fetching Procedure list: ", error);
     }
   };
 
-  const deleteProtocol = (id) => {
-    setSelectedProtocolId(id);
+  const deleteProcedure = (id) => {
+    setSelectedProcedureId(id);
     setDeleteDialogOpen(true);
   };
 
   const handleDeleteConfirmed = async () => {
-    await ProtocolService.deleteProtocol(selectedProtocolId);
-    await fetchProtocolList();
+    await ProtocolService.deleteProcedure(selectedProcedureId);
+    await fetchProcedureList();
     setDeleteDialogOpen(false);
   };
 
@@ -86,10 +86,10 @@ export const useProtocolList = () => {
     setDeleteDialogOpen(false);
   };
   return {
-    protocolArray,
+    procedureArray,
     deleteDialogOpen,
     myDate,
-    deleteProtocol,
+    deleteProcedure,
     handleDeleteConfirmed,
     handleCloseDeleteDialog,
   };

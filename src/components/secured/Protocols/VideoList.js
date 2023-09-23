@@ -177,7 +177,7 @@ export default function VideoList() {
                   textAlign: "center",
                   mx: "auto",
                   p: 1,
-                  background: "#f4f4f4",
+                  background: "#e3e3e3",
                   maxWidth: 1000,
                 }}
               >
@@ -186,7 +186,7 @@ export default function VideoList() {
                     <Grid
                       item
                       xs={12}
-                      sm={2}
+                      sm={3}
                       sx={{
                         display: "flex",
                         alignItems: "center",
@@ -198,7 +198,7 @@ export default function VideoList() {
                     <Grid
                       item
                       xs={12}
-                      sm={6}
+                      sm={5}
                       sx={{
                         display: "flex",
                         alignItems: "center",
