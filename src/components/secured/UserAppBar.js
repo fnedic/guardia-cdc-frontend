@@ -1,7 +1,6 @@
 import React from "react";
 import { setAuthHeader } from "../../helpers/axios_helper";
 import { useNavigate } from "react-router-dom";
-
 import {
   AppBar,
   Avatar,
@@ -83,7 +82,7 @@ export const UserAppBar = ({ userRole }) => {
       navigate("/videos");
     } else if (selectedPage === "Proc. Institucionales") {
       handleCloseNavMenu();
-      navigate("/protocol/list");
+      navigate("/procedure/list");
     }
   };
   const handleAdminPageClick = (selectedPage) => {

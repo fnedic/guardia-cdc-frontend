@@ -39,6 +39,10 @@ class ProtocolService {
     return axios.get(USER_API_BASE_URL + "/list", config);
   }
 
+  procedureList() {
+    return axios.get(USER_API_BASE_URL + "/procedures/list", config);
+  }
+
   mostViewedProtocol() {
     return axios.get(USER_API_BASE_URL + "/mostviewed", config);
   }

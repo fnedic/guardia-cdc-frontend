@@ -19,6 +19,7 @@ import { Home } from './components/secured/Home';
 import { DashboardHome } from "./components/secured/Dashboard/DashboardHome";
 import Dashboard from "./components/secured/Dashboard/Dashboard";
 import UpdateVideo from "./components/secured/Dashboard/UpdateVideo";
+import ProceduresList from "./components/secured/Protocols/ProceduresList";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -56,6 +57,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/videos" element={<VideoList />} />
           <Route path="/protocol/list" element={<ProtocolList />} />
+          <Route path="/procedure/list" element={<ProceduresList />} />
           <Route path="/protocol/view/:id" element={<ProtocolView />} />
           <Route path="/profile" element={<Profile />} />
         </Route>

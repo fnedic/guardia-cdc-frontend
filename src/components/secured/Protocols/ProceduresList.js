@@ -16,9 +16,9 @@ import {
   createTheme,
 } from "@mui/material";
 import { Book, KeyboardArrowRight, Search } from "@mui/icons-material";
-import { useProtocolList } from "../../../hooks/useProtocolList";
 import { ThemeProvider } from "@mui/material/styles";
 import LoadingMain from './../../public/LoadingMain';
+import { useProcedureList } from "../../../hooks/useProcedureList";
 
 const customTheme = createTheme({
   palette: {
@@ -28,29 +28,30 @@ const customTheme = createTheme({
   },
 });
 
-export default function ProtocolList() {
-  const { protocolArray } = useProtocolList();
+export default function ProceduresList() {
+  const { procedureArray } = useProcedureList();
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(1);
-  if (!protocolArray || protocolArray.length === 0) {
+
+  if (!procedureArray || procedureArray.length === 0) {
     return <LoadingMain />;
   }
-  const protocolsPerPage = 6;
-  const filteredProtocols = protocolArray.filter(
-    (protocol) =>
-      protocol.title.toLowerCase().includes(searchText.toLowerCase()) ||
-      protocol.protocolGroup.toLowerCase().includes(searchText.toLowerCase()) ||
-      protocol.publicationDate.toLowerCase().includes(searchText.toLowerCase())
+  const procedurePerPage = 6;
+  const filteredProcedures = procedureArray.filter(
+    (procedure) =>
+    procedure.title.toLowerCase().includes(searchText.toLowerCase()) ||
+    procedure.protocolGroup.toLowerCase().includes(searchText.toLowerCase()) ||
+    procedure.publicationDate.toLowerCase().includes(searchText.toLowerCase())
   );
 
   function generate() {
-    const startIndex = (page - 1) * protocolsPerPage;
-    const endIndex = startIndex + protocolsPerPage;
-    const currentPageProtocols = filteredProtocols.slice(startIndex, endIndex);
+    const startIndex = (page - 1) * procedurePerPage;
+    const endIndex = startIndex + procedurePerPage;
+    const currentPageProtocols = filteredProcedures.slice(startIndex, endIndex);
 
-    return currentPageProtocols.map((protocol) => (
+    return currentPageProtocols.map((procedure) => (
       <Box>
-        <ListItem key={protocol.id}>
+        <ListItem key={procedure.id}>
           <Box sx={{ flexGrow: 1, overflow: "hidden" }}>
             <Paper
               elevation={0}
@@ -64,7 +65,7 @@ export default function ProtocolList() {
               }}
             >
               <Stack direction="row" alignItems="center">
-                <IconButton href={`view/${protocol.id}`}>
+                <IconButton href={`../protocol/view/${procedure.id}`}>
                   <Avatar sx={{ backgroundColor: "#c6abae" }}>
                     <Book />
                   </Avatar>
@@ -80,7 +81,7 @@ export default function ProtocolList() {
                       justifyContent: "left",
                     }}
                   >
-                    <Typography>{protocol.protocolGroup} </Typography>
+                    <Typography>Procedimiento Institucional </Typography>
                   </Grid>
                   <Grid
                     item
@@ -92,7 +93,7 @@ export default function ProtocolList() {
                       justifyContent: "left",
                     }}
                   >
-                    <Typography>{protocol.title}</Typography>
+                    <Typography>{procedure.title}</Typography>
                   </Grid>
                   <Grid
                     item
@@ -104,10 +105,10 @@ export default function ProtocolList() {
                       justifyContent: "center",
                     }}
                   >
-                    <Typography>{protocol.publicationDate}</Typography>
+                    <Typography>{procedure.publicationDate}</Typography>
                   </Grid>
                 </Grid>
-                <IconButton href={`view/${protocol.id}`}>
+                <IconButton href={`../protocol/view/${procedure.id}`}>
                   <Avatar>
                     <KeyboardArrowRight />
                   </Avatar>
@@ -213,7 +214,7 @@ export default function ProtocolList() {
           </Grid>
           <Box sx={{ display:"flex", justifyContent:"center" }}>
             <Pagination
-              count={Math.ceil(filteredProtocols.length / protocolsPerPage)}
+              count={Math.ceil(filteredProcedures.length / procedurePerPage)}
               page={page}
               onChange={(event, value) => {
                 setPage(value);
