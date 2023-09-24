@@ -1,4 +1,4 @@
-import UserService from "../services/UserService.js"
+import UserService from "../services/axios/UserService.js"
 
 export const UseUser = async () => {
     try {

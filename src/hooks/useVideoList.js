@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ProtocolService from "../services/ProtocolService.js";
+import ProtocolService from "../services/axios/ProtocolService.js";
 import { useNavigate } from "react-router-dom";
 
 export const useVideoList = () => {

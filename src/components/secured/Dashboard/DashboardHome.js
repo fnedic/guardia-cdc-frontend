@@ -11,7 +11,7 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
-import { setAuthHeader } from "../../../helpers/axios_helper";
+import { setAuthHeader } from "../../../services/axios/axios_helper.js";
 
 export const DashboardHome = () => {
   

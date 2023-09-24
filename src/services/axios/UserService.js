@@ -1,5 +1,5 @@
-import axios from "axios";
-import { getAuthToken } from "../helpers/axios_helper";
+import axios from "./axios_config";
+import { getAuthToken } from "./axios_helper";
 const USER_API_BASE_URL = "http://localhost:8080/cdc/user";
 
 const token = getAuthToken();

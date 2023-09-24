@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import UserService from "../services/UserService.js";
+import UserService from "../services/axios/UserService.js";
 import { useNavigate } from "react-router-dom";
 
 export const useUserList = () => {

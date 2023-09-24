@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./axios_config";
 
 export const getAuthToken = () => {
   return window.localStorage.getItem("auth_token");

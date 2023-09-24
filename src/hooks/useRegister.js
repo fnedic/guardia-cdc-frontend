@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { request, setAuthHeader } from "../helpers/axios_helper";
+import { request, setAuthHeader } from "../services/axios/axios_helper.js";
 import { useEffect, useState } from "react";
 
 export const useRegister = (form) => {
