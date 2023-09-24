@@ -1,5 +1,5 @@
 import React from "react";
-import { setAuthHeader } from "../../helpers/axios_helper";
+import { setAuthHeader } from "../../services/axios/axios_helper.js";
 import { useNavigate } from "react-router-dom";
 import {
   AppBar,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import UserService from "../../../services/UserService.js";
+import UserService from "../../../services/axios/UserService.js";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
