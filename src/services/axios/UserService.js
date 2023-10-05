@@ -33,6 +33,10 @@ class UserService {
   getUser() {
     return axios.get(USER_API_BASE_URL + "/role", config);
   }
+
+  getProfile() {
+    return axios.get(USER_API_BASE_URL + "/profile", config);
+  }
 }
 const instance = new UserService();
 export default instance;

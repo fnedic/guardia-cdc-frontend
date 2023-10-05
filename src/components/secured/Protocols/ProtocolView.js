@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -29,7 +29,7 @@ function ProtocolView() {
   const { editorStates, protocol, ImproveViews } = useProtocolView();
   const { myDate } = useProtocolList();
 
-  const gradientColors = "linear-gradient(18deg, #283583 30%, #799A3D 85%)";
+  const gradientColors = "linear-gradient(18deg, #8f5c7e 30%, #cecece 85%)";
 
   const sidebar = {
     title: "About",
@@ -59,6 +59,10 @@ function ProtocolView() {
     ImproveViews();
   }
 
+  useEffect(() => {
+    console.log()
+  },[protocol.intro])
+
   return (
     <Container component="main" sx={{ mt: 5, mb: 5 }}>
       {mostViewedProtocol && (
@@ -78,8 +82,9 @@ function ProtocolView() {
                   color: "white",
                   padding: "1.5rem",
                   backgroundImage: gradientColors,
-                  borderRadius: "0.8rem",
+                  borderRadius: 0,
                   opacity: "0.95",
+                  boxShadow:0
                 }}
               >
                 <CardContent
@@ -97,7 +102,7 @@ function ProtocolView() {
                   <Typography variant="subtitle1" paragraph>
                     {mostViewedProtocol.intro}...
                   </Typography>
-                  <Button href={`${mostViewedProtocol.id}`}>
+                  <Button href={`${mostViewedProtocol.id}`} sx={{ color:"#cecece"}}>
                     Continuar leyendo...
                   </Button>
                 </CardContent>
@@ -112,12 +117,12 @@ function ProtocolView() {
             {protocol.protocolGroup}
             <Divider />
           </Grid>
-          {editorStates.title && (
-            <Typography>{protocol.title}</Typography>
-          )}
+          <Grid mb={3} mt={3}>
+            <Typography variant="h6">{protocol.title}</Typography>
+          </Grid>
           <Grid fontStyle="italic" color="text.secondary" display="flex">
             {myDate(protocol.publicationDate)}
-            <Typography>, &nbsp; por &nbsp;</Typography>
+            <Typography>,&nbsp;por&nbsp;</Typography>
             <Typography>{protocol.autor1}</Typography>
             <Typography
               fontStyle="italic"
@@ -125,7 +130,7 @@ function ProtocolView() {
               component="div"
               display="flex"
             >
-              , &nbsp;
+            ,&nbsp;
             </Typography>
             <Typography>{protocol.autor2}</Typography>
           </Grid>
