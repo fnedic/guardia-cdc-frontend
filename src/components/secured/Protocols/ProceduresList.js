@@ -15,7 +15,7 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
-import { Book, KeyboardArrowRight, Search } from "@mui/icons-material";
+import { KeyboardArrowRight, Newspaper, Search } from "@mui/icons-material";
 import { ThemeProvider } from "@mui/material/styles";
 import LoadingMain from './../../public/LoadingMain';
 import { useProcedureList } from "../../../hooks/useProcedureList";
@@ -67,7 +67,7 @@ export default function ProceduresList() {
               <Stack direction="row" alignItems="center">
                 <IconButton href={`../protocol/view/${procedure.id}`}>
                   <Avatar sx={{ backgroundColor: "#c6abae" }}>
-                    <Book />
+                    <Newspaper />
                   </Avatar>
                 </IconButton>
                 <Grid container>
