@@ -129,9 +129,9 @@ function UpdateUser() {
                     onChange={handleChange}
                     sx={{
                       "& .MuiOutlinedInput-root": {
-                        borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos rectos
+                        borderRadius: 0,
                         "& fieldset": {
-                          borderWidth: 1, // Puedes ajustar el ancho del borde como desees
+                          borderWidth: 1,
                         },
                       },
                     }}
