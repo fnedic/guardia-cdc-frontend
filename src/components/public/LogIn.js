@@ -41,7 +41,6 @@ const inputStyle = {
     },
   },
 };
-
 export default function Login() {
   const { handleChange, form } = useForm(initialForm);
   const { setSnackbarMessage, setShowSnackbar, setSeverity, SnackBar } =
