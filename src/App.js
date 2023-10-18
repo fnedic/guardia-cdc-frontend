@@ -15,8 +15,7 @@ import LoadingPage from "./components/public/LoadingPage";
 import { UserAppBar } from "./components/secured/UserAppBar";
 import { ProtectedRoute } from "./constants/ProtectedRoute";
 import { Landing } from "./components/secured/Landing";
-import { Home } from './components/secured/Home';
-import { DashboardHome } from "./components/secured/Dashboard/DashboardHome";
+import { Home } from "./components/secured/Home";
 import Dashboard from "./components/secured/Dashboard/Dashboard";
 import UpdateVideo from "./components/secured/Dashboard/UpdateVideo";
 import ProceduresList from "./components/secured/Protocols/ProceduresList";
@@ -54,7 +53,7 @@ function App() {
             />
           }
         >
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<Home userRole={user.role}/>} />
           <Route path="/videos" element={<VideoList />} />
           <Route path="/protocol/list" element={<ProtocolList />} />
           <Route path="/procedure/list" element={<ProceduresList />} />
@@ -69,7 +68,6 @@ function App() {
             />
           }
         >
-          <Route path="/admin" element={<DashboardHome />} />
           <Route path="/admin/data" element={<Dashboard />} />
           <Route path="/protocol/upload" element={<ProtocolForm />} />
           <Route path="/user/update/:id" element={<UpdateUser />} />
