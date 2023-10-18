@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { setAuthHeader } from "../../services/axios/axios_helper.js";
 
-export const Home = () => {
+export const Home = ({ userRole }) => {
   
   const handleLogout = () => {
     setAuthHeader(null);
@@ -80,7 +80,7 @@ export const Home = () => {
               }}
             >
               <Grid>
-                <Typography variant="poster">¡Bienvenido de nuevo!</Typography>
+                {userRole === "ADMIN" ? (<Typography variant="poster">¡Bienvenido de nuevo Admin!</Typography>) : (<Typography variant="poster">¡Bienvenido de nuevo!</Typography>)}
                 <Typography variant="h3">¿Que deseas hacer?</Typography>
               </Grid>
               <Box>
