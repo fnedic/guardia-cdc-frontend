@@ -30,6 +30,7 @@ export const useRegister = (form) => {
     })
       .then((response) => {
         if (response.status === 201) {
+          setAuthHeader(null);
           navigate("/login?status=registered");
         }
       })
