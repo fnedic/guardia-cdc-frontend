@@ -1,58 +1,56 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import * as React from "react";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
+import { useSidebar } from "../../../hooks/useSidebar";
+import { Avatar, IconButton, Skeleton } from "@mui/material";
+import { CloudDownload } from "@mui/icons-material";
 
-function Sidebar(props) {
-  const { description, social, title } = props;
+function Sidebar(driveLink) {
+  const { notice } = useSidebar();
 
   return (
     <Grid item xs={12} md={12} ml={4} mt={3}>
-      <Paper elevation={0} sx={{ p: 2, bgcolor: 'grey.200' }}>
+      <Paper elevation={0} sx={{ p: 2, bgcolor: "grey.200", borderRadius:0 }}>
         <Typography variant="h6" gutterBottom>
-          {title}
+          Aviso!
         </Typography>
-        <Typography>{description}</Typography>
+        <Typography>
+          {notice ? <Typography>{notice.title}</Typography> : <Skeleton variant="" width={300} height={100} />}
+        </Typography>
       </Paper>
-      <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
-        Social
-      </Typography>
-      {social.map((network) => (
-        <Link
-          display="block"
-          variant="body1"
-          href="#"
-          key={network.name}
-          sx={{ mb: 0.5 }}
-        >
-          <Stack direction="row" spacing={1} alignItems="center">
-            <network.icon />
-            <span>{network.name}</span>
-          </Stack>
-        </Link>
-      ))}
+      <Grid
+            item
+            xs={12}
+            mt={5}
+            ml={3}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "left",
+            }}
+          >
+            <IconButton
+              href={`${driveLink}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Avatar sx={{ backgroundColor: "#283583", color: "#ffffff" }}>
+                <CloudDownload />
+              </Avatar>
+            </IconButton>
+            <Link
+              href={`${driveLink}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              underline="hover"
+            >
+              Descargar protocolo
+            </Link>
+          </Grid>
     </Grid>
   );
 }
-
-Sidebar.propTypes = {
-  archives: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  description: PropTypes.string.isRequired,
-  social: PropTypes.arrayOf(
-    PropTypes.shape({
-      icon: PropTypes.elementType,
-      name: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  title: PropTypes.string.isRequired,
-};
 
 export default Sidebar;

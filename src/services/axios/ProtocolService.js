@@ -4,6 +4,7 @@ import { getAuthToken } from "../axios/axios_helper.js";
 const USER_API_BASE_URL = "http://localhost:8080/protocol";
 const VIDEO_API_BASE_URL = "http://localhost:8080/video";
 const PROCEDURE_API_BASE_URL = "http://localhost:8080/procedure";
+const NOTICE_API_BASE_URL = "http://localhost:8080/notice";
 
 const token = getAuthToken();
 
@@ -64,19 +65,19 @@ class ProtocolService {
   }
 
   videoList() {
-    return axios.get(VIDEO_API_BASE_URL+"/get", config);
+    return axios.get(VIDEO_API_BASE_URL + "/get", config);
   }
 
   getVideoById(id) {
-    return axios.get(VIDEO_API_BASE_URL+"/update/"+id, config);
+    return axios.get(VIDEO_API_BASE_URL + "/update/" + id, config);
   }
 
   updateVideo(id, video) {
-    return axios.put(VIDEO_API_BASE_URL+"/update/"+id, video, config);
+    return axios.put(VIDEO_API_BASE_URL + "/update/" + id, video, config);
   }
 
   deleteVideo(id) {
-    return axios.get(VIDEO_API_BASE_URL+"/delete/" + id, config);
+    return axios.get(VIDEO_API_BASE_URL + "/delete/" + id, config);
   }
 
   procedureList() {
@@ -85,6 +86,20 @@ class ProtocolService {
 
   deleteProcedure(id) {
     return axios.get(PROCEDURE_API_BASE_URL + "/delete/" + id, config);
+  }
+  createNotice(notice) {
+    return axios
+      .post(NOTICE_API_BASE_URL + "/create", notice, config)
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }
+
+  getNotice() {
+    return axios.get(NOTICE_API_BASE_URL + "/get/", config);
   }
 }
 

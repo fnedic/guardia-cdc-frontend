@@ -67,6 +67,7 @@ export default function ProtocolForm() {
   const [videoLink, setLink] = useState();
   const [videoGroup, setVideoGroup] = useState("");
   const [videoDate, setDate] = useState();
+  const [notice, setNotice] = useState("");
 
   const navigate = useNavigate();
   const [selectedForm, setSelectedForm] = useState("protocol");
@@ -125,9 +126,7 @@ export default function ProtocolForm() {
       .then((response) => {
         const messageParam = encodeURIComponent(response.data);
         const tableName =
-          protocol.protocolGroup === "PROCEDIMIENTO"
-            ? "procedure"
-            : "protocol";
+          protocol.protocolGroup === "PROCEDIMIENTO" ? "procedure" : "protocol";
         navigate(
           `/admin/data?table=${tableName}&status=success&mssg=${messageParam}`
         );
@@ -171,6 +170,28 @@ export default function ProtocolForm() {
         setShowSnackbar(true);
       });
   };
+  const handleNoticeSubmit = (e) => {
+    e.preventDefault();
+    if (notice === "") {
+      setSnackbarMessage("Algunos campos se encuentran vacíos!");
+      setSeverity("warning");
+      setShowSnackbar(true);
+      return;
+    }
+    const notice2 = {
+      title: notice,
+    };
+    ProtocolService.createNotice(notice2)
+     .then((response) => {
+        const messageParam = encodeURIComponent(response.data);
+        navigate(`/admin/data?table=protocol&status=success&mssg=${messageParam}`);
+      })
+     .catch((error) => {
+        setSnackbarMessage(error.response.data.message);
+        setSeverity("error");
+        setShowSnackbar(true);
+      });
+  };
   const handleTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -203,6 +224,9 @@ export default function ProtocolForm() {
   };
   const handleInputChangeD2 = (e) => {
     setLink(e.target.value);
+  };
+  const handleNotice = (e) => {
+    setNotice(e.target.value);
   };
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -258,6 +282,16 @@ export default function ProtocolForm() {
                     />
                   }
                   label="Video"
+                />
+                <FormControlLabel
+                  control={
+                    <Radio
+                      checked={selectedForm === "notice"}
+                      onChange={handleFormChange}
+                      value="notice"
+                    />
+                  }
+                  label="Aviso"
                 />
               </FormGroup>
             </Box>
@@ -628,6 +662,56 @@ export default function ProtocolForm() {
                     Publicar
                   </Button>
                 </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        )}
+        {selectedForm === "notice" && (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Box component="form" noValidate sx={{ textAlign: "center" }}>
+              <Grid item xs={12} sm={6}>
+                <Box mb={5}>
+                  <Box sx={customBoxStyle}>
+                    <Typography variant="h6" letterSpacing={0.5}>
+                      Aviso
+                    </Typography>
+                  </Box>
+                  <TextField
+                    fullWidth
+                    id="notice"
+                    value={notice}
+                    onChange={handleNotice}
+                    sx={{
+                      minWidth:600,
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 0,
+                        "& fieldset": {
+                          borderWidth: 1,
+                        },
+                      },
+                    }}
+                  />
+                </Box>
+                <Button
+                  type="button"
+                  variant="contained"
+                  endIcon={<Send />}
+                  disableElevation
+                  sx={{
+                    backgroundColor: "#6d7dac",
+                    boxShadow: "0",
+                    borderRadius: 0,
+                  }}
+                  onClick={handleNoticeSubmit}
+                >
+                  Publicar
+                </Button>
               </Grid>
             </Box>
           </Box>

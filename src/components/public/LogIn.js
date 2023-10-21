@@ -125,7 +125,7 @@ export default function Login() {
               />
             </FormControl>
             <Button
-              type="button"
+              type="submit"
               fullWidth
               variant="contained"
               onClick={onLogin}

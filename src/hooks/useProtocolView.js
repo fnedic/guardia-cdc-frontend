@@ -72,9 +72,22 @@ export const useProtocolView = () => {
     }, [])
   }
   ////////////////////////////////////////////////////////////////////////////////
+  // LOGIC FOR SIDEBAR CONTENT //////////////////////////////////////////////////
+
+  const [notice, setNotice] = useState();
+
+  useEffect(() => {
+    ProtocolService.getNotice()
+    .then((r) => {
+      setNotice(r.data);
+    })
+    .catch((e) => {});
+  }, []);
+  ////////////////////////////////////////////////////////////////////////////////
   return {
     editorStates,
     protocol,
+    notice,
     renderFormatedContent,
     ImproveViews
   };

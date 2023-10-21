@@ -1,28 +1,21 @@
-import { React, useEffect } from "react";
+import { React } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import {
-  Avatar,
   Badge,
   Button,
   Container,
   Divider,
-  IconButton,
-  Link,
 } from "@mui/material";
 import { Editor } from "draft-js";
 import { useProtocolView } from "../../../hooks/useProtocolView.js";
 import { useMostViewedProtocol } from "../../../hooks/useMostViewedProtocol.js";
 import { useProtocolList } from "../../../hooks/useProtocolList.js";
 
-import GitHubIcon from "@mui/icons-material/GitHub";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import Sidebar from "./Sidebar.js";
-import { CloudDownload } from "@mui/icons-material";
 
 function ProtocolView() {
   const { mostViewedProtocol } = useMostViewedProtocol();
@@ -31,37 +24,9 @@ function ProtocolView() {
 
   const gradientColors = "linear-gradient(18deg, #8f5c7e 30%, #cecece 85%)";
 
-  const sidebar = {
-    title: "About",
-    description:
-      "Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.",
-    archives: [
-      { title: "March 2020", url: "#" },
-      { title: "February 2020", url: "#" },
-      { title: "January 2020", url: "#" },
-      { title: "November 1999", url: "#" },
-      { title: "October 1999", url: "#" },
-      { title: "September 1999", url: "#" },
-      { title: "August 1999", url: "#" },
-      { title: "July 1999", url: "#" },
-      { title: "June 1999", url: "#" },
-      { title: "May 1999", url: "#" },
-      { title: "April 1999", url: "#" },
-    ],
-    social: [
-      { name: "GitHub", icon: GitHubIcon },
-      { name: "Twitter", icon: TwitterIcon },
-      { name: "Facebook", icon: FacebookIcon },
-    ],
-  };
-
   if (protocol) {
     ImproveViews();
   }
-
-  useEffect(() => {
-    console.log()
-  },[protocol.intro])
 
   return (
     <Container component="main" sx={{ mt: 5, mb: 5 }}>
@@ -163,41 +128,7 @@ function ProtocolView() {
           </Grid>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Sidebar
-            title={sidebar.title}
-            description={sidebar.description}
-            archives={sidebar.archives}
-            social={sidebar.social}
-          />
-          <Grid
-            item
-            xs={12}
-            mt={5}
-            ml={3}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "left",
-            }}
-          >
-            <IconButton
-              href={`${protocol.driveLink}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Avatar sx={{ backgroundColor: "#283583", color: "#ffffff" }}>
-                <CloudDownload />
-              </Avatar>
-            </IconButton>
-            <Link
-              href={`${protocol.driveLink}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              underline="hover"
-            >
-              Descargar protocolo
-            </Link>
-          </Grid>
+          <Sidebar driveLink={protocol.driveLink}/>
         </Grid>
       </Grid>
     </Container>
