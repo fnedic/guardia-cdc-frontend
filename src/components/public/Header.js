@@ -1,25 +1,36 @@
 import React from "react";
+import logo from "../public/images/logo-cdc-header.png";
+import { Box, Button } from "@mui/material";
 
 export const Header = () => {
-
   const headerStyle = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "9rem",
+    height: "8rem",
     width: "100%",
   };
 
-  const imgStyle = {
-    maxWidth: "100%",
-  };
-
   return (
-    <header style={headerStyle}>
-      <img style={imgStyle}
-        src="https://www.clinicadecuyosa.org/wp-content/uploads/2022/10/logo-cdc-header.svg"
-        alt="Imagen centrada"
-      />
-    </header>
+    <Button
+      disableRipple
+      sx={{ "&:hover": { backgroundColor: "inherit" } }}
+      style={headerStyle}
+      href="/home"
+    >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundImage: `url(${logo})`,
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          width: "200%",
+          height: "200%",
+        }}
+      ></Box>
+    </Button>
   );
 };

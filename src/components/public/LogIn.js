@@ -2,34 +2,74 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Key } from "@mui/icons-material";
-import { CssBaseline } from "@mui/material";
+import { Key, Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  CssBaseline,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+} from "@mui/material";
+import { useForm } from "../../hooks/useForm";
+import { useLogin } from "../../hooks/useLogin";
+import { useLocation } from "react-router-dom";
+import { useSnackBar } from "../../hooks/useSnackbar";
 
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#283583",
+      main: "#69445d",
     },
   },
 });
+const initialForm = {
+  email: "",
+  password: "",
+};
+const inputStyle = {
+  "& .MuiOutlinedInput-root": {
+    borderRadius: 0,
+    "& fieldset": {
+      borderWidth: 1,
+    },
+  },
+};
+export default function Login() {
+  const { handleChange, form } = useForm(initialForm);
+  const { setSnackbarMessage, setShowSnackbar, setSeverity, SnackBar } =
+    useSnackBar();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const status = queryParams.get("status");
+  const {
+    onLogin,
+    SnackBar2,
+    showPassword,
+    handleMouseDownPassword,
+    handleClickShowPassword,
+  } = useLogin(form);
 
-export default function LogIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  React.useEffect(() => {
+    if (status === "registered") {
+      setSnackbarMessage(
+        "Usuario registrado, aguarde autorización del administrador para iniciar sesión!"
+      );
+      setSeverity("info");
+      setShowSnackbar(true);
+    } else if (status === "rejected") {
+      setSnackbarMessage("Aun no tiene permisos para ingresar!");
+      setSeverity("error");
+      setShowSnackbar(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
 
   return (
     <ThemeProvider theme={customTheme}>
@@ -44,15 +84,10 @@ export default function LogIn() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ bgcolor: "#283583", width: 50, height: 50 }}>
+          <Avatar sx={{ bgcolor: "#6d7dac", width: 50, height: 50 }}>
             <Key sx={{ fontSize: 30 }} />
           </Avatar>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -62,52 +97,57 @@ export default function LogIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleChange}
+              sx={inputStyle}
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Contraseña"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              sx={{ color: "#6c737f" }}
-              control={<Checkbox value="remember" />}
-              label="Recuérdame"
-            />
+            <FormControl fullWidth>
+              <InputLabel>Contraseña</InputLabel>
+              <OutlinedInput
+                required
+                fullWidth
+                label="Contraseñ"
+                id="password"
+                name="password"
+                onChange={handleChange}
+                sx={{ borderRadius: 0 }}
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              onClick={onLogin}
+              disableElevation
               sx={{
                 mt: 3,
                 mb: 1,
-                backgroundColor: "#799A3D",
+                backgroundColor: "#6d7dac",
                 boxShadow: "0",
-                borderRadius: 1,
+                borderRadius: 0,
+                width: "100%",
               }}
             >
               <Typography>Iniciar Sesión</Typography>
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2" color="#283583e0">
-                  Olvide mi contraseña
-                </Link>
-              </Grid>
               <Grid item display={"flex"}>
                 <Typography variant="body2" color="#6c737f">
                   No tienes una cuenta?
                 </Typography>
                 &nbsp;
-                <Link
-                  href="http://localhost:3000/register"
-                  variant="body2"
-                  color="#283583e0"
-                >
+                <Link href="/register" variant="body2" color="#283583e0">
                   {"Crea una!"}
                 </Link>
               </Grid>
@@ -115,6 +155,8 @@ export default function LogIn() {
           </Box>
         </Box>
       </Container>
+      {SnackBar2}
+      {SnackBar}
     </ThemeProvider>
   );
 }
