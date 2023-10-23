@@ -19,6 +19,7 @@ import { Home } from "./components/secured/Home";
 import Dashboard from "./components/secured/Dashboard/Dashboard";
 import UpdateVideo from "./components/secured/Dashboard/UpdateVideo";
 import ProceduresList from "./components/secured/Protocols/ProceduresList";
+import NotFound from "./components/public/NotFound";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -45,6 +46,7 @@ function App() {
         <Route path="/landing" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<NotFound/>} />
         <Route
           element={
             <ProtectedRoute
@@ -53,12 +55,13 @@ function App() {
             />
           }
         >
-          <Route path="/home" element={<Home userRole={user.role}/>} />
+          <Route path="/home" element={<Home userRole={user.role} />} />
           <Route path="/videos" element={<VideoList />} />
           <Route path="/protocol/list" element={<ProtocolList />} />
           <Route path="/procedure/list" element={<ProceduresList />} />
           <Route path="/protocol/view/:id" element={<ProtocolView />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<NotFound/>} />
         </Route>
         <Route
           element={
@@ -72,6 +75,7 @@ function App() {
           <Route path="/protocol/upload" element={<ProtocolForm />} />
           <Route path="/user/update/:id" element={<UpdateUser />} />
           <Route path="/video/update/:id" element={<UpdateVideo />} />
+          <Route path="*" element={<NotFound/>} />
         </Route>
       </Routes>
       <Footer />

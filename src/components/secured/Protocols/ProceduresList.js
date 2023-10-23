@@ -39,9 +39,7 @@ export default function ProceduresList() {
   const procedurePerPage = 6;
   const filteredProcedures = procedureArray.filter(
     (procedure) =>
-    procedure.title.toLowerCase().includes(searchText.toLowerCase()) ||
-    procedure.protocolGroup.toLowerCase().includes(searchText.toLowerCase()) ||
-    procedure.publicationDate.toLowerCase().includes(searchText.toLowerCase())
+    procedure.title.toLowerCase().includes(searchText.toLowerCase())
   );
 
   function generate() {

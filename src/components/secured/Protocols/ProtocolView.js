@@ -89,16 +89,8 @@ function ProtocolView() {
           <Grid fontStyle="italic" color="text.secondary" display="flex">
             {myDate(protocol.publicationDate)}
             <Typography>,&nbsp;por&nbsp;</Typography>
-            <Typography>{protocol.autor1}</Typography>
-            <Typography
-              fontStyle="italic"
-              color="text.secondary"
-              component="div"
-              display="flex"
-            >
-            ,&nbsp;
-            </Typography>
-            <Typography>{protocol.autor2}</Typography>
+            {protocol.autor1 && (<Typography>{protocol.autor1}</Typography>)}
+            {protocol.autor2 && (<Typography>,&nbsp;{protocol.autor2}</Typography>)}
           </Grid>
           <Grid mt={3}>
             {editorStates.intro && (
