@@ -39,8 +39,7 @@ export default function ProtocolList() {
   const filteredProtocols = protocolArray.filter(
     (protocol) =>
       protocol.title.toLowerCase().includes(searchText.toLowerCase()) ||
-      protocol.protocolGroup.toLowerCase().includes(searchText.toLowerCase()) ||
-      protocol.publicationDate.toLowerCase().includes(searchText.toLowerCase())
+      protocol.protocolGroup.toLowerCase().includes(searchText.toLowerCase())
   );
 
   function generate() {
