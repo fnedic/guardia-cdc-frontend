@@ -49,7 +49,8 @@ function ProtocolView() {
                   backgroundImage: gradientColors,
                   borderRadius: 0,
                   opacity: "0.95",
-                  boxShadow:0
+                  boxShadow:0,
+                  width:1150,
                 }}
               >
                 <CardContent
@@ -103,26 +104,22 @@ function ProtocolView() {
             {editorStates.intro && (
               <>
                 <Editor editorState={editorStates.intro} readOnly />
-                <Divider sx={{ mb: 3, mt: 3 }} />
               </>
             )}
             {editorStates.generalInfo && (
               <>
                 <Editor editorState={editorStates.generalInfo} readOnly />
-                <Divider sx={{ mb: 3, mt: 3 }} />
               </>
             )}
 
             {editorStates.procedures && (
               <>
                 <Editor editorState={editorStates.procedures} readOnly />
-                <Divider sx={{ mb: 3, mt: 3 }} />
               </>
             )}
             {editorStates.annexed && (
               <>
                 <Editor editorState={editorStates.annexed} readOnly />
-                <Divider sx={{ mt: 3 }} />
               </>
             )}
           </Grid>

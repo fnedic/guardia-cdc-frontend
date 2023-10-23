@@ -29,14 +29,13 @@ export default function Footer() {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "flex-start",
           alignItems: "center",
           backgroundImage: `url(${logo})`,
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "left",
-          width: "30%",
-          height: "150%",
+          width: "10rem",
+          height: "10rem",
         }}
       ></Box>
       <Box
