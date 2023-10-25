@@ -6,14 +6,9 @@ import Link from "@mui/material/Link";
 import { useSidebar } from "../../../hooks/useSidebar";
 import { Avatar, IconButton, Skeleton } from "@mui/material";
 import { CloudDownload } from "@mui/icons-material";
-import { useEffect } from "react";
 
 function Sidebar(driveLink) {
   const { notice } = useSidebar();
-
-  useEffect(() => {
-    console.log("link: ", driveLink.driveLink);
-  }, [driveLink]);
 
   return (
     <Grid item xs={12} md={12} ml={4} mt={3}>
