@@ -8,7 +8,7 @@ export const setAuthHeader = (token) => {
   window.localStorage.setItem("auth_token", token);
 };
 
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "https://guardiacdc-backend.zeabur.app";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 export const request = (method, url, data) => {

@@ -1,10 +1,10 @@
 import axios from "./axios_config";
 import { getAuthToken } from "../axios/axios_helper.js";
 
-const USER_API_BASE_URL = "http://localhost:8080/protocol";
-const VIDEO_API_BASE_URL = "http://localhost:8080/video";
-const PROCEDURE_API_BASE_URL = "http://localhost:8080/procedure";
-const NOTICE_API_BASE_URL = "http://localhost:8080/notice";
+const USER_API_BASE_URL = "https://guardiacdc-backend.zeabur.app/protocol";
+const VIDEO_API_BASE_URL = "https://guardiacdc-backend.zeabur.app/video";
+const PROCEDURE_API_BASE_URL = "https://guardiacdc-backend.zeabur.app/procedure";
+const NOTICE_API_BASE_URL = "https://guardiacdc-backend.zeabur.app/notice";
 
 const token = getAuthToken();
 
