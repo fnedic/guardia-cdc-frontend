@@ -1,7 +1,7 @@
 import axios from "axios";
 import { setAuthHeader } from "./axios_helper";
 
-axios.defaults.baseURL = "http://localhost:8080"; // URL backend
+axios.defaults.baseURL = "https://guardiacdc-backend.zeabur.app"; // URL backend
 
 axios.interceptors.response.use(
   (response) => response,

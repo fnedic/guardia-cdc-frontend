@@ -1,6 +1,6 @@
 import axios from "./axios_config";
 import { getAuthToken } from "./axios_helper";
-const USER_API_BASE_URL = "http://localhost:8080/cdc/user";
+const USER_API_BASE_URL = "https://guardiacdc-backend.zeabur.app/cdc/user";
 
 const token = getAuthToken();
 
