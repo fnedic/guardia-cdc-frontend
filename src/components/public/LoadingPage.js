@@ -10,7 +10,7 @@ const LoadingPage = () => {
     alignItems: "center",
     height: "5rem",
     width: "100%",
-    backgroundColor: "#69445d",
+    backgroundColor: "283583",
     boxShadow: "0px 0px 0px",
   };
   return (
