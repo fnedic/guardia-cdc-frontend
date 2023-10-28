@@ -25,7 +25,7 @@ import { useSnackBar } from "../../hooks/useSnackbar";
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#69445d",
+      main: "#799a3d",
     },
   },
 });
@@ -84,7 +84,7 @@ export default function Login() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ bgcolor: "#6d7dac", width: 50, height: 50 }}>
+          <Avatar sx={{ bgcolor: "#315d9f", width: 50, height: 50 }}>
             <Key sx={{ fontSize: 30 }} />
           </Avatar>
           <Box component="form" sx={{ mt: 1 }}>
@@ -133,7 +133,7 @@ export default function Login() {
               sx={{
                 mt: 3,
                 mb: 1,
-                backgroundColor: "#6d7dac",
+                backgroundColor: "#315d9f",
                 boxShadow: "0",
                 borderRadius: 0,
                 width: "100%",

@@ -27,7 +27,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#69445d",
+      main: "#799a3d",
     },
   },
 });
@@ -84,7 +84,7 @@ export default function Register() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ bgcolor: "#6d7dac", width: 50, height: 50 }}>
+            <Avatar sx={{ bgcolor: "#315d9f", width: 50, height: 50 }}>
               <AppRegistrationIcon sx={{ fontSize: 35 }} />
             </Avatar>
             <Box component="form" sx={{ mt: 3 }}>
@@ -220,7 +220,7 @@ export default function Register() {
                 sx={{
                   mt: 3,
                   mb: 1,
-                  backgroundColor: "#6d7dac",
+                  backgroundColor: "#315d9f",
                   boxShadow: "0",
                   borderRadius: 0,
                 }}

@@ -23,7 +23,7 @@ import { useProcedureList } from "../../../hooks/useProcedureList";
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#69445d",
+      main: "#799a3d",
     },
   },
 });
@@ -58,13 +58,13 @@ export default function ProceduresList() {
                 textAlign: "center",
                 mx: "auto",
                 p: 2,
-                background: "#f4f4f4",
+                background: "#f4f5ff",
                 maxWidth: 1000,
               }}
             >
               <Stack direction="row" alignItems="center">
                 <IconButton href={`../protocol/view/${procedure.id}`}>
-                  <Avatar sx={{ backgroundColor: "#c6abae" }}>
+                  <Avatar sx={{ backgroundColor: "#b4b8cc" }}>
                     <Newspaper />
                   </Avatar>
                 </IconButton>
@@ -162,7 +162,7 @@ export default function ProceduresList() {
                   textAlign: "center",
                   mx: "auto",
                   p: 1,
-                  background: "#e3e3e3",
+                  background: "#ebeeff",
                   maxWidth: 1000,
                 }}
               >
