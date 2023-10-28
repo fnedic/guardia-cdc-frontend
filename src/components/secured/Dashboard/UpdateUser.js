@@ -22,7 +22,7 @@ import { useSnackBar } from "../../../hooks/useSnackbar.js";
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#69445d",
+      main: "#799a3d",
     },
   },
 });
@@ -105,7 +105,7 @@ function UpdateUser() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ bgcolor: "#6d7dac", width: 50, height: 50 }}>
+          <Avatar sx={{ bgcolor: "#427bd2", width: 50, height: 50 }}>
             <Edit sx={{ fontSize: 35 }} />
           </Avatar>
           <Box component="form" sx={{ mt: 3 }}>
@@ -166,7 +166,7 @@ function UpdateUser() {
                 endIcon={<Update />}
                 sx={{
                   mr: 2,
-                  backgroundColor: "#6d7dac",
+                  backgroundColor: "#427bd2",
                   boxShadow: "0",
                   borderRadius: 0,
                 }}

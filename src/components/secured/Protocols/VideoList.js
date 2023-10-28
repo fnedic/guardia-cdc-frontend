@@ -25,7 +25,7 @@ import LoadingMain from "./../../public/LoadingMain";
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#69445d",
+      main: "#315d9f",
     },
   },
 });
@@ -58,7 +58,7 @@ export default function VideoList() {
               textAlign: "center",
               mx: "auto",
               p: 2,
-              background: "#f4f4f4",
+              background: "#f4f5ff",
               maxWidth: 1000,
             }}
           >
@@ -69,7 +69,7 @@ export default function VideoList() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Avatar sx={{ backgroundColor: "#FFFFFF", color: "#FF0000" }}>
+                  <Avatar sx={{ backgroundColor: "#b4b8cc", color: "#ff6767" }}>
                     <YouTube />
                   </Avatar>
                 </IconButton>
@@ -177,7 +177,7 @@ export default function VideoList() {
                   textAlign: "center",
                   mx: "auto",
                   p: 1,
-                  background: "#e3e3e3",
+                  background: "#ebeeff",
                   maxWidth: 1000,
                 }}
               >

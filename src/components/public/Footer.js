@@ -4,7 +4,7 @@ import { Link, Typography } from "@mui/material";
 import logo from "../public/images/logo-cdc-footer.png";
 
 const footerStyle = {
-  backgroundColor: "#69445d",
+  backgroundColor: "#283583",
   display: "flex",
   alignItems: "center",
   height: "10rem",
@@ -31,7 +31,7 @@ export default function Footer() {
           display: "flex",
           alignItems: "center",
           backgroundImage: `url(${logo})`,
-          backgroundSize: "contain",
+          backgroundSize: "100%",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "left",
           width: "10rem",
@@ -43,10 +43,11 @@ export default function Footer() {
           marginLeft: "auto",
           display: "flex",
           flexDirection: "column",
+          textAlign: "center",
           justifyContent: "center",
           alignItems: "center",
-          width: "15%",
-          height: "100%",
+          width: "10rem",
+          height: "10rem%",
         }}
       >
         <Copyright />
