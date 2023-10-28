@@ -1,6 +1,8 @@
 import axios from "./axios_config";
 import { getAuthToken } from "./axios_helper";
-const USER_API_BASE_URL = "https://guardiacdc-backend.zeabur.app/cdc/user";
+
+const baseURL = process.env.REACT_APP_BACKEND_URL;
+const USER_API_BASE_URL = baseURL+"/cdc/user";
 
 const token = getAuthToken();
 
