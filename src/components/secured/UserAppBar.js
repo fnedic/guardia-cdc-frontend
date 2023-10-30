@@ -109,7 +109,7 @@ export const UserAppBar = ({ userRole }) => {
     alignItems: "center",
     height: "5rem",
     width: "100%",
-    backgroundColor: "#69445d",
+    backgroundColor: "#283583",
     boxShadow: "0px 0px 0px",
   };
 
@@ -213,8 +213,8 @@ export const UserAppBar = ({ userRole }) => {
                     letterSpacing: 1,
                     borderRadius: 0,
                     "&:hover": {
-                      backgroundColor: "#ffffff", // Cambia "hoverColor" por el color deseado en hover
-                      color: "#69445d", // Cambia "hoverTextColor" por el color de texto deseado en hover
+                      backgroundColor: "#ffffff",
+                      color: "#000c58",
                     },
                   }}
                 >
@@ -359,8 +359,8 @@ export const UserAppBar = ({ userRole }) => {
                     letterSpacing: 1,
                     borderRadius: 0,
                     "&:hover": {
-                      backgroundColor: "#ffffff", // Cambia "hoverColor" por el color deseado en hover
-                      color: "#69445d", // Cambia "hoverTextColor" por el color de texto deseado en hover
+                      backgroundColor: "#ffffff",
+                      color: "#000c58",
                     },
                   }}
                 >

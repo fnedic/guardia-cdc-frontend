@@ -35,12 +35,12 @@ import { useNavigate } from "react-router-dom";
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#69445d",
+      main: "#799a3d",
     },
   },
 });
 const customBoxStyle = {
-  backgroundColor: "#a19ba8",
+  backgroundColor: "#799a3d",
   maxWidth: "100%",
   color: "#fafafa",
   borderTopLeftRadius: "0",
@@ -253,7 +253,7 @@ export default function ProtocolForm() {
               mx: "auto",
               p: 4,
               borderRadius: "0",
-              backgroundColor: "#ebebeb",
+              backgroundColor: "#ebeeff",
             }}
           >
             <Box mb={2}>
@@ -533,7 +533,7 @@ export default function ProtocolForm() {
                   sx={{
                     mt: 0.2,
                     ml: 6,
-                    backgroundColor: "#6d7dac",
+                    backgroundColor: "#315d9f",
                     boxShadow: "0",
                     borderRadius: 0,
                     width: "20%",
@@ -652,7 +652,7 @@ export default function ProtocolForm() {
                     endIcon={<Send />}
                     disableElevation
                     sx={{
-                      backgroundColor: "#6d7dac",
+                      backgroundColor: "#315d9f",
                       boxShadow: "0",
                       borderRadius: 0,
                       ml: 2,
@@ -704,7 +704,7 @@ export default function ProtocolForm() {
                   endIcon={<Send />}
                   disableElevation
                   sx={{
-                    backgroundColor: "#6d7dac",
+                    backgroundColor: "#315d9f",
                     boxShadow: "0",
                     borderRadius: 0,
                   }}

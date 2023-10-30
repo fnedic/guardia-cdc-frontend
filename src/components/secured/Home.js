@@ -22,20 +22,19 @@ export const Home = ({ userRole }) => {
   const defaultTheme = createTheme({
     palette: {
       primary: {
-        main: "#69445d",
+        main: "#799a3d",
       },
     },
     typography: {
       poster: {
         fontSize: 50,
-        color: "#283583",
+        color: "#427bd2",
       },
     },
     components: {
       MuiTypography: {
         defaultProps: {
           variantMapping: {
-            // Map the new variant to render a <h1> by default
             poster: "h2",
           },
         },
@@ -97,7 +96,7 @@ export const Home = ({ userRole }) => {
                     sx={{
                       mt: 3,
                       mb: 1,
-                      backgroundColor: "#6d7dac",
+                      backgroundColor: "#000c58",
                       boxShadow: "0",
                       borderRadius: 0,
                       width: "100%",
@@ -122,7 +121,7 @@ export const Home = ({ userRole }) => {
                     sx={{
                       mt: 3,
                       mb: 1,
-                      backgroundColor: "#6d7dac",
+                      backgroundColor: "#000c58",
                       boxShadow: "0",
                       borderRadius: 0,
                       width: "100%",

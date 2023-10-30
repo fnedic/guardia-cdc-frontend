@@ -8,7 +8,8 @@ export const setAuthHeader = (token) => {
   window.localStorage.setItem("auth_token", token);
 };
 
-axios.defaults.baseURL = "http://localhost:8080";
+const baseURL = process.env.REACT_APP_BACKEND_URL;
+axios.defaults.baseURL = baseURL;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 export const request = (method, url, data) => {

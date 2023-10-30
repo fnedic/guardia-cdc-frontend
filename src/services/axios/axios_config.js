@@ -1,7 +1,8 @@
 import axios from "axios";
 import { setAuthHeader } from "./axios_helper";
 
-axios.defaults.baseURL = "http://localhost:8080"; // URL backend
+const baseURL = process.env.REACT_APP_BACKEND_URL;
+axios.defaults.baseURL = baseURL;
 
 axios.interceptors.response.use(
   (response) => response,

@@ -77,7 +77,7 @@ export function ProcedureTable() {
         >
           <Button
             sx={{
-              backgroundColor: "#8f5c7e",
+              backgroundColor: "#000c58",
               borderRadius: 0,
               marginRight: 0.5,
             }}
@@ -135,7 +135,7 @@ export function ProcedureTable() {
           sx={{
             border: 3,
             borderRadius:0,
-            borderColor: "#69445d",
+            borderColor: "#799a3d",
             "& .MuiDataGrid-cell:hover": {
               color: "#69445d",
             },

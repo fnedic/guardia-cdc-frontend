@@ -23,7 +23,6 @@ export const useMostViewedProtocol = () => {
                 protocolGroup: mvProtocolUpdate.protocolGroup
             };
             setMostViewedProtocol(mvProtocol);
-            // console.log("Protocolo mas visto --> ",mostViewedProtocol);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mvProtocolUpdate])

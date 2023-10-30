@@ -14,7 +14,7 @@ import { useSnackBar } from "../../../hooks/useSnackbar.js";
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#69445d",
+      main: "#799a3d",
     },
   },
 });
@@ -103,7 +103,7 @@ function UpdateVideo() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ bgcolor: "#6d7dac", width: 50, height: 50 }}>
+          <Avatar sx={{ bgcolor: "#427bd2", width: 50, height: 50 }}>
             <Edit sx={{ fontSize: 35 }} />
           </Avatar>
           <Box component="form" id="video-form" sx={{ mt: 3 }}>
@@ -118,9 +118,9 @@ function UpdateVideo() {
                     onChange={handleChange}
                     sx={{
                       "& .MuiOutlinedInput-root": {
-                        borderRadius: 0, // Establece el radio de los bordes a 0 para hacerlos rectos
+                        borderRadius: 0, 
                         "& fieldset": {
-                          borderWidth: 1, // Puedes ajustar el ancho del borde como desees
+                          borderWidth: 1,
                         },
                       },
                     }}
@@ -155,7 +155,7 @@ function UpdateVideo() {
                 endIcon={<Update />}
                 sx={{
                   mr: 2,
-                  backgroundColor: "#6d7dac",
+                  backgroundColor: "#427bd2",
                   boxShadow: "0",
                   borderRadius: 0,
                 }}

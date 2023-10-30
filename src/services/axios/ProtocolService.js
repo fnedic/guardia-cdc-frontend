@@ -1,10 +1,11 @@
 import axios from "./axios_config";
 import { getAuthToken } from "../axios/axios_helper.js";
 
-const USER_API_BASE_URL = "http://localhost:8080/protocol";
-const VIDEO_API_BASE_URL = "http://localhost:8080/video";
-const PROCEDURE_API_BASE_URL = "http://localhost:8080/procedure";
-const NOTICE_API_BASE_URL = "http://localhost:8080/notice";
+const baseURL = process.env.REACT_APP_BACKEND_URL;
+const USER_API_BASE_URL = baseURL+"/protocol";
+const VIDEO_API_BASE_URL = baseURL+"/video";
+const PROCEDURE_API_BASE_URL = baseURL+"/procedure";
+const NOTICE_API_BASE_URL = baseURL+"/notice";
 
 const token = getAuthToken();
 

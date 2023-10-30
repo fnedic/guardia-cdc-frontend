@@ -14,7 +14,7 @@ export const Header = () => {
   return (
     <Button
       disableRipple
-      sx={{ "&:hover": { backgroundColor: "inherit" } }}
+      sx={{ "&:hover": { backgroundColor: "inherit" }}}
       style={headerStyle}
       href="/home"
     >
@@ -24,11 +24,11 @@ export const Header = () => {
           justifyContent: "center",
           alignItems: "center",
           backgroundImage: `url(${logo})`,
-          backgroundSize: "contain",
+          backgroundSize: "100%",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
-          width: "200%",
-          height: "200%",
+          width: "30rem",
+          height: "8rem",
         }}
       ></Box>
     </Button>
