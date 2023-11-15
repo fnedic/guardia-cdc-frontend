@@ -77,8 +77,8 @@ export default function Login() {
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
-            marginTop: 8,
-            marginBottom: 15,
+            marginTop: 5,
+            marginBottom: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -90,7 +90,6 @@ export default function Login() {
           <Box component="form" sx={{ mt: 1 }}>
             <TextField
               margin="normal"
-              required
               fullWidth
               id="email"
               label="Email"

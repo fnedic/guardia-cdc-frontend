@@ -31,6 +31,8 @@ import "../../../../node_modules/draft-js/dist/Draft.css";
 import RichTextEditor from "./RichTextEditor";
 import { Send } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import dayjs from 'dayjs';
+import "dayjs/locale/es-us";
 
 const customTheme = createTheme({
   palette: {
@@ -49,6 +51,7 @@ const customBoxStyle = {
 };
 
 export default function ProtocolForm() {
+  dayjs.locale('es-us');
   const titleRef = useRef(null);
   const autor1Ref = useRef(null);
   const autor2Ref = useRef(null);
@@ -68,7 +71,7 @@ export default function ProtocolForm() {
   const [videoGroup, setVideoGroup] = useState("");
   const [videoDate, setDate] = useState();
   const [notice, setNotice] = useState("");
-
+  
   const navigate = useNavigate();
   const [selectedForm, setSelectedForm] = useState("protocol");
   const handleFormChange = (event) => {
@@ -528,6 +531,7 @@ export default function ProtocolForm() {
                       id="createdDate"
                       value={selectedDate}
                       onChange={handleDateChange}
+                      format="DD/MM/YYYY"
                       sx={{
                         minWidth: 300,
                         "& .MuiOutlinedInput-root": {
@@ -663,6 +667,7 @@ export default function ProtocolForm() {
                         id="date"
                         value={videoDate}
                         onChange={handleDateChange2}
+                        format="DD/MM/YYYY"
                         sx={{
                           minWidth: 300,
                           "& .MuiOutlinedInput-root": {

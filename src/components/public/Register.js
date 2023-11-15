@@ -19,10 +19,20 @@ import {
   FormControl,
   OutlinedInput,
   InputLabel,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import { useForm } from "./../../hooks/useForm";
 import { useRegister } from "../../hooks/useRegister";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
+import "dayjs/locale/es";
+import { useState } from "react";
+import { useEffect } from "react";
+dayjs.locale("es");
 
 const customTheme = createTheme({
   palette: {
@@ -41,20 +51,25 @@ const inputStyle = {
   },
 };
 
-const initialForm = {
-  name: "",
-  lastname: "",
-  email: "",
-  password: "",
-  dni: "",
-  medicalRegistration: "",
-  role: "USER",
-  status: "PENDING",
-};
-
 export default function Register() {
-  const { form, handleChange } = useForm(initialForm);
+  const [selectedDate, setSelectedDate] = useState();
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
 
+  const initialForm = {
+    name: "",
+    lastname: "",
+    email: "",
+    password: "",
+    dni: "",
+    specialtie: "",
+    medicalRegistration: "",
+    role: "USER",
+    status: "PENDING",
+  };
+
+  const { form, handleChange, setForm } = useForm(initialForm);
   const {
     onRegister,
     areEquals,
@@ -70,6 +85,14 @@ export default function Register() {
     handleMouseDownPassword2,
   } = useRegister(form);
 
+  useEffect(() => {
+    setForm((prevForm) => ({
+      ...prevForm,
+      startDate: selectedDate,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedDate]);
+
   return (
     <>
       <ThemeProvider theme={customTheme}>
@@ -77,8 +100,8 @@ export default function Register() {
         <Container component="main" maxWidth="xs">
           <Box
             sx={{
-              marginTop: 8,
-              marginBottom: 15,
+              marginTop: 5,
+              marginBottom: 8,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -92,7 +115,6 @@ export default function Register() {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     name="name"
-                    required
                     fullWidth
                     id="name"
                     label="Nombre"
@@ -102,7 +124,6 @@ export default function Register() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    required
                     fullWidth
                     id="lastname"
                     label="Apellido"
@@ -113,7 +134,6 @@ export default function Register() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    required
                     fullWidth
                     id="email"
                     label="Email"
@@ -126,7 +146,6 @@ export default function Register() {
                   <TextField
                     type="number"
                     name="dni"
-                    required
                     fullWidth
                     id="dni"
                     label="DNI"
@@ -137,7 +156,6 @@ export default function Register() {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     type="number"
-                    required
                     fullWidth
                     id="medicalRegistration"
                     label="Matrícula Médica"
@@ -146,17 +164,67 @@ export default function Register() {
                     sx={inputStyle}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>Especilidad</InputLabel>
+                    <Select
+                      id="specialtie"
+                      label="Especialidad"
+                      name="specialtie"
+                      onChange={handleChange}
+                      sx={{ borderRadius: 0 }}
+                    >
+                      <MenuItem value={"CARDIOVASCULAR"}>Cardiología</MenuItem>
+                      <MenuItem value={"CIRUGIA"}>Cirugía</MenuItem>
+                      <MenuItem value={"ENDOCRINOMETABOLICO"}>
+                        Endocrinometabolico
+                      </MenuItem>
+                      <MenuItem value={"GASTROENTEROLOGIA"}>
+                        Gastroenterología
+                      </MenuItem>
+                      <MenuItem value={"GENERALISTA"}>Generalista</MenuItem>
+                      <MenuItem value={"GINECOOBSTETRICIA"}>
+                        Ginecoobstetricia
+                      </MenuItem>
+                      <MenuItem value={"INFECTOLOGIA"}>Infectología</MenuItem>
+                      <MenuItem value={"CLINICA"}>Medicina Interna</MenuItem>
+                      <MenuItem value={"NEFROLOGIA"}>Nefrología</MenuItem>
+                      <MenuItem value={"NEUMONOLOGIA"}>Neumonología</MenuItem>
+                      <MenuItem value={"NEUROLOGIA"}>Neurologia</MenuItem>
+                      <MenuItem value={"OTORRINOLARINGOLOGIA"}>ORL</MenuItem>
+                      <MenuItem value={"TOXICOLOGIA"}>Toxicología</MenuItem>
+                      <MenuItem value={"TRAUMATOLOGIA"}>Traumatología</MenuItem>
+                      <MenuItem value={"UROLOGIA"}>Urología</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      label="Inicio de actividad"
+                      id="selectedDate"
+                      value={selectedDate}
+                      onChange={handleDateChange}
+                      format="DD/MM/YYYY"
+                      sx={{
+                        width: "100%",
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: 0,
+                        },
+                      }}
+                    />
+                  </LocalizationProvider>
+                </Grid>
+                <Grid item xs={12} mt={2}>
                   <FormControl fullWidth>
                     <InputLabel>Contraseña</InputLabel>
                     <OutlinedInput
-                      required
                       fullWidth
                       label="Contraseñ"
                       id="password"
                       name="password"
                       onChange={handleChange}
-                      sx={{ borderRadius:0 }}
+                      sx={{ borderRadius: 0 }}
                       type={showPassword ? "text" : "password"}
                       endAdornment={
                         <InputAdornment position="end">
@@ -177,13 +245,12 @@ export default function Register() {
                   <FormControl fullWidth variant="outlined">
                     <InputLabel>Repite tu contraseña</InputLabel>
                     <OutlinedInput
-                      required
                       fullWidth
                       label="repitetucontraseña"
                       name="password2"
                       id="password2"
                       onChange={handlePasswordConfirmation}
-                      sx={{ borderRadius:0 }}
+                      sx={{ borderRadius: 0 }}
                       type={showPassword2 ? "text" : "password"}
                       endAdornment={
                         <InputAdornment position="end">
