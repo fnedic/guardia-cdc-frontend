@@ -23,7 +23,7 @@ import LoadingMain from './../../public/LoadingMain';
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#799a3d",
+      main: "#283583",
     },
   },
 });

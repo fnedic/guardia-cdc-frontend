@@ -13,7 +13,9 @@ export const useRegister = (form) => {
       form.email.trim() === "" ||
       form.password.trim() === "" ||
       form.dni.trim() === "" ||
-      form.medicalRegistration.trim() === ""
+      form.medicalRegistration.trim() === "" ||
+      form.specialtie.trim() === "" ||
+      form.startDate === undefined
     ) {
       setSnackbarMessage("Algunos campos se encuentran vacíos!");
       setShowSnackbar(true);
@@ -27,6 +29,8 @@ export const useRegister = (form) => {
       password: form.password,
       dni: form.dni,
       medicalRegistration: form.medicalRegistration,
+      startDate: form.startDate,
+      specialtie: form.specialtie,
     })
       .then((response) => {
         if (response.status === 201) {
@@ -38,7 +42,9 @@ export const useRegister = (form) => {
         if (error.response) {
           setSnackbarMessage(error.response.data);
         } else {
-          setSnackbarMessage("Error al registrarse, intente nuevamente en unos instantes!");
+          setSnackbarMessage(
+            "Error al registrarse, intente nuevamente en unos instantes!"
+          );
         }
         setAuthHeader(null);
         setShowSnackbar(true);
@@ -89,6 +95,6 @@ export const useRegister = (form) => {
     handleMouseDownPassword,
     showPassword2,
     handleClickShowPassword2,
-    handleMouseDownPassword2
+    handleMouseDownPassword2,
   };
 };

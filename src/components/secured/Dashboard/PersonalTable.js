@@ -16,6 +16,7 @@ import { useUserList } from "../../../hooks/useUserList";
 import LoadingMain from "../../public/LoadingMain";
 
 export function PersonalTable() {
+  
   const {
     userList,
     editUser,
@@ -23,10 +24,15 @@ export function PersonalTable() {
     handleCloseDeleteDialog,
     handleDeleteConfirmed,
     deleteUser,
+    myDate
   } = useUserList();
   if (!userList || userList.length === 0) {
     return <LoadingMain />;
   }
+  const formattedUserList = userList.map((users) => ({
+    ...users,
+    startDate: myDate(users.startDate),
+  }));
   const columns = [
     {
       field: "name",
@@ -47,7 +53,7 @@ export function PersonalTable() {
     {
       field: "email",
       headerName: "Email",
-      width: 200,
+      width: 190,
       editable: false,
       align: "center",
       headerAlign: "center",
@@ -56,7 +62,15 @@ export function PersonalTable() {
       field: "dni",
       headerName: "DNI",
       typeof: "number",
-      width: 110,
+      width: 90,
+      editable: false,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
+      field: "specialtie",
+      headerName: "Especialidad",
+      width: 120,
       editable: false,
       align: "center",
       headerAlign: "center",
@@ -65,23 +79,22 @@ export function PersonalTable() {
       field: "medicalRegistration",
       headerName: "Matrícula",
       typeof: "number",
+      width: 90,
+      editable: false,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
+      field: "startDate",
+      headerName: "Inicio labores",
       width: 110,
       editable: false,
       align: "center",
       headerAlign: "center",
     },
-
     {
       field: "status",
       headerName: "Estado",
-      width: 120,
-      editable: false,
-      align: "center",
-      headerAlign: "center",
-    },
-    {
-      field: "role",
-      headerName: "Rol",
       width: 85,
       editable: false,
       align: "center",
@@ -90,7 +103,7 @@ export function PersonalTable() {
     {
       field: "actions",
       headerName: "Acciones",
-      width: 250,
+      width: 200,
       editable: false,
       align: "center",
       headerAlign: "center",
@@ -162,13 +175,13 @@ export function PersonalTable() {
         <DataGrid
           sx={{
             border: 3,
-            borderRadius:0,
+            borderRadius: 0,
             borderColor: "#799a3d",
             "& .MuiDataGrid-cell:hover": {
               color: "#283583",
             },
           }}
-          rows={userList}
+          rows={formattedUserList}
           columns={[...columns]}
           initialState={{
             pagination: { paginationModel: { pageSize: 10 } },

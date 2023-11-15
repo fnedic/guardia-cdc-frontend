@@ -18,6 +18,9 @@ import {
 import { useParams } from "react-router-dom";
 import { Cancel, Edit, Update } from "@mui/icons-material";
 import { useSnackBar } from "../../../hooks/useSnackbar.js";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const customTheme = createTheme({
   palette: {
@@ -40,6 +43,24 @@ const fieldLabels = {
   email: "Email",
 };
 
+const specialtieOptions = {
+  CARDIOVASCULAR: "Cardiovascular",
+  CIRUGIA: "Cirugía",
+  CLINICA: "Clínica",
+  ENDOCRINOMETABOLICO: "Endocrinometabólico",
+  GASTROENTEROLOGIA: "Gastroenterologia",
+  GENERALISTA: "Generalista",
+  GINECOOBSTETRICIA: "Ginecoobstetricia",
+  INFECTOLOGIA: "Infectología",
+  NEFROLOGIA: "Nefrologia",
+  NEUMONOLOGIA: "Neumonologia",
+  NEUROLOGIA: "Neurologia",
+  OTORRINOLARINGOLOGIA: "ORL",
+  TOXICOLOGIA: "Toxicología",
+  TRAUMATOLOGIA: "Traumatologia",
+  UROLOGIA: "Urologia",
+};
+
 function UpdateUser() {
   const { id } = useParams();
   const { SnackBar, setSeverity, setShowSnackbar, setSnackbarMessage } =
@@ -52,6 +73,8 @@ function UpdateUser() {
     dni: "",
     status: "",
     email: "",
+    specialtie: "",
+    startDate: undefined,
   });
 
   const handleGoBack = () => {
@@ -82,6 +105,13 @@ function UpdateUser() {
           setShowSnackbar(true);
         }
       });
+  };
+  
+  const handleDateChange = (e) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      startDate: e,
+    }));
   };
 
   const handleChange = (event) => {
@@ -155,6 +185,41 @@ function UpdateUser() {
                     ))}
                   </Select>
                 </FormControl>
+              </Grid>
+              <Grid item xs={6}>
+                <FormControl>
+                  <InputLabel>Especialidad</InputLabel>
+                  <Select
+                    sx={{ minWidth: "12rem", borderRadius: 0 }}
+                    name="specialtie"
+                    value={user.specialtie}
+                    onChange={handleChange}
+                    label="Especialidad"
+                  >
+                    {Object.entries(specialtieOptions).map(([value, label]) => (
+                      <MenuItem key={value} value={value}>
+                        {label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    label="Inicio de actividad"
+                    name="startDate"
+                    value={dayjs(user.startDate)}
+                    onChange={handleDateChange}
+                    format="DD/MM/YYYY"
+                    sx={{
+                      width: "100%",
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 0,
+                      },
+                    }}
+                  />
+                </LocalizationProvider>
               </Grid>
             </Grid>
             <Grid display={"flex"} mt={3}>
