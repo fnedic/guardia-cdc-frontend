@@ -9,7 +9,6 @@ import { Editor } from "draft-js";
 import { useProtocolView } from "../../../hooks/useProtocolView.js";
 import { useMostViewedProtocol } from "../../../hooks/useMostViewedProtocol.js";
 import { useProtocolList } from "../../../hooks/useProtocolList.js";
-
 import Sidebar from "./Sidebar.js";
 
 function ProtocolView() {
@@ -80,14 +79,20 @@ function ProtocolView() {
           <Grid mb={3} mt={3}>
             <Typography variant="h6">{protocol.title}</Typography>
           </Grid>
-          <Box fontStyle="italic" color="text.secondary" display="inline-flex">
-            {myDate(protocol.publicationDate)}
-            <Typography>,&nbsp;por&nbsp;</Typography>
-            {protocol.autor1 && <Typography>{protocol.autor1}</Typography>}
-            {protocol.autor2 && (
-              <Typography>,&nbsp;{protocol.autor2}</Typography>
-            )}
-          </Box>
+          {protocol.autor1 && (
+            <Box
+              fontStyle="italic"
+              color="text.secondary"
+              display="inline-flex"
+            >
+              {myDate(protocol.publicationDate)}
+              <Typography>,&nbsp;por&nbsp;</Typography>
+              {protocol.autor1 && <Typography>{protocol.autor1}</Typography>}
+              {protocol.autor2 && (
+                <Typography>,&nbsp;{protocol.autor2}</Typography>
+              )}
+            </Box>
+          )}
           <Grid mt={3}>
             {editorStates.intro && (
               <>
