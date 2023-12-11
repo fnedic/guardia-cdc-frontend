@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { Link, Typography } from "@mui/material";
-import logo from "../public/images/logo-cdc-footer.png";
+import logo from "../public/images/new-logo-footer.svg";
 
 const footerStyle = {
   backgroundColor: "#283583",
@@ -31,11 +31,11 @@ export default function Footer() {
           display: "flex",
           alignItems: "center",
           backgroundImage: `url(${logo})`,
-          backgroundSize: "100%",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "left",
-          width: "10rem",
-          height: "10rem",
+          width: "70%",
+          height: "70%",
+          marginLeft:2
         }}
       ></Box>
       <Box
