@@ -33,8 +33,8 @@ export default function Footer() {
           backgroundImage: `url(${logo})`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "left",
-          width: "70%",
-          height: "70%",
+          width: "50%",
+          height: "50%",
           marginLeft:2
         }}
       ></Box>
