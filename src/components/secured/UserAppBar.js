@@ -27,6 +27,7 @@ import {
   UploadFile,
   YouTube,
 } from "@mui/icons-material";
+import TodayIcon from "@mui/icons-material/Today";
 
 export const UserAppBar = ({ userRole }) => {
   const navigate = useNavigate();
@@ -36,9 +37,15 @@ export const UserAppBar = ({ userRole }) => {
     "Proc. Institucionales",
     "Videos",
     "Subir Contenido",
+    "Calendario",
   ];
   const adminSettings = ["Perfil", "Cerrar Sesión"];
-  const userPages = ["Protocolos", "Videos", "Proc. Institucionales"];
+  const userPages = [
+    "Protocolos",
+    "Videos",
+    "Proc. Institucionales",
+    "Mis Guardias",
+  ];
   const userSettings = ["Perfil", "Cerrar Sesión"];
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -83,6 +90,12 @@ export const UserAppBar = ({ userRole }) => {
     } else if (selectedPage === "Proc. Institucionales") {
       handleCloseNavMenu();
       navigate("/procedure/list");
+    } else if (selectedPage === "Calendario") {
+      handleCloseNavMenu();
+      navigate("/admin/calendario");
+    } else if (selectedPage === "Mis Guardias") {
+      handleCloseNavMenu();
+      navigate("/calendar");
     }
   };
   const handleAdminPageClick = (selectedPage) => {
@@ -101,6 +114,9 @@ export const UserAppBar = ({ userRole }) => {
     } else if (selectedPage === "Proc. Institucionales") {
       handleCloseNavMenu();
       navigate("/admin/data?table=procedure");
+    } else if (selectedPage === "Calendario") {
+      handleCloseNavMenu();
+      navigate("/admin/calendario");
     }
   };
   const appBarStyle = {
@@ -171,6 +187,8 @@ export const UserAppBar = ({ userRole }) => {
                         <YouTube />
                       ) : pages === "Proc. Institucionales" ? (
                         <Newspaper />
+                      ) : pages === "Calendario" ? (
+                        <TodayIcon />
                       ) : null}
                     </ListItemIcon>
                     <Typography textAlign="center">{pages}</Typography>
@@ -317,6 +335,8 @@ export const UserAppBar = ({ userRole }) => {
                         <YouTube />
                       ) : pages === "Proc. Institucionales" ? (
                         <Newspaper />
+                      ) : pages === "Mis Guardias" ? (
+                        <TodayIcon />
                       ) : null}
                     </ListItemIcon>
                     <Typography textAlign="center">{pages}</Typography>

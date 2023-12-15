@@ -37,7 +37,7 @@ export function PersonalTable() {
     {
       field: "name",
       headerName: "Nombre",
-      width: 100,
+      width: 110,
       editable: false,
       align: "center",
       headerAlign: "center",
@@ -45,7 +45,7 @@ export function PersonalTable() {
     {
       field: "lastname",
       headerName: "Apellido",
-      width: 100,
+      width: 110,
       editable: false,
       align: "center",
       headerAlign: "center",
@@ -95,7 +95,7 @@ export function PersonalTable() {
     {
       field: "status",
       headerName: "Estado",
-      width: 85,
+      width: 100,
       editable: false,
       align: "center",
       headerAlign: "center",
@@ -171,7 +171,7 @@ export function PersonalTable() {
           </Button>
         </DialogActions>
       </Dialog>
-      <Box sx={{ width: "95%" }}>
+      <Box sx={{ width: "100%" }}>
         <DataGrid
           sx={{
             border: 3,

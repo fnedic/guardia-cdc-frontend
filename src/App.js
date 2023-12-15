@@ -20,6 +20,8 @@ import Dashboard from "./components/secured/Dashboard/Dashboard";
 import UpdateVideo from "./components/secured/Dashboard/UpdateVideo";
 import ProceduresList from "./components/secured/Protocols/ProceduresList";
 import NotFound from "./components/public/NotFound";
+import HomeCalendar from "./components/secured/Calendar/HomeCalendar";
+import Events from "./components/secured/Calendar/Events.js";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -61,6 +63,7 @@ function App() {
           <Route path="/procedure/list" element={<ProceduresList />} />
           <Route path="/protocol/view/:id" element={<ProtocolView />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/calendar" element={<Events />} />
           <Route path="*" element={<NotFound/>} />
         </Route>
         <Route
@@ -75,6 +78,7 @@ function App() {
           <Route path="/protocol/upload" element={<ProtocolForm />} />
           <Route path="/user/update/:id" element={<UpdateUser />} />
           <Route path="/video/update/:id" element={<UpdateVideo />} />
+          <Route path="/admin/calendario" element={<HomeCalendar />} />
           <Route path="*" element={<NotFound/>} />
         </Route>
       </Routes>

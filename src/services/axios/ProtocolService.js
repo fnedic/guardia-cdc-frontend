@@ -78,7 +78,7 @@ class ProtocolService {
   }
 
   deleteVideo(id) {
-    return axios.get(VIDEO_API_BASE_URL + "/delete/" + id, config);
+    return axios.delete(VIDEO_API_BASE_URL + "/delete/" + id, config);
   }
 
   procedureList() {
