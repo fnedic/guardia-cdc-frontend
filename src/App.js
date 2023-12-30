@@ -22,6 +22,7 @@ import ProceduresList from "./components/secured/Protocols/ProceduresList";
 import NotFound from "./components/public/NotFound";
 import HomeCalendar from "./components/secured/Calendar/HomeCalendar";
 import Events from "./components/secured/Calendar/Events.js";
+import AdminRequestedChanges from "./components/secured/Calendar/AdminRequestedChanges.js";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -78,8 +79,9 @@ function App() {
           <Route path="/protocol/upload" element={<ProtocolForm />} />
           <Route path="/user/update/:id" element={<UpdateUser />} />
           <Route path="/video/update/:id" element={<UpdateVideo />} />
-          <Route path="/admin/calendario" element={<HomeCalendar />} />
+          <Route path="/admin/calendar" element={<HomeCalendar />} />
           <Route path="*" element={<NotFound/>} />
+          <Route path="/admin/requested-changes" element={<AdminRequestedChanges/>} />
         </Route>
       </Routes>
       <Footer />

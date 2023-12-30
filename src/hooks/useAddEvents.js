@@ -4,7 +4,6 @@ import { useEffect } from "react";
 
 export const useAddEvents = (initialEvent) => {
   const [event, setEvent] = useState(initialEvent);
-
   const handleChange = (name, e) => {
     if (name === "start") {
       setEvent({
@@ -60,7 +59,7 @@ export const useAddEvents = (initialEvent) => {
       CalendarService.createEvent(event)
         .then((r) => {
           alert(r.data);
-          window.location.href = "/admin/calendario";
+          window.location.href = "/admin/calendar";
         })
         .catch((err) => {
           alert(err.response.data);
@@ -72,7 +71,7 @@ export const useAddEvents = (initialEvent) => {
     CalendarService.deleteEvent(id)
       .then((r) => {
         alert(r.data);
-        window.location.href = "/admin/calendario";
+        window.location.href = "/admin/calendar";
       })
       .catch((err) => {
         alert(err.response.data);
@@ -84,7 +83,7 @@ export const useAddEvents = (initialEvent) => {
       CalendarService.editEvent(event)
         .then((r) => {
           alert(r.data);
-          window.location.href = "/admin/calendario";
+          window.location.href = "/admin/calendar";
         })
         .catch((err) => {
           alert(err.response.data.message);
@@ -96,7 +95,7 @@ export const useAddEvents = (initialEvent) => {
     CalendarService.publishEvents(events)
       .then((r) => {
         alert(r.data);
-        window.location.href = "/admin/calendario";
+        window.location.href = "/admin/calendar";
       })
       .catch((error) => {
         alert(error.response.data.message);
@@ -112,7 +111,7 @@ export const useAddEvents = (initialEvent) => {
       .catch((error) => {
         console.log(error);
         alert(error.response.data.message);
-      })
+      });
   };
 
   const handleRequestCancel = (id) => {
@@ -124,7 +123,7 @@ export const useAddEvents = (initialEvent) => {
       .catch((error) => {
         console.log(error);
         alert(error.response.data.message);
-      })
+      });
   };
 
   const handleRequestAccept = (id) => {
@@ -136,7 +135,31 @@ export const useAddEvents = (initialEvent) => {
       .catch((error) => {
         console.log(error);
         alert(error.response.data.message);
+      });
+  };
+
+  const handleRequestApprove = (id) => {
+    CalendarService.requestChangeAccept(id)
+      .then((r) => {
+        alert(r.data);
+        window.location.href = "/admin/requested-changes";
       })
+      .catch((error) => {
+        console.log(error);
+        alert(error.response.data.message);
+      });
+  };
+
+  const handleChangeCancel = (id) => {
+    CalendarService.handleChangeCancel(id)
+      .then((r) => {
+        alert(r.data);
+        window.location.href = "/admin/requested-changes";
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error.response.data.message);
+      });
   };
 
   useEffect(() => {
@@ -153,5 +176,7 @@ export const useAddEvents = (initialEvent) => {
     handleRequestChange,
     handleRequestCancel,
     handleRequestAccept,
+    handleRequestApprove,
+    handleChangeCancel,
   };
 };

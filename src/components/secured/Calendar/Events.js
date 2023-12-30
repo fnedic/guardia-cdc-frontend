@@ -1,34 +1,32 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Paper, Typography } from "@mui/material";
 import UserEvents from "./UserEvents.js";
 import RequiredEvents from "./RequiredEvents.js";
 
 export default function Events() {
   const fontStyle = {
-    mb:5,
+    mb: 2,
     letterSpacing: 1,
-    fontWeight:"bold",
+    fontWeight: "bold",
   };
 
   return (
     <Container sx={{ mt: 5, mb: 5 }}>
-      <Grid container spacing={2} sx={{textAlign:"center"}}>
+      <Grid container spacing={2} sx={{ textAlign: "center" }}>
         <Grid item xs={12} sm={6}>
-            <Typography
-              variant="h5"
-              sx={fontStyle}
-            >
-              GUARDIAS ASIGNADAS
+          <Paper sx={{ backgroundColor: "#d5d5d5", boxShadow: 0 }}>
+            <Typography variant="h5" sx={fontStyle}>
+              Guardias asignadas
             </Typography>
-            <UserEvents />
+          </Paper>
+          <UserEvents />
         </Grid>
         <Grid item xs={12} sm={6}>
-            <Typography
-              variant="h5"
-              sx={fontStyle}
-            >
-              CAMBIOS SOLICITADOS
+          <Paper sx={{ backgroundColor: "#d5d5d5", boxShadow: 0 }}>
+            <Typography variant="h5" sx={fontStyle}>
+              Cambios solicitados
             </Typography>
-            <RequiredEvents />
+          </Paper>
+          <RequiredEvents />
         </Grid>
       </Grid>
     </Container>

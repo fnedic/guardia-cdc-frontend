@@ -19,6 +19,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   AccountCircle,
+  ChangeCircle,
   Description,
   Logout,
   Newspaper,
@@ -38,6 +39,7 @@ export const UserAppBar = ({ userRole }) => {
     "Videos",
     "Subir Contenido",
     "Calendario",
+    "Cambios",
   ];
   const adminSettings = ["Perfil", "Cerrar Sesión"];
   const userPages = [
@@ -92,10 +94,13 @@ export const UserAppBar = ({ userRole }) => {
       navigate("/procedure/list");
     } else if (selectedPage === "Calendario") {
       handleCloseNavMenu();
-      navigate("/admin/calendario");
+      navigate("/admin/calendar");
     } else if (selectedPage === "Mis Guardias") {
       handleCloseNavMenu();
       navigate("/calendar");
+    } else if (selectedPage === "Cambios") {
+      handleCloseNavMenu();
+      navigate("/admin/requested-changes");
     }
   };
   const handleAdminPageClick = (selectedPage) => {
@@ -116,7 +121,10 @@ export const UserAppBar = ({ userRole }) => {
       navigate("/admin/data?table=procedure");
     } else if (selectedPage === "Calendario") {
       handleCloseNavMenu();
-      navigate("/admin/calendario");
+      navigate("/admin/calendar");
+    } else if (selectedPage === "Cambios") {
+      handleCloseNavMenu();
+      navigate("/admin/requested-changes");
     }
   };
   const appBarStyle = {
@@ -189,6 +197,8 @@ export const UserAppBar = ({ userRole }) => {
                         <Newspaper />
                       ) : pages === "Calendario" ? (
                         <TodayIcon />
+                      ) : pages === "Cambios" ? (
+                        <ChangeCircle />
                       ) : null}
                     </ListItemIcon>
                     <Typography textAlign="center">{pages}</Typography>

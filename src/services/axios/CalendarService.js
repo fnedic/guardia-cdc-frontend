@@ -65,9 +65,12 @@ class CalendarService {
     return axios.delete(CALENDAR_API_BASE_URL + "/delete/" + id, config);
   }
 
-  getUserEvents() {
+  getUserEvents(start, end) {
     return axios
-      .get(CALENDAR_API_BASE_URL + "/get-user-events", config)
+      .get(
+        `${CALENDAR_API_BASE_URL}/get-user-events?start=${start}&end=${end}`,
+        config
+      )
       .then((r) => {
         return r;
       })
@@ -77,11 +80,11 @@ class CalendarService {
   }
 
   getUserRequestedEvents() {
-    return axios.get(CALENDAR_API_BASE_URL + "/get-requested-events", config)
+    return axios.get(CALENDAR_API_BASE_URL + "/get-requested-events", config);
   }
 
   getOtherRequestedEvents() {
-    return axios.get(CALENDAR_API_BASE_URL + "/get-requested-other", config)
+    return axios.get(CALENDAR_API_BASE_URL + "/get-requested-other", config);
   }
 
   publishEvents(events) {
@@ -96,15 +99,34 @@ class CalendarService {
   }
 
   requestChange(id) {
-    return axios.get(CALENDAR_API_BASE_URL +"/req-change/"+id, config)
+    return axios.get(CALENDAR_API_BASE_URL + "/req-change/" + id, config);
   }
 
   requestCancel(id) {
-    return axios.get(CALENDAR_API_BASE_URL +"/req-cancel/"+id, config)
+    return axios.get(CALENDAR_API_BASE_URL + "/req-cancel/" + id, config);
   }
 
   requestAccept(id) {
-    return axios.get(CALENDAR_API_BASE_URL +"/req-accept/"+id, config)
+    return axios.get(CALENDAR_API_BASE_URL + "/req-accept/" + id, config);
+  }
+
+  getChangedEvents() {
+    return axios
+      .get(CALENDAR_API_BASE_URL + "/get-changed-events", config)
+      .then((r) => {
+        return r;
+      })
+      .catch((e) => {
+        throw e;
+      });
+  }
+
+  requestChangeAccept(id) {
+    return axios.get(CALENDAR_API_BASE_URL + "/req-approve/"+id, config);
+  }
+
+  handleChangeCancel(id) {
+    return axios.get(CALENDAR_API_BASE_URL + "/req-change-cancel/"+id, config);
   }
 }
 

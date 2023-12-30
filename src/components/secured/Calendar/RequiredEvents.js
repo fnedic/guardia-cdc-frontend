@@ -1,4 +1,4 @@
-import { Box, Container, createTheme } from "@mui/material";
+import { Box, Container, Paper, Typography, createTheme } from "@mui/material";
 import { ThemeProvider } from "styled-components";
 import { useGetEvents } from "../../../hooks/useGetEvents";
 import { useState } from "react";
@@ -51,7 +51,6 @@ function RequiredEvents() {
       },
     }));
   };
-
   const otherRequestedEvents = () => {
     return otherReqEvents.map((event) => ({
       id: event.id,
@@ -69,24 +68,35 @@ function RequiredEvents() {
       },
     }));
   };
+  const fontStyle = {
+    mb: 1,
+    letterSpacing: 1,
+  };
 
   return (
     <ThemeProvider theme={customTheme}>
       <Container>
         <Box>
+          <Paper sx={{ backgroundColor: "#f0f0f0", boxShadow: 0 }}>
+            <Typography variant="h5" sx={fontStyle}>
+              Mis solicitudes
+            </Typography>
+          </Paper>
           <FullCalendar
             eventContent={(eventInfo) => {
               return (
                 <>
-                  <p>{eventInfo.event.title}</p>
-                  <p>{eventInfo.event.extendedProps.customProperty}</p>
+                  <Box>{eventInfo.event.title}</Box>
+                  <Box>{eventInfo.event.extendedProps.customProperty}</Box>
                 </>
               );
             }}
             headerToolbar={{
               right: "today next",
             }}
-            views={{listMonth: {titleFormat: {month: "short", year:"numeric"}}}}
+            views={{
+              listMonth: { titleFormat: { month: "short", year: "numeric" } },
+            }}
             plugins={[listPlugin, interactionPlugin]}
             locale={esLocale}
             height={"auto"}
@@ -96,20 +106,27 @@ function RequiredEvents() {
             eventClick={handleEventUserClick}
           />
         </Box>
-        <Box sx={{mt:3}}>
+        <Box sx={{ mt: 5 }}>
+          <Paper sx={{ backgroundColor: "#f0f0f0", boxShadow: 0 }}>
+            <Typography variant="h5" sx={fontStyle}>
+              Solicitud de terceros
+            </Typography>
+          </Paper>
           <FullCalendar
             eventContent={(eventInfo) => {
               return (
                 <>
-                  <p>{eventInfo.event.title}</p>
-                  <p>{eventInfo.event.extendedProps.customProperty}</p>
+                  <Box>{eventInfo.event.title}</Box>
+                  <Box>{eventInfo.event.extendedProps.customProperty}</Box>
                 </>
               );
             }}
             headerToolbar={{
               right: "today next",
             }}
-            views={{listMonth: {titleFormat: {month: "short", year:"numeric"}}}}
+            views={{
+              listMonth: { titleFormat: { month: "short", year: "numeric" } },
+            }}
             plugins={[listPlugin, interactionPlugin]}
             locale={esLocale}
             height={"auto"}

@@ -5,7 +5,7 @@ import esLocale from "@fullcalendar/core/locales/es";
 import interactionPlugin from "@fullcalendar/interaction";
 import EventAddDialog from "./Dialogs/EventAddDialog.js";
 import EventInfoDialog from "./Dialogs/EventInfoDialog.js";
-import { Container, ThemeProvider, createTheme } from "@mui/material";
+import { Box, Container, ThemeProvider, createTheme } from "@mui/material";
 import { useGetEvents } from "../../../hooks/useGetEvents.js";
 import EventPublishDialogList from "./Dialogs/EventPublishDialogList.js";
 
@@ -17,14 +17,13 @@ const customTheme = createTheme({
   },
 });
 
-const Calendar = () => {
+const AdminCalendar = () => {
   const [currentDates, setCurrentDates] = useState(null);
   const [open, setOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
   const [publishOpen, setPublishOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const { events, unpublishedEvents, fetchUnpublishedEvents } = useGetEvents(currentDates);
-
   const handleEditOpen = () => {
     setOpen(true);
   };
@@ -44,6 +43,14 @@ const Calendar = () => {
     setInfoOpen(true);
   };
 
+  const statusMap = {
+    CREATED: "❌ Sin publicar",
+    ASSIGNED: "✅ Publicado",
+    CHANGED: "⏳ En espera de aprovación",
+    REQUESTED: "⏳ Cambio solicitado",
+    APPROVED: "🔄 Cambio aceptado",
+  };
+  
   const renderEvents = () => {
     return events.map((event) => ({
       id: event.id,
@@ -54,7 +61,7 @@ const Calendar = () => {
       userId: event.userId,
       eventStatus: event.eventStatus,
       extendedProps: {
-        customProperty: event.eventStatus === "CREATED" ? "❌ Sin publicar" : "✅ Publicado"
+        customProperty: statusMap[event.eventStatus]
       },
     }));
   };
@@ -73,9 +80,9 @@ const Calendar = () => {
           eventContent={(eventInfo) => {
             return (
               <>
-                <p>{eventInfo.timeText}</p>
-                <p>{eventInfo.event.title}</p>
-                <p>{eventInfo.event.extendedProps.customProperty}</p>
+                <Box>{eventInfo.timeText}</Box>
+                <Box>{eventInfo.event.title}</Box>
+                <Box>{eventInfo.event.extendedProps.customProperty}</Box>
               </>
             );
           }}
@@ -131,4 +138,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default AdminCalendar;

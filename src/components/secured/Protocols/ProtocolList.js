@@ -87,7 +87,6 @@ export default function ProtocolList() {
                     sm={5}
                     sx={{
                       display: "flex",
-                      alignItems: "center",
                       justifyContent: "left",
                     }}
                   >
@@ -99,7 +98,6 @@ export default function ProtocolList() {
                     sm={3}
                     sx={{
                       display: "flex",
-                      alignItems: "center",
                       justifyContent: "center",
                     }}
                   >

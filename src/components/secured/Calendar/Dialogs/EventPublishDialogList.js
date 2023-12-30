@@ -4,6 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import {
+  DialogContent,
   DialogContentText,
   List,
   ListItem,
@@ -35,23 +36,26 @@ function myDate(date) {
   return formattedDate;
 }
 const EventPublishDialogList = ({ open, handleClose, unpublishedEvents }) => {
-
   const { handlePublishEvents } = useAddEvents();
 
   return (
     <ThemeProvider theme={customTheme}>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle sx={{ mb: 1 }}>Publicar guardias</DialogTitle>
-        {unpublishedEvents.map((event) => (
-          <List key={event.id}>
-            <ListItem sx={{ display: "flex", maxHeight: 2 }}>
-              {event.title}&nbsp;
-              <DialogContentText>
-                ({myDate(event.startDate)} hasta {myDate(event.endDate)})
-              </DialogContentText>
-            </ListItem>
-          </List>
-        ))}
+        {unpublishedEvents.length !== 0 ? (
+          unpublishedEvents.map((event) => (
+            <List key={event.id}>
+              <ListItem sx={{ display: "flex", maxHeight: 2 }}>
+                {event.title}&nbsp;
+                <DialogContentText>
+                  ({myDate(event.startDate)} hasta {myDate(event.endDate)})
+                </DialogContentText>
+              </ListItem>
+            </List>
+          ))
+        ) : (
+          <DialogContent>No hay eventos para publicar</DialogContent>
+        )}
         <DialogActions>
           <Button onClick={handleClose}>Cerrar</Button>
           <Button
@@ -59,6 +63,7 @@ const EventPublishDialogList = ({ open, handleClose, unpublishedEvents }) => {
               handlePublishEvents(unpublishedEvents);
               handleClose();
             }}
+            disabled={unpublishedEvents.length === 0}
           >
             Publicar
           </Button>

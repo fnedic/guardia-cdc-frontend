@@ -39,14 +39,21 @@ function myDate(date) {
   return formattedDate;
 }
 
-const EventInfoUserDialog = ({ open, handleClose, selectedEvent }) => {
-  const { handleRequestChange } = useAddEvents();
+const EventChangedDialog = ({ open, handleClose, selectedEvent }) => {
+  const { handleRequestApprove, handleChangeCancel } = useAddEvents();
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [cancelOpen, setCancelOpen] = useState(false);
   const handleChangeOpen = () => {
     setConfirmOpen(true);
   };
   const handleConfirmClose = () => {
     setConfirmOpen(false);
+  };
+  const handleCancelOpen = () => {
+    setCancelOpen(true);
+  };
+  const handleCancelClose = () => {
+    setCancelOpen(false);
   };
 
   return (
@@ -60,14 +67,7 @@ const EventInfoUserDialog = ({ open, handleClose, selectedEvent }) => {
         >
           {selectedEvent ? (
             <Box>
-              <DialogContentText>
-                Médico: {selectedEvent.title}
-              </DialogContentText>
-              {selectedEvent.extendedProps.customProperty && (
-                <DialogContentText>
-                  Estado: {selectedEvent.extendedProps.customProperty}
-                </DialogContentText>
-              )}
+              <DialogContentText>De: {selectedEvent.title}</DialogContentText>
               <Divider sx={{ mt: 1, mb: 1 }} />
               <DialogContentText>
                 Desde: {myDate(selectedEvent.startStr)}
@@ -89,14 +89,8 @@ const EventInfoUserDialog = ({ open, handleClose, selectedEvent }) => {
         >
           <DialogActions>
             <Button onClick={handleClose}>Cerrar</Button>
-            {selectedEvent ? (
-              <Button
-                onClick={handleChangeOpen}
-                disabled={new Date() > new Date(selectedEvent.start)}
-              >
-                Solicitar Cambio
-              </Button>
-            ) : null}
+            <Button color="error" onClick={handleCancelOpen}>Cancelar Cambio</Button>{" "}
+            <Button onClick={handleChangeOpen}>Aceptar Cambio</Button>
           </DialogActions>
         </Box>
       </Dialog>
@@ -104,8 +98,7 @@ const EventInfoUserDialog = ({ open, handleClose, selectedEvent }) => {
         <DialogTitle>¡Atención!</DialogTitle>
         <DialogContent sx={{ maxWidth: 400, minHeight: 120, margin: 1 }}>
           <DialogContentText>
-            Esta acción publicara esta guardia médica en el panel de solicitudes
-            de cambios.
+            Esta acción validará el cambio de guardia solicitado por {selectedEvent ? (selectedEvent.title) : ""}.
           </DialogContentText>
           <Divider sx={{ mt: 2, mb: 2 }} />
           <DialogContentText>Desea continuar?</DialogContentText>
@@ -114,10 +107,30 @@ const EventInfoUserDialog = ({ open, handleClose, selectedEvent }) => {
           <Button onClick={handleConfirmClose}>Cerrar</Button>
           <Button
             onClick={() => {
-              handleRequestChange(selectedEvent.id);
+              handleRequestApprove(selectedEvent.id);
             }}
           >
-            Publicar
+            Aceptar
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={cancelOpen} onClose={handleCancelOpen}>
+        <DialogTitle>¡Atención!</DialogTitle>
+        <DialogContent sx={{ maxWidth: 400, minHeight: 120, margin: 1 }}>
+          <DialogContentText>
+            Esta acción cancelará el cambio de guardia solicitado por {selectedEvent ? (selectedEvent.title) : ""}, y restablecera dicha guardia al médico solicitante.
+          </DialogContentText>
+          <Divider sx={{ mt: 2, mb: 2 }} />
+          <DialogContentText>Desea continuar?</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancelClose}>Cerrar</Button>
+          <Button
+            onClick={() => {
+              handleChangeCancel(selectedEvent.id);
+            }}
+          >
+            Aceptar
           </Button>
         </DialogActions>
       </Dialog>
@@ -125,4 +138,4 @@ const EventInfoUserDialog = ({ open, handleClose, selectedEvent }) => {
   );
 };
 
-export default EventInfoUserDialog;
+export default EventChangedDialog;

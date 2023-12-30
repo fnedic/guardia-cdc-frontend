@@ -1,4 +1,8 @@
-import { Box, Container, createTheme } from "@mui/material";
+import {
+  Box,
+  Container,
+  createTheme,
+} from "@mui/material";
 import { ThemeProvider } from "styled-components";
 import { useGetEvents } from "../../../hooks/useGetEvents";
 import { useState } from "react";
@@ -6,7 +10,7 @@ import FullCalendar from "@fullcalendar/react";
 import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
 import esLocale from "@fullcalendar/core/locales/es";
-import EventInfoUserDialog from "./Dialogs/EventInfoUserDialog.js";
+import EventChangedDialog from "./Dialogs/EventChangedDialog.js";
 
 const customTheme = createTheme({
   palette: {
@@ -16,9 +20,8 @@ const customTheme = createTheme({
   },
 });
 
-function UserEvents() {
-  const [currentDates, setCurrentDates] = useState(null);
-  const { userEvents } = useGetEvents(currentDates);
+function AdminRequestedChanges() {
+  const { changedEvents } = useGetEvents();
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [infoOpen, setInfoOpen] = useState(false);
   const handleClose = () => {
@@ -28,8 +31,8 @@ function UserEvents() {
     setSelectedEvent(eventClickInfo.event);
     setInfoOpen(true);
   };
-  const renderUserEvents = () => {
-    return userEvents.map((event) => ({
+  const renderChangedEvents = () => {
+    return changedEvents.map((event) => ({
       id: event.id,
       title: event.title,
       start: new Date(event.startDate),
@@ -38,51 +41,37 @@ function UserEvents() {
       userId: event.userId,
       eventStatus: event.eventStatus,
       extendedProps: {
-        customProperty:
-          event.eventStatus === "REQUESTED"
-            ? "⏳ Cambio solicitado"
-            : "✅ Asignada",
+        customProperty: event.eventStatus === "REQUESTED" ? "⏳ Cambio solicitado" : "✅ Asignada",
       },
     }));
-  };
-  const handleDatesSet = (dateInfo) => {
-    setCurrentDates({
-      start: dateInfo.startStr,
-      end: dateInfo.endStr,
-    });
   };
 
   return (
     <ThemeProvider theme={customTheme}>
-      <Container>
+      <Container sx={{mt:5,mb:5}}>
         <Box className="calendar-container">
           <FullCalendar
-            eventContent={(eventInfo) => {
+            eventContent={(e) => {
               return (
-                <>
-                  <Box>{eventInfo.event.title}</Box>
-                  <Box>{eventInfo.event.extendedProps.customProperty}</Box>
-                </>
+                <Box>
+                  <Box>Cambio solicitado - Tomará guardia: {e.event.title}</Box>
+                </Box>
               );
             }}
             headerToolbar={{
-              right: "today next",
+              right: "today prev next",
             }}
             plugins={[listPlugin, interactionPlugin]}
             locale={esLocale}
-            views={{
-              listMonth: { titleFormat: { month: "short", year: "numeric" } },
-            }}
-            height={"auto"}
+            views={{listMonth: {titleFormat: {month: "short", year:"numeric"}}}}
             initialView="listMonth"
-            events={userEvents ? renderUserEvents() : null}
+            events={changedEvents ? renderChangedEvents() : null}
             selectable={true}
             eventClick={handleEventClick}
-            datesSet={handleDatesSet}
           />
         </Box>
       </Container>
-      <EventInfoUserDialog
+      <EventChangedDialog
         open={infoOpen}
         handleClose={handleClose}
         selectedEvent={selectedEvent}
@@ -91,4 +80,4 @@ function UserEvents() {
   );
 }
 
-export default UserEvents;
+export default AdminRequestedChanges;
