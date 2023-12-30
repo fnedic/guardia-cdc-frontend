@@ -229,7 +229,7 @@ function ProfileContent() {
                 }}
                 onClick={handleGoBack}
               >
-                Cancelar
+                Cerrar
               </Button>
             </Grid>
           </Box>
