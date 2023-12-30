@@ -31,6 +31,8 @@ import "../../../../node_modules/draft-js/dist/Draft.css";
 import RichTextEditor from "./RichTextEditor";
 import { Send } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import dayjs from 'dayjs';
+import "dayjs/locale/es-us";
 
 const customTheme = createTheme({
   palette: {
@@ -40,7 +42,7 @@ const customTheme = createTheme({
   },
 });
 const customBoxStyle = {
-  backgroundColor: "#799a3d",
+  backgroundColor: "#616ba9",
   maxWidth: "100%",
   color: "#fafafa",
   borderTopLeftRadius: "0",
@@ -49,6 +51,7 @@ const customBoxStyle = {
 };
 
 export default function ProtocolForm() {
+  dayjs.locale('es-us');
   const titleRef = useRef(null);
   const autor1Ref = useRef(null);
   const autor2Ref = useRef(null);
@@ -68,7 +71,7 @@ export default function ProtocolForm() {
   const [videoGroup, setVideoGroup] = useState("");
   const [videoDate, setDate] = useState();
   const [notice, setNotice] = useState("");
-
+  
   const navigate = useNavigate();
   const [selectedForm, setSelectedForm] = useState("protocol");
   const handleFormChange = (event) => {
@@ -182,11 +185,13 @@ export default function ProtocolForm() {
       title: notice,
     };
     ProtocolService.createNotice(notice2)
-     .then((response) => {
+      .then((response) => {
         const messageParam = encodeURIComponent(response.data);
-        navigate(`/admin/data?table=protocol&status=success&mssg=${messageParam}`);
+        navigate(
+          `/admin/data?table=protocol&status=success&mssg=${messageParam}`
+        );
       })
-     .catch((error) => {
+      .catch((error) => {
         setSnackbarMessage(error.response.data.message);
         setSeverity("error");
         setShowSnackbar(true);
@@ -238,7 +243,7 @@ export default function ProtocolForm() {
   return (
     <ThemeProvider theme={customTheme}>
       <CssBaseline />
-      <Container component="main" sx={{ marginTop: 8, marginBottom: 15 }}>
+      <Container component="main" sx={{ marginTop: 8, marginBottom: 10 }}>
         <Box
           sx={{
             mb: 8,
@@ -474,88 +479,99 @@ export default function ProtocolForm() {
                 </Grid>
               </Grid>
 
-              <Grid item xs={12} sm={2}>
-                <FormControl sx={{ minWidth: 200, mr: 5 }} size="small">
-                  <InputLabel>Grupo</InputLabel>
-                  <Select
-                    id="protocolGroup"
-                    value={group}
-                    label="Group"
-                    onChange={handleInputChange}
-                    sx={{ borderRadius: 0 }}
-                  >
-                    <MenuItem value={"CARDIOVASCULAR"}>Cardiología</MenuItem>
-                    <MenuItem value={"CIRUGIA"}>Cirugía</MenuItem>
-                    <MenuItem value={"ENDOCRINOMETABOLICO"}>
-                      Endocrinometabolico
-                    </MenuItem>
-                    <MenuItem value={"GASTROENTEROLOGIA"}>
-                      Gastroenterología
-                    </MenuItem>
-                    <MenuItem value={"GINECOOBSTETRICIA"}>
-                      Ginecoobstetricia
-                    </MenuItem>
-                    <MenuItem value={"HOMEOSTASIS"}>Homeostasis</MenuItem>
-                    <MenuItem value={"INFECTOLOGIA"}>Infectología</MenuItem>
-                    <MenuItem value={"NEFROLOGIA"}>Nefrología</MenuItem>
-                    <MenuItem value={"NEUMONOLOGIA"}>Neumonología</MenuItem>
-                    <MenuItem value={"NEUROLOGIA"}>Neurologia</MenuItem>
-                    <MenuItem value={"OTORRINOLARINGOLOGIA"}>ORL</MenuItem>
-                    <MenuItem value={"PROCEDIMIENTO"}>
-                      Procedimiento Institucional
-                    </MenuItem>
-                    <MenuItem value={"TOXICOLOGIA"}>Toxicología</MenuItem>
-                    <MenuItem value={"TRAUMATOLOGIA"}>Traumatología</MenuItem>
-                    <MenuItem value={"UROLOGIA"}>Urología</MenuItem>
-                  </Select>
-                </FormControl>
-
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                    label="Publicación"
-                    slotProps={{ textField: { size: "small" } }}
-                    id="createdDate"
-                    value={selectedDate}
-                    onChange={handleDateChange}
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Box margin={2}>
+                  <FormControl sx={{ minWidth: 300 }} size="small">
+                    <InputLabel>Grupo</InputLabel>
+                    <Select
+                      id="protocolGroup"
+                      value={group}
+                      label="Group"
+                      onChange={handleInputChange}
+                      sx={{ borderRadius: 0 }}
+                    >
+                      <MenuItem value={"CARDIOVASCULAR"}>Cardiología</MenuItem>
+                      <MenuItem value={"CIRUGIA"}>Cirugía</MenuItem>
+                      <MenuItem value={"ENDOCRINOMETABOLICO"}>
+                        Endocrinometabolico
+                      </MenuItem>
+                      <MenuItem value={"GASTROENTEROLOGIA"}>
+                        Gastroenterología
+                      </MenuItem>
+                      <MenuItem value={"GENERALES"}>Generales</MenuItem>
+                      <MenuItem value={"GINECOOBSTETRICIA"}>
+                        Ginecoobstetricia
+                      </MenuItem>
+                      <MenuItem value={"HOMEOSTASIS"}>Homeostasis</MenuItem>
+                      <MenuItem value={"INFECTOLOGIA"}>Infectología</MenuItem>
+                      <MenuItem value={"NEFROLOGIA"}>Nefrología</MenuItem>
+                      <MenuItem value={"NEUMONOLOGIA"}>Neumonología</MenuItem>
+                      <MenuItem value={"NEUROLOGIA"}>Neurologia</MenuItem>
+                      <MenuItem value={"OTORRINOLARINGOLOGIA"}>ORL</MenuItem>
+                      <MenuItem value={"PROCEDIMIENTO"}>
+                        Procedimiento Institucional
+                      </MenuItem>
+                      <MenuItem value={"TOXICOLOGIA"}>Toxicología</MenuItem>
+                      <MenuItem value={"TRAUMATOLOGIA"}>Traumatología</MenuItem>
+                      <MenuItem value={"UROLOGIA"}>Urología</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+                <Box margin={3}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      label="Fecha Publicación"
+                      slotProps={{ textField: { size: "small" } }}
+                      id="createdDate"
+                      value={selectedDate}
+                      onChange={handleDateChange}
+                      format="DD/MM/YYYY"
+                      sx={{
+                        minWidth: 300,
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: 0,
+                        },
+                      }}
+                    />
+                  </LocalizationProvider>
+                </Box>
+                <Box>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    endIcon={<Send />}
+                    disableElevation
                     sx={{
-                      "& .MuiOutlinedInput-root": {
-                        borderRadius: 0,
-                      },
+                      backgroundColor: "#315d9f",
+                      boxShadow: "0",
+                      borderRadius: 0,
                     }}
-                  />
-                </LocalizationProvider>
-
-                <Button
-                  type="submit"
-                  variant="contained"
-                  endIcon={<Send />}
-                  disableElevation
-                  sx={{
-                    mt: 0.2,
-                    ml: 6,
-                    backgroundColor: "#315d9f",
-                    boxShadow: "0",
-                    borderRadius: 0,
-                    width: "20%",
-                  }}
-                  onClick={handleSubmit}
-                >
-                  Publicar
-                </Button>
+                    onClick={handleSubmit}
+                  >
+                    Publicar
+                  </Button>
+                </Box>
               </Grid>
             </Box>
           </Box>
         )}
         {selectedForm === "video" && (
           <Box
+            xs={12}
+            sm={6}
             sx={{
-              display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
             <Box component="form" noValidate sx={{ textAlign: "center" }}>
-              <Grid item xs={12} sm={6}>
+              <Grid item>
                 <Box mb={5}>
                   <Box sx={customBoxStyle}>
                     <Typography variant="h6" letterSpacing={0.5}>
@@ -598,69 +614,85 @@ export default function ProtocolForm() {
                     }}
                   />
                 </Box>
-                <Grid>
-                  <FormControl sx={{ minWidth: 200, mr: 2 }} size="small">
-                    <InputLabel>Grupo</InputLabel>
-                    <Select
-                      id="videoGroup"
-                      label="Group"
-                      value={videoGroup}
-                      onChange={handleInputChange2}
-                      sx={{ borderRadius: 0 }}
-                    >
-                      <MenuItem value={"CARDIOVASCULAR"}>Cardiología</MenuItem>
-                      <MenuItem value={"CIRUGIA"}>Cirugía</MenuItem>
-                      <MenuItem value={"ENDOCRINOMETABOLICO"}>
-                        Endocrinometabolico
-                      </MenuItem>
-                      <MenuItem value={"GASTROENTEROLOGIA"}>
-                        Gastroenterología
-                      </MenuItem>
-                      <MenuItem value={"GINECOOBSTETRICIA"}>
-                        Ginecoobstetricia
-                      </MenuItem>
-                      <MenuItem value={"HOMEOSTASIS"}>Homeostasis</MenuItem>
-                      <MenuItem value={"INFECTOLOGIA"}>Infectología</MenuItem>
-                      <MenuItem value={"NEFROLOGIA"}>Nefrología</MenuItem>
-                      <MenuItem value={"NEUMONOLOGIA"}>Neumonología</MenuItem>
-                      <MenuItem value={"NEUROLOGIA"}>Neurologia</MenuItem>
-                      <MenuItem value={"OTORRINOLARINGOLOGIA"}>ORL</MenuItem>
-                      <MenuItem value={"TOXICOLOGIA"}>Toxicología</MenuItem>
-                      <MenuItem value={"TRAUMATOLOGIA"}>Traumatología</MenuItem>
-                      <MenuItem value={"UROLOGIA"}>Urología</MenuItem>
-                    </Select>
-                  </FormControl>
-
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      label="Publicación"
-                      slotProps={{ textField: { size: "small" } }}
-                      id="date"
-                      value={videoDate}
-                      onChange={handleDateChange2}
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <Box margin={2}>
+                    <FormControl sx={{ minWidth: 300 }} size="small">
+                      <InputLabel>Grupo</InputLabel>
+                      <Select
+                        id="videoGroup"
+                        label="Group"
+                        value={videoGroup}
+                        onChange={handleInputChange2}
+                        sx={{ borderRadius: 0 }}
+                      >
+                        <MenuItem value={"CARDIOVASCULAR"}>
+                          Cardiología
+                        </MenuItem>
+                        <MenuItem value={"CIRUGIA"}>Cirugía</MenuItem>
+                        <MenuItem value={"ENDOCRINOMETABOLICO"}>
+                          Endocrinometabolico
+                        </MenuItem>
+                        <MenuItem value={"GASTROENTEROLOGIA"}>
+                          Gastroenterología
+                        </MenuItem>
+                        <MenuItem value={"GENERALES"}>Generales</MenuItem>
+                        <MenuItem value={"GINECOOBSTETRICIA"}>
+                          Ginecoobstetricia
+                        </MenuItem>
+                        <MenuItem value={"HOMEOSTASIS"}>Homeostasis</MenuItem>
+                        <MenuItem value={"INFECTOLOGIA"}>Infectología</MenuItem>
+                        <MenuItem value={"NEFROLOGIA"}>Nefrología</MenuItem>
+                        <MenuItem value={"NEUMONOLOGIA"}>Neumonología</MenuItem>
+                        <MenuItem value={"NEUROLOGIA"}>Neurologia</MenuItem>
+                        <MenuItem value={"OTORRINOLARINGOLOGIA"}>ORL</MenuItem>
+                        <MenuItem value={"TOXICOLOGIA"}>Toxicología</MenuItem>
+                        <MenuItem value={"TRAUMATOLOGIA"}>
+                          Traumatología
+                        </MenuItem>
+                        <MenuItem value={"UROLOGIA"}>Urología</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                  <Box margin={3}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        label="Publicación"
+                        slotProps={{ textField: { size: "small" } }}
+                        id="date"
+                        value={videoDate}
+                        onChange={handleDateChange2}
+                        format="DD/MM/YYYY"
+                        sx={{
+                          minWidth: 300,
+                          "& .MuiOutlinedInput-root": {
+                            borderRadius: 0,
+                          },
+                        }}
+                      />
+                    </LocalizationProvider>
+                  </Box>
+                  <Box>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      endIcon={<Send />}
+                      disableElevation
                       sx={{
-                        "& .MuiOutlinedInput-root": {
-                          borderRadius: 0,
-                        },
+                        backgroundColor: "#315d9f",
+                        boxShadow: "0",
+                        borderRadius: 0,
                       }}
-                    />
-                  </LocalizationProvider>
-
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    endIcon={<Send />}
-                    disableElevation
-                    sx={{
-                      backgroundColor: "#315d9f",
-                      boxShadow: "0",
-                      borderRadius: 0,
-                      ml: 2,
-                    }}
-                    onClick={handleVideoSubmit}
-                  >
-                    Publicar
-                  </Button>
+                      onClick={handleVideoSubmit}
+                    >
+                      Publicar
+                    </Button>
+                  </Box>
                 </Grid>
               </Grid>
             </Box>
@@ -668,14 +700,15 @@ export default function ProtocolForm() {
         )}
         {selectedForm === "notice" && (
           <Box
+            xs={12}
+            sm={6}
             sx={{
-              display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
             <Box component="form" noValidate sx={{ textAlign: "center" }}>
-              <Grid item xs={12} sm={6}>
+              <Grid item>
                 <Box mb={5}>
                   <Box sx={customBoxStyle}>
                     <Typography variant="h6" letterSpacing={0.5}>
@@ -688,7 +721,6 @@ export default function ProtocolForm() {
                     value={notice}
                     onChange={handleNotice}
                     sx={{
-                      minWidth:600,
                       "& .MuiOutlinedInput-root": {
                         borderRadius: 0,
                         "& fieldset": {

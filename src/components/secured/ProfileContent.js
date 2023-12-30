@@ -18,6 +18,11 @@ import {
 import { useParams } from "react-router-dom";
 import { Cancel, Edit, Update } from "@mui/icons-material";
 import { useSnackBar } from "../../hooks/useSnackbar.js";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import "dayjs/locale/es-us.js";
+import dayjs from "dayjs";
+dayjs.locale("es-us");
 
 const customTheme = createTheme({
   palette: {
@@ -27,9 +32,22 @@ const customTheme = createTheme({
   },
 });
 
-const statusOptions = {
-  ACTIVE: "Activo",
-  INACTIVE: "Inactivo",
+const specialtieOptions = {
+  CARDIOVASCULAR: "Cardiovascular",
+  CIRUGIA: "Cirugía",
+  CLINICA: "Clínica",
+  ENDOCRINOMETABOLICO: "Endocrinometabólico",
+  GASTROENTEROLOGIA: "Gastroenterologia",
+  GENERALISTA: "Generalista",
+  GINECOOBSTETRICIA: "Ginecoobstetricia",
+  INFECTOLOGIA: "Infectología",
+  NEFROLOGIA: "Nefrologia",
+  NEUMONOLOGIA: "Neumonologia",
+  NEUROLOGIA: "Neurologia",
+  OTORRINOLARINGOLOGIA: "ORL",
+  TOXICOLOGIA: "Toxicología",
+  TRAUMATOLOGIA: "Traumatologia",
+  UROLOGIA: "Urologia",
 };
 
 const fieldLabels = {
@@ -44,14 +62,14 @@ function ProfileContent() {
   const { id } = useParams();
   const { SnackBar, setSeverity, setShowSnackbar, setSnackbarMessage } =
     useSnackBar();
-
   const [user, setUser] = useState({
     name: "",
     lastname: "",
     medicalRegistration: "",
     dni: "",
-    status: "ACTIVE",
     email: "",
+    specialtie: "",
+    startDate: undefined,
   });
 
   const handleGoBack = () => {
@@ -82,6 +100,13 @@ function ProfileContent() {
           setShowSnackbar(true);
         }
       });
+  };
+
+  const handleDateChange = (e) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      startDate: e,
+    }));
   };
 
   const handleChange = (event) => {
@@ -138,18 +163,34 @@ function ProfileContent() {
                   />
                 </Grid>
               ))}
-              <Grid item xs={6}>
-                <FormControl>
-                  <InputLabel>Estado</InputLabel>
+              <Grid item xs={12} sm={6}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    label="Inicio de actividad"
+                    name="startDate"
+                    value={dayjs(user.startDate)}
+                    onChange={handleDateChange}
+                    format="DD/MM/YYYY"
+                    sx={{
+                      width: "100%",
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 0,
+                      },
+                    }}
+                  />
+                </LocalizationProvider>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl fullWidth>
+                  <InputLabel>Especialidad</InputLabel>
                   <Select
-                    sx={{ minWidth: "12rem", borderRadius:0 }}
-                    name="status"
-                    value={user.status}
+                    sx={{ borderRadius: 0 }}
+                    name="specialtie"
+                    value={user.specialtie}
                     onChange={handleChange}
-                    label="Estado"
-                    disabled
+                    label="Especialidad"
                   >
-                    {Object.entries(statusOptions).map(([value, label]) => (
+                    {Object.entries(specialtieOptions).map(([value, label]) => (
                       <MenuItem key={value} value={value}>
                         {label}
                       </MenuItem>

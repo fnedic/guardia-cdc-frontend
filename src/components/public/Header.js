@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../public/images/logo-cdc-header.png";
+import logo from "../public/images/new-logo-header.svg";
 import { Box, Button } from "@mui/material";
 
 export const Header = () => {
@@ -24,11 +24,10 @@ export const Header = () => {
           justifyContent: "center",
           alignItems: "center",
           backgroundImage: `url(${logo})`,
-          backgroundSize: "100%",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
-          width: "30rem",
-          height: "8rem",
+          width: "85%",
+          height: "85%",
         }}
       ></Box>
     </Button>

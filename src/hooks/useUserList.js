@@ -43,6 +43,15 @@ export const useUserList = () => {
     setDeleteDialogOpen(false);
   };
 
+  function myDate(date) {
+    const myDate = new Date(date);
+    const day = myDate.getDate();
+    const month = myDate.getMonth() + 1;
+    const year = myDate.getFullYear();
+    const formattedDate = `${day}/${month}/${year}`;
+    return formattedDate;
+  }
+
   return {
     userList,
     deleteDialogOpen,
@@ -50,5 +59,6 @@ export const useUserList = () => {
     deleteUser,
     handleDeleteConfirmed,
     handleCloseDeleteDialog,
+    myDate
   };
 };

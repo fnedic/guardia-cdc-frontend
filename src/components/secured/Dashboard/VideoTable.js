@@ -133,7 +133,7 @@ export function VideoTable() {
             borderRadius:0,
             borderColor: "#799a3d",
             "& .MuiDataGrid-cell:hover": {
-              color: "#69445d",
+              color: "#283583",
             },
           }}
           rows={formattedVideoList}

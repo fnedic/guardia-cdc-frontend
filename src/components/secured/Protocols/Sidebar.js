@@ -11,8 +11,8 @@ function Sidebar(driveLink) {
   const { notice } = useSidebar();
 
   return (
-    <Grid item xs={12} md={12} ml={4} mt={3}>
-      <Paper elevation={0} sx={{ p: 2, bgcolor: "grey.200", borderRadius: 0 }}>
+    <Grid item xs={12} md={12} mt={3}>
+      <Paper elevation={0} sx={{ p: 2, bgcolor: "#ebeeff", borderRadius: 0 }}>
         <Typography variant="h6" gutterBottom>
           Aviso!
         </Typography>
@@ -28,7 +28,6 @@ function Sidebar(driveLink) {
         item
         xs={12}
         mt={5}
-        ml={3}
         sx={{
           display: "flex",
           alignItems: "center",

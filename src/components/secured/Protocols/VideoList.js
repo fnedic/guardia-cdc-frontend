@@ -69,7 +69,7 @@ export default function VideoList() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Avatar sx={{ backgroundColor: "#b4b8cc", color: "#ff6767" }}>
+                  <Avatar sx={{ backgroundColor: "#e1e3ff", color: "#e14949" }}>
                     <YouTube />
                   </Avatar>
                 </IconButton>
