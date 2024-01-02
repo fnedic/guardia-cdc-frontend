@@ -83,6 +83,7 @@ export default function Register() {
     showPassword2,
     handleClickShowPassword2,
     handleMouseDownPassword2,
+    emailFormat,
   } = useRegister(form);
 
   useEffect(() => {
@@ -141,6 +142,17 @@ export default function Register() {
                     onChange={handleChange}
                     sx={inputStyle}
                   />
+                  {!emailFormat && (
+                    <Typography
+                      align="center"
+                      fontSize={"small"}
+                      backgroundColor="#fc6a6a"
+                      color={"white"}
+                      marginTop={0.3}
+                    >
+                      El formato del email no es válido
+                    </Typography>
+                  )}
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -272,7 +284,6 @@ export default function Register() {
                       backgroundColor="#fc6a6a"
                       color={"white"}
                       marginTop={0.3}
-                      borderRadius={0.8}
                     >
                       Las contraseñas no coinciden!
                     </Typography>
@@ -292,7 +303,7 @@ export default function Register() {
                   borderRadius: 0,
                 }}
                 onClick={onRegister}
-                disabled={!areEquals}
+                disabled={!areEquals || !emailFormat}
               >
                 Registrarme
               </Button>
