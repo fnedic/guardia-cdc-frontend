@@ -111,7 +111,7 @@ export default function VideoList() {
                   sx={{
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent: "left",
                   }}
                 >
                   <Typography>{myDate(video.date)}</Typography>
