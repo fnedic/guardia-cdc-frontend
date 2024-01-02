@@ -99,7 +99,7 @@ export default function ProceduresList() {
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center",
+                      justifyContent: "left",
                     }}
                   >
                     <Typography>{procedure.publicationDate}</Typography>
