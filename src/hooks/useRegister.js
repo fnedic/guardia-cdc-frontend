@@ -61,6 +61,7 @@ export const useRegister = (form) => {
   // handle password confirmation ////////////////////////////////////////////////
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [areEquals, setAreEqual] = useState(true);
+  const [emailFormat, setEmailFormat] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const [showPassword2, setShowPassword2] = useState(false);
@@ -74,6 +75,10 @@ export const useRegister = (form) => {
     const { password } = form;
     setAreEqual(password === passwordConfirmation);
   }, [passwordConfirmation, form]);
+
+  useEffect(() => {
+    setEmailFormat(form.email === "" || (form.email.includes("@") && form.email.includes(".com")));
+  }, [form.email]);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -96,5 +101,6 @@ export const useRegister = (form) => {
     showPassword2,
     handleClickShowPassword2,
     handleMouseDownPassword2,
+    emailFormat,
   };
 };
