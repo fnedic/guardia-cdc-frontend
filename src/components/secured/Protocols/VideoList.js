@@ -55,7 +55,6 @@ export default function VideoList() {
             elevation={0}
             square
             sx={{
-              textAlign: "center",
               mx: "auto",
               p: 2,
               background: "#f4f5ff",
