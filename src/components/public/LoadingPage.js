@@ -1,9 +1,34 @@
-import { Container, CssBaseline, Skeleton, Stack } from "@mui/material";
+import {
+  Box,
+  Container,
+  CssBaseline,
+  LinearProgress,
+  Skeleton,
+  Stack,
+} from "@mui/material";
 import React from "react";
 import { Header } from "./Header";
 import Footer from "./Footer";
 
 const LoadingPage = () => {
+  const [progress, setProgress] = React.useState(0);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((oldProgress) => {
+        if (oldProgress === 100) {
+          return 0;
+        }
+        const diff = Math.random() * 10;
+        return Math.min(oldProgress + diff, 100);
+      });
+    }, 500);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   const appBarStyle = {
     display: "flex",
     justifyContent: "center",
@@ -20,6 +45,13 @@ const LoadingPage = () => {
         <CssBaseline />
         <Skeleton variant="text" width={300} />
       </header>
+      <Box sx={{ width: "100%" }}>
+        <LinearProgress
+          color="success"
+          variant="determinate"
+          value={progress}
+        />
+      </Box>
       <Container
         sx={{
           mt: 10,

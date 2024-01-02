@@ -23,7 +23,7 @@ import { useProcedureList } from "../../../hooks/useProcedureList";
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#799a3d",
+      main: "#283583",
     },
   },
 });
@@ -55,7 +55,6 @@ export default function ProceduresList() {
               elevation={0}
               square
               sx={{
-                textAlign: "center",
                 mx: "auto",
                 p: 2,
                 background: "#f4f5ff",
@@ -100,7 +99,7 @@ export default function ProceduresList() {
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center",
+                      justifyContent: "left",
                     }}
                   >
                     <Typography>{procedure.publicationDate}</Typography>

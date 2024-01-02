@@ -55,7 +55,6 @@ export default function ProtocolList() {
               elevation={0}
               square
               sx={{
-                textAlign: "center",
                 mx: "auto",
                 p: 2,
                 background: "#f4f5ff",
@@ -87,7 +86,6 @@ export default function ProtocolList() {
                     sm={5}
                     sx={{
                       display: "flex",
-                      alignItems: "center",
                       justifyContent: "left",
                     }}
                   >
@@ -99,8 +97,7 @@ export default function ProtocolList() {
                     sm={3}
                     sx={{
                       display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
+                      justifyContent: "left",
                     }}
                   >
                     <Typography>{protocol.publicationDate}</Typography>
