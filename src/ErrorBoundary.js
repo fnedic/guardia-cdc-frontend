@@ -1,7 +1,7 @@
 import { Box, Container, CssBaseline, Skeleton } from "@mui/material";
 import React, { Component } from "react";
 import { Header } from "./components/public/Header";
-import Footer from "./components/public/Footer";
+import {Footer} from "./components/public/Footer";
 
 class ErrorBoundary extends Component {
   constructor(props) {

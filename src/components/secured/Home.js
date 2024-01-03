@@ -44,7 +44,7 @@ export const Home = ({ userRole }) => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ maxHeight: "100vh" }}>
+      <Grid container component="main">
         <CssBaseline />
         <Grid
           item
