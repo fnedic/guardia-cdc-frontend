@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { useSidebar } from "../../../hooks/useSidebar";
-import { Avatar, IconButton, Skeleton } from "@mui/material";
+import { Avatar, Box, IconButton, Skeleton } from "@mui/material";
 import { CloudDownload } from "@mui/icons-material";
 
 function Sidebar(driveLink) {
@@ -18,7 +18,18 @@ function Sidebar(driveLink) {
         </Typography>
         <Typography>
           {notice ? (
-            <Typography>{notice.title}</Typography>
+            <Box>
+              <Typography>{notice.title}</Typography>
+              <Typography>
+                <Link
+                  href={notice.linkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Enlace
+                </Link>
+              </Typography>
+            </Box>
           ) : (
             <Skeleton variant="" width={300} height={100} />
           )}
