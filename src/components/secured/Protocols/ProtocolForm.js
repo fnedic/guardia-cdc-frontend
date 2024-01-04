@@ -67,10 +67,11 @@ export default function ProtocolForm() {
   const [drive, setDrive] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const [videoTitle, setVideoTitle] = useState();
-  const [videoLink, setLink] = useState();
+  const [videoLink, setVideoLink] = useState();
   const [videoGroup, setVideoGroup] = useState("");
   const [videoDate, setDate] = useState();
-  const [notice, setNotice] = useState("");
+  const [mssg, setMssg] = useState("");
+  const [link, setLink] = useState("");
   
   const navigate = useNavigate();
   const [selectedForm, setSelectedForm] = useState("protocol");
@@ -175,16 +176,17 @@ export default function ProtocolForm() {
   };
   const handleNoticeSubmit = (e) => {
     e.preventDefault();
-    if (notice === "") {
+    if (mssg === "") {
       setSnackbarMessage("Algunos campos se encuentran vacíos!");
       setSeverity("warning");
       setShowSnackbar(true);
       return;
     }
-    const notice2 = {
-      title: notice,
+    const notice = {
+      title: mssg,
+      linkUrl: link,
     };
-    ProtocolService.createNotice(notice2)
+    ProtocolService.createNotice(notice)
       .then((response) => {
         const messageParam = encodeURIComponent(response.data);
         navigate(
@@ -228,10 +230,13 @@ export default function ProtocolForm() {
     setVideoTitle(e.target.value);
   };
   const handleInputChangeD2 = (e) => {
-    setLink(e.target.value);
+    setVideoLink(e.target.value);
   };
-  const handleNotice = (e) => {
-    setNotice(e.target.value);
+  const handleMssg = (e) => {
+    setMssg(e.target.value);
+  };
+  const handleLink = (e) => {
+    setLink(e.target.value);
   };
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -712,14 +717,35 @@ export default function ProtocolForm() {
                 <Box mb={5}>
                   <Box sx={customBoxStyle}>
                     <Typography variant="h6" letterSpacing={0.5}>
-                      Aviso
+                      Mensaje del aviso
                     </Typography>
                   </Box>
                   <TextField
                     fullWidth
                     id="notice"
-                    value={notice}
-                    onChange={handleNotice}
+                    value={mssg}
+                    onChange={handleMssg}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 0,
+                        "& fieldset": {
+                          borderWidth: 1,
+                        },
+                      },
+                    }}
+                  />
+                </Box>
+                <Box mb={5}>
+                  <Box sx={customBoxStyle}>
+                    <Typography variant="h6" letterSpacing={0.5}>
+                      Link (cuestionario, video, drive, etc)
+                    </Typography>
+                  </Box>
+                  <TextField
+                    fullWidth
+                    id="notice"
+                    value={link}
+                    onChange={handleLink}
                     sx={{
                       "& .MuiOutlinedInput-root": {
                         borderRadius: 0,
