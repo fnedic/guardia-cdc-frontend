@@ -188,6 +188,8 @@ export default function Register() {
                     >
                       <MenuItem value={"CARDIOVASCULAR"}>Cardiología</MenuItem>
                       <MenuItem value={"CIRUGIA"}>Cirugía</MenuItem>
+                      <MenuItem value={"CLINICA"}>Medicina Interna</MenuItem>
+                      <MenuItem value={"DXIMAGENES"}>Diagnóstico por Imágenes</MenuItem>
                       <MenuItem value={"ENDOCRINOMETABOLICO"}>
                         Endocrinometabolico
                       </MenuItem>
@@ -199,7 +201,6 @@ export default function Register() {
                         Ginecoobstetricia
                       </MenuItem>
                       <MenuItem value={"INFECTOLOGIA"}>Infectología</MenuItem>
-                      <MenuItem value={"CLINICA"}>Medicina Interna</MenuItem>
                       <MenuItem value={"NEFROLOGIA"}>Nefrología</MenuItem>
                       <MenuItem value={"NEUMONOLOGIA"}>Neumonología</MenuItem>
                       <MenuItem value={"NEUROLOGIA"}>Neurologia</MenuItem>
