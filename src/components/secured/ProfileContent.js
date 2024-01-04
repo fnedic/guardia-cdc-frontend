@@ -36,6 +36,7 @@ const specialtieOptions = {
   CARDIOVASCULAR: "Cardiovascular",
   CIRUGIA: "Cirugía",
   CLINICA: "Clínica",
+  DXIMAGENES: "Diagnóstico por Imágenes",
   ENDOCRINOMETABOLICO: "Endocrinometabólico",
   GASTROENTEROLOGIA: "Gastroenterologia",
   GENERALISTA: "Generalista",
