@@ -46,7 +46,7 @@ const AdminCalendar = () => {
   const statusMap = {
     CREATED: "❌ Sin publicar",
     ASSIGNED: "✅ Publicado",
-    CHANGED: "⏳ En espera de aprovación",
+    CHANGED: "⏳ En espera de aprobación",
     REQUESTED: "⏳ Cambio solicitado",
     APPROVED: "🔄 Cambio aceptado",
   };

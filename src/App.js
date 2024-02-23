@@ -1,7 +1,7 @@
 import Register from "./components/public/Register";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Header } from "./components/public/Header";
-import Footer from "./components/public/Footer";
+import {Footer} from "./components/public/Footer";
 import Login from "./components/public/Login";
 import ProtocolForm from "./components/secured/Protocols/ProtocolForm";
 import ProtocolView from "./components/secured/Protocols/ProtocolView";
@@ -84,7 +84,7 @@ function App() {
           <Route path="/admin/requested-changes" element={<AdminRequestedChanges/>} />
         </Route>
       </Routes>
-      <Footer />
+      <Footer userRole={user.role}/>
     </BrowserRouter>
   );
 }

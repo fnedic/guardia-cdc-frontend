@@ -186,25 +186,39 @@ export default function Register() {
                       onChange={handleChange}
                       sx={{ borderRadius: 0 }}
                     >
+                      <MenuItem value={"ANESTESIOLOGIA"}>Anestesiología</MenuItem>
                       <MenuItem value={"CARDIOVASCULAR"}>Cardiología</MenuItem>
-                      <MenuItem value={"CIRUGIA"}>Cirugía</MenuItem>
-                      <MenuItem value={"ENDOCRINOMETABOLICO"}>
-                        Endocrinometabolico
+                      <MenuItem value={"CXCARDIOVASCULAR"}>Cirugía Cardiovascular</MenuItem>
+                      <MenuItem value={"CIRUGIA"}>Cirugía (otras)</MenuItem>
+                      <MenuItem value={"CLINICA"}>Clínica Médica</MenuItem>
+                      <MenuItem value={"DERMATOLOGIA"}>Dermatología</MenuItem>
+                      <MenuItem value={"DXIMAGENES"}>Diagnóstico por Imágenes</MenuItem>
+                      <MenuItem value={"ENDOCRINOLOGIA"}>
+                        Endocrinología
                       </MenuItem>
+                      <MenuItem value={"FISIATRIA"}>Fisiatria</MenuItem>
                       <MenuItem value={"GASTROENTEROLOGIA"}>
                         Gastroenterología
                       </MenuItem>
-                      <MenuItem value={"GENERALISTA"}>Generalista</MenuItem>
-                      <MenuItem value={"GINECOOBSTETRICIA"}>
+                      <MenuItem value={"GENETICA"}>Genética Médica</MenuItem>
+                      <MenuItem value={"GINECOLOGIA"}>
                         Ginecoobstetricia
                       </MenuItem>
+                      <MenuItem value={"HEMATOLOGIA"}>Hematología</MenuItem>
                       <MenuItem value={"INFECTOLOGIA"}>Infectología</MenuItem>
-                      <MenuItem value={"CLINICA"}>Medicina Interna</MenuItem>
+                      <MenuItem value={"GENERALISTA"}>Medicina General</MenuItem>
+                      <MenuItem value={"FAMILIA"}>Medicina de Familia</MenuItem>
                       <MenuItem value={"NEFROLOGIA"}>Nefrología</MenuItem>
                       <MenuItem value={"NEUMONOLOGIA"}>Neumonología</MenuItem>
                       <MenuItem value={"NEUROLOGIA"}>Neurologia</MenuItem>
-                      <MenuItem value={"OTORRINOLARINGOLOGIA"}>ORL</MenuItem>
-                      <MenuItem value={"TOXICOLOGIA"}>Toxicología</MenuItem>
+                      <MenuItem value={"NUTRICION"}>Nutrición</MenuItem>
+                      <MenuItem value={"OFTALMOLOGIA"}>Oftalmología</MenuItem>
+                      <MenuItem value={"ONCOLOGIA"}>Oncología</MenuItem>
+                      <MenuItem value={"ORL"}>ORL</MenuItem>
+                      <MenuItem value={"PEDIATRIA"}>Pediatría</MenuItem>
+                      <MenuItem value={"PSIQUIATRIA"}>Psiquiatría</MenuItem>
+                      <MenuItem value={"REUMATOLOGIA"}>Reumatología</MenuItem>
+                      <MenuItem value={"INTENSIVA"}>Terapia Intensiva</MenuItem>
                       <MenuItem value={"TRAUMATOLOGIA"}>Traumatología</MenuItem>
                       <MenuItem value={"UROLOGIA"}>Urología</MenuItem>
                     </Select>

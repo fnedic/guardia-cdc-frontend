@@ -42,4 +42,3 @@ No se conocen problemas en la aplicación. Me encuentro proactivamente buscando 
 ## Contacto
 
 LinkedIn: [Facundo Nedic](https://www.linkedin.com/in/facundonedic/)
-
