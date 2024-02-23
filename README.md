@@ -38,3 +38,7 @@ Este proyecto está bajo licencia de código abierto.
 ## Problemas Conocidos
 
 No se conocen problemas en la aplicación. Me encuentro proactivamente buscando y corrigiendo cualquier potencial error.
+
+## Contacto
+
+LinkedIn: [Facundo Nedic](https://www.linkedin.com/in/facundonedic/)
