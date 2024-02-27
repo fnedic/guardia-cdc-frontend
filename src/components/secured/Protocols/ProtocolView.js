@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
-import { Badge, Box, Button, Container, Divider } from "@mui/material";
+import { Badge, Button, Container, Divider } from "@mui/material";
 import { Editor } from "draft-js";
 import { useProtocolView } from "../../../hooks/useProtocolView.js";
 import { useMostViewedProtocol } from "../../../hooks/useMostViewedProtocol.js";
