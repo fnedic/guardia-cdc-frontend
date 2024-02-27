@@ -79,20 +79,13 @@ function ProtocolView() {
           <Grid mb={3} mt={3}>
             <Typography variant="h6">{protocol.title}</Typography>
           </Grid>
-          {protocol.autor1 && (
-            <Box
-              fontStyle="italic"
-              color="text.secondary"
-              display="inline-flex"
-            >
-              {myDate(protocol.publicationDate)}
-              <Typography>,&nbsp;por&nbsp;</Typography>
-              {protocol.autor1 && <Typography>{protocol.autor1}</Typography>}
-              {protocol.autor2 && (
-                <Typography>,&nbsp;{protocol.autor2}</Typography>
-              )}
-            </Box>
-          )}
+          <Typography fontStyle="italic" color="text.secondary">{`${myDate(
+            protocol.publicationDate
+          )}, por ${
+            protocol.autor2
+              ? protocol.autor1 + ", " + protocol.autor2
+              : protocol.autor1
+          }`}</Typography>
           <Grid mt={3}>
             {editorStates.intro && (
               <>
